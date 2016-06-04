@@ -36,7 +36,8 @@ public class Frame implements ActionListener {
 		calendar.addPropertyChangeListener("calendar", new PropertyChangeListener() {
 
 		    @Override
-		    public void propertyChange(PropertyChangeEvent e) {
+		    public void propertyChange(PropertyChangeEvent e) { // Zmiana miesiaca i roku powoduje otwarcie okna ..
+		    	
 		        final Calendar c = (Calendar) e.getNewValue();   
 		        System.out.println(c.get(Calendar.DAY_OF_MONTH));  
 		        CreateEventWindow wnd = new CreateEventWindow();

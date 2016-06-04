@@ -1,26 +1,18 @@
 package calendar;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
-import java.awt.GridLayout;
 import java.text.ParseException;
-
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import javax.swing.SwingConstants;
-import javax.print.PrintException;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
 
 public class CreateEventWindow extends JFrame {
 	private JTextField textField;
@@ -58,7 +50,7 @@ public class CreateEventWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public CreateEventWindow() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		
