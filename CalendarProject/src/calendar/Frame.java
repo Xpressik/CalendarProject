@@ -6,13 +6,11 @@ import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Calendar;
-
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-
 import com.toedter.calendar.JCalendar;
 
 public class Frame implements ActionListener {
@@ -42,20 +40,8 @@ public class Frame implements ActionListener {
 		        final Calendar c = (Calendar) e.getNewValue();   
 		        System.out.println(c.get(Calendar.DAY_OF_MONTH));   
 		    }
-		});
+		});	
 		
-		menuBar = new JMenuBar();
-		menuBar.add(menu);
-		menuBar.add(editMenu);
-		
-		menu = new JMenu("Menu");
-		menu.add(newFile);
-		menu.add(menuItem);
-		menu.add(exit);
-		
-		editMenu = new JMenu("Edit");
-		editMenu.add(undo);
-
 		menuItem = new JMenuItem("A text-only menu item", KeyEvent.VK_T);
 		
 		undo = new JMenuItem("Undo", KeyEvent.VK_U);
@@ -64,7 +50,19 @@ public class Frame implements ActionListener {
 		newFile.addActionListener(this);
 
 		exit = new JMenuItem("Exit", KeyEvent.VK_E);
-		exit.addActionListener(this);		
+		exit.addActionListener(this);
+		
+		editMenu = new JMenu("Edit");
+		editMenu.add(undo);
+		
+		menu = new JMenu("Menu");
+		menu.add(newFile);
+		menu.add(menuItem);
+		menu.add(exit);
+		
+		menuBar = new JMenuBar();
+		menuBar.add(menu);
+		menuBar.add(editMenu);
 		
 		frame = new JFrame("Event Calendar");
 		frame.setLayout(null);
