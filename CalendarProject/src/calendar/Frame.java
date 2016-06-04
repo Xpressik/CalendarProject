@@ -32,7 +32,7 @@ public class Frame implements ActionListener {
 	private void init(){
 		
 		calendar = new JCalendar();
-		calendar.setBounds(600,50,300,300);
+		calendar.setBounds(0,0,350,350);
 		calendar.addPropertyChangeListener("calendar", new PropertyChangeListener() {
 
 		    @Override
@@ -68,7 +68,7 @@ public class Frame implements ActionListener {
 		frame.setLayout(null);
 		frame.setJMenuBar(menuBar);
 		frame.add(calendar);
-		frame.setSize(1200, 700);
+		frame.setSize(365, 410);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
