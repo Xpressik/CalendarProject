@@ -38,7 +38,9 @@ public class Frame implements ActionListener {
 		    @Override
 		    public void propertyChange(PropertyChangeEvent e) {
 		        final Calendar c = (Calendar) e.getNewValue();   
-		        System.out.println(c.get(Calendar.DAY_OF_MONTH));   
+		        System.out.println(c.get(Calendar.DAY_OF_MONTH));  
+		        CreateEventWindow wnd = new CreateEventWindow();
+		        wnd.init();
 		    }
 		});	
 		
