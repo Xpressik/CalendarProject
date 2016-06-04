@@ -9,7 +9,8 @@ public class Event {
 	private String place;
 	private String from;
 	private String to;
-
+//	private Date date; kazde wydazrzenie musi przechowywac date aby mozna bylo je odpowiednio wyswietlac 
+	
 //	Date from;
 //	Date to;
 //	String wodziesta = "20:40";           									/////////////////////////////////////////////////////////////////////////////////////////////////

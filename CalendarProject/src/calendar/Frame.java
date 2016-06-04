@@ -59,6 +59,7 @@ public class Frame implements ActionListener {
 		editMenu.add(undo);
 		
 		menu = new JMenu("Menu");
+		menu.setMnemonic(KeyEvent.VK_M);
 		menu.add(newFile);
 		menu.add(menuItem);
 		menu.add(exit);
@@ -74,6 +75,7 @@ public class Frame implements ActionListener {
 		frame.setSize(365, 410);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
 		
 		
 	}
