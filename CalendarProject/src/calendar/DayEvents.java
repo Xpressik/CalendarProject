@@ -24,7 +24,7 @@ public class DayEvents extends JFrame {
 	 * Launch the application.
 	 * @return 
 	 */
-	public static void init(String date){
+	public static void init(final String date){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -40,7 +40,7 @@ public class DayEvents extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DayEvents(String date) {
+	public DayEvents(final String date) {
 		
 		this.date = date;
 
