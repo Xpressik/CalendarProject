@@ -42,10 +42,9 @@ public class Frame implements ActionListener {
 		    @Override
 		    public void propertyChange(PropertyChangeEvent e) { // Zmiana miesiaca i roku powoduje otwarcie okna ..
 		    	
-		    	final Calendar c = (Calendar) e.getNewValue();   
-		        CreateEventWindow wnd = new CreateEventWindow(c);
-		        DayEvents.init(c);
-		        //wnd.init(c);
+		    	final Calendar c = (Calendar) e.getNewValue();    
+		        DayEvents.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
+		        //CreateEventWindow.init(c);
 		        
 		    }
 		});	

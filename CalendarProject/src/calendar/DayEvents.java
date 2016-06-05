@@ -8,21 +8,35 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 
 public class DayEvents extends JFrame {
+<<<<<<< HEAD
 	private final Calendar calendar;
+=======
+	
+	private String date;
+>>>>>>> cba5233163fde782a69f1edd308747b35563151f
 	/**
 	 * Launch the application.
 	 * @return 
 	 */
+<<<<<<< HEAD
 	public static void init(final Calendar calendar){
+=======
+	public static void init(String date){
+>>>>>>> cba5233163fde782a69f1edd308747b35563151f
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DayEvents frame = new DayEvents(calendar);
+					DayEvents frame = new DayEvents(date);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,9 +48,17 @@ public class DayEvents extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+<<<<<<< HEAD
 	public DayEvents(final Calendar calendar) {
+=======
+	public DayEvents(String date) {
 		
-		this.calendar = calendar;
+		this.date = date;
+
+		List<Event> eventList = EventList.getEventListForSpecifiedDate(date);
+
+>>>>>>> cba5233163fde782a69f1edd308747b35563151f
+		
 		setTitle("Events");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -46,40 +68,61 @@ public class DayEvents extends JFrame {
 		lblFrom.setBounds(10, 43, 46, 14);
 		getContentPane().add(lblFrom);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(10, 61, 46, 14);
+		JLabel lblNewLabel = new JLabel("<html>");
+		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel.setBounds(10, 61, 46, 189);
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblTo = new JLabel("To");
 		lblTo.setBounds(66, 43, 46, 14);
 		getContentPane().add(lblTo);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(66, 61, 46, 14);
+		JLabel lblNewLabel_1 = new JLabel("<html>");
+		lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1.setBounds(66, 61, 46, 189);
 		getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblDesc = new JLabel("Description");
 		lblDesc.setBounds(122, 43, 69, 14);
 		getContentPane().add(lblDesc);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setBounds(122, 61, 132, 14);
+		JLabel lblNewLabel_2 = new JLabel("<html>");
+		lblNewLabel_2.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_2.setBounds(122, 61, 132, 189);
 		getContentPane().add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Place");
 		lblNewLabel_3.setBounds(264, 43, 46, 14);
 		getContentPane().add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("New label");
-		lblNewLabel_4.setBounds(264, 61, 160, 14);
+		JLabel lblNewLabel_4 = new JLabel("<html>");
+		lblNewLabel_4.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_4.setBounds(264, 61, 160, 189);
 		getContentPane().add(lblNewLabel_4);
 		
 		JButton btnCreateEvent = new JButton("Create Event");
+		btnCreateEvent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CreateEventWindow.init(date);
+			}
+		});
 		btnCreateEvent.setBounds(171, 11, 117, 23);
 		getContentPane().add(btnCreateEvent);
 		
-		JLabel lblEventsFor = new JLabel("Events for :  " + calendar.get(Calendar.DAY_OF_MONTH) + "-" + (calendar.get(Calendar.MONTH)+1) + "-" + calendar.get(Calendar.YEAR));
+		JLabel lblEventsFor = new JLabel("Events for :  " + date);
 		lblEventsFor.setBounds(10, 18, 139, 14);
 		getContentPane().add(lblEventsFor);
+		
+		for(Event evt : eventList){
+			lblNewLabel.setText(lblNewLabel.getText() + evt.getFrom() + "<br>");
+			lblNewLabel_1.setText(lblNewLabel_1.getText() + evt.getTo() + "<br>");
+			lblNewLabel_2.setText(lblNewLabel_2.getText() + evt.getDescription() + "<br>");
+			lblNewLabel_4.setText(lblNewLabel_4.getText() + evt.getPlace() + "<br>");
+		}
+		lblNewLabel.setText(lblNewLabel.getText() + "</html>");
+		lblNewLabel_1.setText(lblNewLabel_1.getText() + "</html>");
+		lblNewLabel_2.setText(lblNewLabel_2.getText() + "</html>");
+		lblNewLabel_4.setText(lblNewLabel_4.getText() + "</html>");
+
 	}
 }

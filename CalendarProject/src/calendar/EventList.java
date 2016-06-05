@@ -10,7 +10,6 @@ public class EventList {
 		events.add(evt);
 	}
 	public static List<Event> getEventListForSpecifiedDate(String date){
-		// to do ....
 		List<Event> results = new Vector<Event>();
 		for( Event evt : events){
 			if(evt.getDate().equals(date))
