@@ -58,7 +58,11 @@ public class CreateEventWindow extends JFrame {
 	 * Create the frame.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public CreateEventWindow(final Calendar c) {
+=======
+	public CreateEventWindow(Calendar c) {
+>>>>>>> parent of d36de0c... adding final attribute to methods parametres
 		
 		this.c = c;
 =======
@@ -107,12 +111,12 @@ public class CreateEventWindow extends JFrame {
 		}
 		mask.setPlaceholderCharacter('_');
 		
-		final JFormattedTextField formattedTextField = new JFormattedTextField(mask);
+		JFormattedTextField formattedTextField = new JFormattedTextField(mask);
 		formattedTextField.setHorizontalAlignment(SwingConstants.CENTER);
 		formattedTextField.setBounds(61, 193, 46, 20);
 		getContentPane().add(formattedTextField);
 		
-		final JFormattedTextField formattedTextField_1 = new JFormattedTextField(mask);
+		JFormattedTextField formattedTextField_1 = new JFormattedTextField(mask);
 		formattedTextField_1.setHorizontalAlignment(SwingConstants.CENTER);
 		formattedTextField_1.setBounds(312, 193, 46, 20);
 		getContentPane().add(formattedTextField_1);
@@ -165,7 +169,7 @@ public class CreateEventWindow extends JFrame {
 		btnPrnt.setBounds(26, 103, 89, 23);
 		getContentPane().add(btnPrnt);
 		
-		final JCheckBox chckbxWholeDay = new JCheckBox("Whole Day");
+		JCheckBox chckbxWholeDay = new JCheckBox("Whole Day");
 		chckbxWholeDay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 								

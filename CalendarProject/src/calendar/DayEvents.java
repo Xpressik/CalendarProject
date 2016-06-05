@@ -19,20 +19,28 @@ import javax.swing.SwingConstants;
 
 public class DayEvents extends JFrame {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private final Calendar calendar;
 =======
 	
 	private String date;
 >>>>>>> cba5233163fde782a69f1edd308747b35563151f
+=======
+	private Calendar calendar;
+>>>>>>> parent of d36de0c... adding final attribute to methods parametres
 	/**
 	 * Launch the application.
 	 * @return 
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public static void init(final Calendar calendar){
 =======
 	public static void init(String date){
 >>>>>>> cba5233163fde782a69f1edd308747b35563151f
+=======
+	public static void init(Calendar calendar){
+>>>>>>> parent of d36de0c... adding final attribute to methods parametres
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -49,6 +57,7 @@ public class DayEvents extends JFrame {
 	 * Create the frame.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public DayEvents(final Calendar calendar) {
 =======
 	public DayEvents(String date) {
@@ -58,6 +67,9 @@ public class DayEvents extends JFrame {
 		List<Event> eventList = EventList.getEventListForSpecifiedDate(date);
 
 >>>>>>> cba5233163fde782a69f1edd308747b35563151f
+=======
+	public DayEvents(Calendar calendar) {
+>>>>>>> parent of d36de0c... adding final attribute to methods parametres
 		
 		setTitle("Events");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
