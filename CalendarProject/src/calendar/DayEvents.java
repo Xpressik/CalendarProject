@@ -1,20 +1,23 @@
 package calendar;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridBagLayout;
-import java.util.Calendar;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.util.List;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.event.ActionListener;
+import java.beans.XMLEncoder;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 public class DayEvents extends JFrame {
@@ -92,9 +95,10 @@ public class DayEvents extends JFrame {
 		btnCreateEvent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				CreateEventWindow.init(date);
+				dispose();
 			}
 		});
-		btnCreateEvent.setBounds(171, 11, 117, 23);
+		btnCreateEvent.setBounds(171, 11, 106, 23);
 		getContentPane().add(btnCreateEvent);
 		
 		JLabel lblEventsFor = new JLabel("Events for :  " + date);
@@ -111,6 +115,34 @@ public class DayEvents extends JFrame {
 		lblNewLabel_1.setText(lblNewLabel_1.getText() + "</html>");
 		lblNewLabel_2.setText(lblNewLabel_2.getText() + "</html>");
 		lblNewLabel_4.setText(lblNewLabel_4.getText() + "</html>");
+		
+		JButton btnNewButton = new JButton("Save to XML");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				JFileChooser chooser = new JFileChooser();
+				chooser.setFileFilter(new FileNameExtensionFilter("XML file","xml"));
+				int result = chooser.showSaveDialog(null);
+				if (result == JFileChooser.APPROVE_OPTION){
+					File fi = chooser.getSelectedFile();
+					try{
+						String path = fi.getPath();
+						if (!path.endsWith(".xml")){
+							path += ".xml";
+						}
+						XMLEncoder x = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(path)));
+						x.writeObject(eventList);
+						x.close();
+					}
+					catch(Exception e){
+						JOptionPane.showMessageDialog(null, e.getMessage());
+					}
+				}
+				
+			}
+		});
+		btnNewButton.setBounds(306, 11, 106, 23);
+		getContentPane().add(btnNewButton);
 
 	}
 }

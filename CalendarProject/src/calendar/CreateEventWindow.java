@@ -7,10 +7,7 @@ import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.swing.JTextField;
@@ -22,6 +19,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 
 public class CreateEventWindow extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2111993159030174208L;
 	private JTextField textField;
 	private JTextField textField_1;
 	
@@ -41,18 +42,6 @@ public class CreateEventWindow extends JFrame {
 			}
 		});
 	}
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					CreateEventWindow frame = new CreateEventWindow();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
 	/**
 	 * Create the frame.
@@ -140,6 +129,8 @@ public class CreateEventWindow extends JFrame {
 				else{
 					EventList.addEvent(new Event(textField.getText(), textField_1.getText(), formattedTextField.getText(), formattedTextField_1.getText(), date)); 
 					JOptionPane.showMessageDialog(null, "Event created propertly.", "Success", JOptionPane.INFORMATION_MESSAGE);
+					dispose();
+					DayEvents.init(date);
 				}
 			}
 		});

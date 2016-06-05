@@ -5,16 +5,21 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.beans.XMLDecoder;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import com.toedter.calendar.JCalendar;
 
 public class Frame implements ActionListener {
@@ -24,11 +29,13 @@ public class Frame implements ActionListener {
 	private JMenu menu;
 	private JMenuItem menuItem;
 	private JMenu editMenu;
-	private JMenuItem undo;
 	private JMenuItem newFile;
 	private JMenuItem exit;
 	private JFrame frame;
-	
+	private JMenuItem filterByPlace;
+	private JMenuItem filterByDescription;
+	private JMenuItem filterByFrom;
+	private JMenuItem filterByTo;
 	public Frame(){
 		init();
 	}
@@ -49,9 +56,18 @@ public class Frame implements ActionListener {
 		    }
 		});	
 		
-		menuItem = new JMenuItem("A text-only menu item", KeyEvent.VK_T);
 		
-		undo = new JMenuItem("Undo", KeyEvent.VK_U);
+		menuItem = new JMenuItem("Deserialize events from XML file", KeyEvent.VK_D);
+		menuItem.addActionListener(this);
+		
+		filterByPlace = new JMenuItem("place");
+		filterByPlace.addActionListener(this);
+		filterByDescription = new JMenuItem("description");
+		filterByDescription.addActionListener(this);
+		filterByFrom = new JMenuItem("begin date");
+		filterByFrom.addActionListener(this);
+		filterByTo = new JMenuItem("ending date");
+		filterByTo.addActionListener(this);
 		
 		newFile = new JMenuItem("New", KeyEvent.VK_N);
 		newFile.addActionListener(this);
@@ -59,8 +75,14 @@ public class Frame implements ActionListener {
 		exit = new JMenuItem("Exit", KeyEvent.VK_E);
 		exit.addActionListener(this);
 		
+		JMenu search = new JMenu("Filter by: ");
+		search.add(filterByPlace);		
+		search.add(filterByDescription);
+		search.add(filterByFrom);		
+		search.add(filterByTo);		
+		
 		editMenu = new JMenu("Edit");
-		editMenu.add(undo);
+		editMenu.add(search);
 		
 		menu = new JMenu("Menu");
 		menu.setMnemonic(KeyEvent.VK_M);
@@ -90,6 +112,38 @@ public class Frame implements ActionListener {
 			if(odp == JOptionPane.YES_OPTION){
 				frame.dispose();
 			}
+		}
+		if (evt.getSource() == menuItem){
+			JFileChooser chooser = new JFileChooser();
+			chooser.setFileFilter(new FileNameExtensionFilter("XML file","xml"));
+			int result = chooser.showOpenDialog(null);
+			if (result == JFileChooser.APPROVE_OPTION){
+				File fi = chooser.getSelectedFile();
+				try{
+					XMLDecoder x = new XMLDecoder(new BufferedInputStream(new FileInputStream(fi.getPath())));
+					Object obj = x.readObject();
+					List<Event> events = (List<Event>) obj;
+					for(Event e : events){
+						EventList.addEvent(e);
+					}
+					x.close();
+				}
+				catch(Exception e){
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
+			}
+		}
+		if(evt.getSource() == filterByFrom){
+			JOptionPane.showInputDialog(null, "Type beging date (must be in HH:mm format");
+		}
+		if(evt.getSource() == filterByTo){
+			JOptionPane.showInputDialog(null, "Type ending date (must be in HH:mm format");
+		}
+		if(evt.getSource() == filterByDescription){
+			JOptionPane.showInputDialog(null, "Type description");
+		}
+		if(evt.getSource() == filterByPlace){
+			JOptionPane.showInputDialog(null, "Type place");
 		}
 	}
 }
