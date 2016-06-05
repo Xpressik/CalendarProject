@@ -13,12 +13,12 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 
 public class DayEvents extends JFrame {
-	private Calendar calendar;
+	private final Calendar calendar;
 	/**
 	 * Launch the application.
 	 * @return 
 	 */
-	public static void init(Calendar calendar){
+	public static void init(final Calendar calendar){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -34,7 +34,7 @@ public class DayEvents extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DayEvents(Calendar calendar) {
+	public DayEvents(final Calendar calendar) {
 		
 		this.calendar = calendar;
 		setTitle("Events");

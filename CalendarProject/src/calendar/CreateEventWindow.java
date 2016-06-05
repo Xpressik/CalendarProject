@@ -58,7 +58,7 @@ public class CreateEventWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CreateEventWindow(Calendar c) {
+	public CreateEventWindow(final Calendar c) {
 		
 		this.c = c;
 		
@@ -101,12 +101,12 @@ public class CreateEventWindow extends JFrame {
 		}
 		mask.setPlaceholderCharacter('_');
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField(mask);
+		final JFormattedTextField formattedTextField = new JFormattedTextField(mask);
 		formattedTextField.setHorizontalAlignment(SwingConstants.CENTER);
 		formattedTextField.setBounds(61, 193, 46, 20);
 		getContentPane().add(formattedTextField);
 		
-		JFormattedTextField formattedTextField_1 = new JFormattedTextField(mask);
+		final JFormattedTextField formattedTextField_1 = new JFormattedTextField(mask);
 		formattedTextField_1.setHorizontalAlignment(SwingConstants.CENTER);
 		formattedTextField_1.setBounds(312, 193, 46, 20);
 		getContentPane().add(formattedTextField_1);
@@ -157,7 +157,7 @@ public class CreateEventWindow extends JFrame {
 		btnPrnt.setBounds(26, 103, 89, 23);
 		getContentPane().add(btnPrnt);
 		
-		JCheckBox chckbxWholeDay = new JCheckBox("Whole Day");
+		final JCheckBox chckbxWholeDay = new JCheckBox("Whole Day");
 		chckbxWholeDay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 								
