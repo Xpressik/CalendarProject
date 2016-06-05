@@ -29,7 +29,7 @@ public class CreateEventWindow extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void init(final String date){    // USUNAC METODE INIT DODAC JEJ CIALO DO KONSTRUKOTRA
+	public static void init(String date){    // USUNAC METODE INIT DODAC JEJ CIALO DO KONSTRUKOTRA
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -57,7 +57,7 @@ public class CreateEventWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CreateEventWindow(final String date) {
+	public CreateEventWindow(String date) {
 		
 		this.date = date;
 		//this.date = c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR);
@@ -101,12 +101,12 @@ public class CreateEventWindow extends JFrame {
 		}
 		mask.setPlaceholderCharacter('_');
 		
-		final JFormattedTextField formattedTextField = new JFormattedTextField(mask);
+		JFormattedTextField formattedTextField = new JFormattedTextField(mask);
 		formattedTextField.setHorizontalAlignment(SwingConstants.CENTER);
 		formattedTextField.setBounds(61, 193, 46, 20);
 		getContentPane().add(formattedTextField);
 		
-		final JFormattedTextField formattedTextField_1 = new JFormattedTextField(mask);
+		JFormattedTextField formattedTextField_1 = new JFormattedTextField(mask);
 		formattedTextField_1.setHorizontalAlignment(SwingConstants.CENTER);
 		formattedTextField_1.setBounds(312, 193, 46, 20);
 		getContentPane().add(formattedTextField_1);
@@ -159,7 +159,7 @@ public class CreateEventWindow extends JFrame {
 		btnPrnt.setBounds(26, 103, 89, 23);
 		getContentPane().add(btnPrnt);
 		
-		final JCheckBox chckbxWholeDay = new JCheckBox("Whole Day");
+		JCheckBox chckbxWholeDay = new JCheckBox("Whole Day");
 		chckbxWholeDay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 								
