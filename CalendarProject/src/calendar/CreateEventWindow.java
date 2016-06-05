@@ -5,7 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
+
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -87,7 +90,7 @@ public class CreateEventWindow extends JFrame {
 		JLabel lblNewLabel_3 = new JLabel("To");
 		lblNewLabel_3.setBounds(326, 168, 24, 14);
 		getContentPane().add(lblNewLabel_3);
-		
+			
 		MaskFormatter mask = null;
 		try{
 			mask = new MaskFormatter("##:##");
@@ -96,6 +99,7 @@ public class CreateEventWindow extends JFrame {
 			e.printStackTrace();
 		}
 		mask.setPlaceholderCharacter('_');
+		
 		JFormattedTextField formattedTextField = new JFormattedTextField(mask);
 		formattedTextField.setHorizontalAlignment(SwingConstants.CENTER);
 		formattedTextField.setBounds(61, 193, 46, 20);
