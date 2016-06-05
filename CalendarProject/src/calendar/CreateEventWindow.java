@@ -25,16 +25,15 @@ public class CreateEventWindow extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	
-	private Calendar c;
+	private String date;
 	/**
 	 * Launch the application.
 	 */
-	public void init(Calendar cal){    // USUNAC METODE INIT DODAC JEJ CIALO DO KONSTRUKOTRA
-		c = cal;
+	public static void init(String date){    // USUNAC METODE INIT DODAC JEJ CIALO DO KONSTRUKOTRA
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CreateEventWindow frame = new CreateEventWindow(c);
+					CreateEventWindow frame = new CreateEventWindow(date);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,10 +57,11 @@ public class CreateEventWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CreateEventWindow(Calendar c) {
+	public CreateEventWindow(String date) {
 		
-		this.c = c;
-		
+		this.date = date;
+		//this.date = c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR);
+				
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
@@ -114,7 +114,7 @@ public class CreateEventWindow extends JFrame {
 		JLabel lblNewLabel_4 = new JLabel("Current Date");
 		lblNewLabel_4.setBounds(26, 23, 104, 14);
 		getContentPane().add(lblNewLabel_4);
-		lblNewLabel_4.setText(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
+		lblNewLabel_4.setText(date);
 		
 		JButton btnCreate = new JButton("Create");
 		btnCreate.addActionListener(new ActionListener() {
@@ -130,15 +130,17 @@ public class CreateEventWindow extends JFrame {
 					 toMinutes = Integer.parseInt(to[1]);
 				}
 				catch(NumberFormatException e){
-					JOptionPane.showMessageDialog(null, "You have to type hours", "Wrong hours", JOptionPane.OK_OPTION);
+					JOptionPane.showMessageDialog(null, "You have to type hours.", "Wrong hours", JOptionPane.OK_OPTION);
 					return;
 				}
 				
 				if( fromHour > toHour || (fromHour == toHour && fromMinutes > toMinutes)){
-					JOptionPane.showMessageDialog(null, "Event end before it starts", "Wrong hours", JOptionPane.OK_OPTION);
+					JOptionPane.showMessageDialog(null, "Event end before it starts.", "Wrong hours", JOptionPane.OK_OPTION);
 				}
-				else
-					EventList.addEvent(new Event(textField.getText(), textField_1.getText(), formattedTextField.getText(), formattedTextField_1.getText(), c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR))); 
+				else{
+					EventList.addEvent(new Event(textField.getText(), textField_1.getText(), formattedTextField.getText(), formattedTextField_1.getText(), date)); 
+					JOptionPane.showMessageDialog(null, "Event created propertly.", "Success", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 		btnCreate.setBounds(180, 192, 89, 23);
@@ -148,7 +150,7 @@ public class CreateEventWindow extends JFrame {
 		btnPrnt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EventList.printEvents();
-				List<Event> test = EventList.getEventListForSpecifiedDate(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR)); // ZAPISAC TO c..... jako pole String ..
+				List<Event> test = EventList.getEventListForSpecifiedDate(date); 
 				for(Event x : test){
 					System.out.println(x.getDate() + " " + x.getDescription());
 				}
