@@ -44,7 +44,9 @@ public class Frame implements ActionListener {
 		    	
 		    	final Calendar c = (Calendar) e.getNewValue();   
 		        CreateEventWindow wnd = new CreateEventWindow(c);
-		        wnd.init(c);
+		        DayEvents.init(c);
+		        //wnd.init(c);
+		        
 		    }
 		});	
 		
@@ -79,8 +81,6 @@ public class Frame implements ActionListener {
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
-		
-		
 	}
 
 	@Override
