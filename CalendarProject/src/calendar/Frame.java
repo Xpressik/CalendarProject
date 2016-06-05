@@ -5,7 +5,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -40,8 +44,8 @@ public class Frame implements ActionListener {
 		    	
 		        final Calendar c = (Calendar) e.getNewValue();   
 		        System.out.println(c.get(Calendar.DAY_OF_MONTH));  
-		        CreateEventWindow wnd = new CreateEventWindow();
-		        wnd.init();
+		        CreateEventWindow wnd = new CreateEventWindow(c);
+		        wnd.init(c);
 		    }
 		});	
 		

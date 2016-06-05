@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
 import java.text.ParseException;
+import java.util.Calendar;
+import java.util.List;
+
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import javax.swing.SwingConstants;
@@ -18,14 +21,16 @@ public class CreateEventWindow extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	
+	private Calendar c;
 	/**
 	 * Launch the application.
 	 */
-	public void init(){
+	public void init(Calendar cal){    // USUNAC METODE INIT DODAC JEJ CIALO DO KONSTRUKOTRA
+		c = cal;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CreateEventWindow frame = new CreateEventWindow();
+					CreateEventWindow frame = new CreateEventWindow(c);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +54,10 @@ public class CreateEventWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CreateEventWindow() {
+	public CreateEventWindow(Calendar c) {
+		
+		this.c = c;
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
@@ -101,6 +109,7 @@ public class CreateEventWindow extends JFrame {
 		JLabel lblNewLabel_4 = new JLabel("Current Date");
 		lblNewLabel_4.setBounds(26, 23, 104, 14);
 		getContentPane().add(lblNewLabel_4);
+		lblNewLabel_4.setText(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
 		
 		JButton btnCreate = new JButton("Create");
 		btnCreate.addActionListener(new ActionListener() {
@@ -116,7 +125,7 @@ public class CreateEventWindow extends JFrame {
 					//throw new Exception("Godzina rozpoczêcia musi byæ przed godzin¹ zakoñczenia");
 				}
 				else
-					EventList.addEvent(new Event(textField.getText(), textField_1.getText(), formattedTextField.getText(), formattedTextField_1.getText())); 
+					EventList.addEvent(new Event(textField.getText(), textField_1.getText(), formattedTextField.getText(), formattedTextField_1.getText(), c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR))); 
 			}
 		});
 		btnCreate.setBounds(180, 192, 89, 23);
@@ -126,6 +135,10 @@ public class CreateEventWindow extends JFrame {
 		btnPrnt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EventList.printEvents();
+				List<Event> test = EventList.getEventListForSpecifiedDate(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR)); // ZAPISAC TO c..... jako pole String ..
+				for(Event x : test){
+					System.out.println(x.getDate() + " " + x.getDescription());
+				}
 			}
 		});
 		btnPrnt.setBounds(26, 103, 89, 23);

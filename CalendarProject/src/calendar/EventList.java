@@ -9,10 +9,14 @@ public class EventList {
 	public static void addEvent(Event evt){
 		events.add(evt);
 	}
-	public static List<Event> getEventListForSpecifiedDate(){
+	public static List<Event> getEventListForSpecifiedDate(String date){
 		// to do ....
-		
-		return null;
+		List<Event> results = new Vector<Event>();
+		for( Event evt : events){
+			if(evt.getDate().equals(date))
+				results.add(evt);
+		}
+		return results;
 	}
 	public static void printEvents(){
 		for( Event x : events ){

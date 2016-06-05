@@ -1,15 +1,15 @@
 package calendar;
 
-//import java.text.ParseException;
-//import java.text.SimpleDateFormat;
-//import java.util.Date;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Event {
 	private String description;
 	private String place;
 	private String from;
 	private String to;
-//	private Date date; kazde wydazrzenie musi przechowywac date aby mozna bylo je odpowiednio wyswietlac 
+	private String date;  // kazde wydazrzenie musi przechowywac date aby mozna bylo je odpowiednio wyswietlac 
 	
 //	Date from;
 //	Date to;
@@ -31,12 +31,14 @@ public class Event {
 		setPlace(null);
 		setFrom(null);
 		setTo(null);
+		setDate(null);
 	}
-	public Event(String desc, String place, String from, String to){
+	public Event(String desc, String place, String from, String to, String date){
 		this.setDescription(desc);
 		this.setPlace(place);
 		this.setFrom(from);
 		this.setTo(to);
+		this.setDate(date);
 	}
 	public String getDescription() {
 		return description;
@@ -61,5 +63,11 @@ public class Event {
 	}
 	public void setTo(String to) {
 		this.to = to;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
 	}
 }
