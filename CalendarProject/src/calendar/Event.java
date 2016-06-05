@@ -14,7 +14,7 @@ public class Event {
 //	Date from;
 //	Date to;
 //	String wodziesta = "20:40";           									/////////////////////////////////////////////////////////////////////////////////////////////////
-//	SimpleDateFormat format = new SimpleDateFormat("HH:mm");				// TAK MO¯NA REPREZENTOWAÆ I PRZECHOWYWAÆ GODZINY ROZPOCZÊCIA I ZAKOÑCZENIA. ALE CZY JEST SENS //
+//	SimpleDateFormat format = new SimpleDateFormat("HH:mm");				// TAK MOÂ¯NA REPREZENTOWAÃ† I PRZECHOWYWAÃ† GODZINY ROZPOCZÃŠCIA I ZAKOÃ‘CZENIA. ALE CZY JEST SENS //
 //																			/////////////////////////////////////////////////////////////////////////////////////////////////
 //	try {
 //		Date date = format.parse(wodziesta);
