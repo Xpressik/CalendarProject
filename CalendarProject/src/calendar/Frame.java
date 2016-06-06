@@ -6,9 +6,12 @@ import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.Calendar;
 import java.util.List;
 
@@ -36,6 +39,7 @@ public class Frame implements ActionListener {
 	private JMenuItem filterByDescription;
 	private JMenuItem filterByFrom;
 	private JMenuItem filterByTo;
+	private JMenuItem serializeToXML;
 	public Frame(){
 		init();
 	}
@@ -59,6 +63,8 @@ public class Frame implements ActionListener {
 		
 		menuItem = new JMenuItem("Deserialize events from XML file", KeyEvent.VK_D);
 		menuItem.addActionListener(this);
+		serializeToXML = new JMenuItem("Save all events to XML file", KeyEvent.VK_S);
+		serializeToXML.addActionListener(this);
 		
 		filterByPlace = new JMenuItem("place");
 		filterByPlace.addActionListener(this);
@@ -88,6 +94,8 @@ public class Frame implements ActionListener {
 		menu.setMnemonic(KeyEvent.VK_M);
 		menu.add(newFile);
 		menu.add(menuItem);
+		menu.add(serializeToXML);
+		menu.addSeparator();
 		menu.add(exit);
 		
 		menuBar = new JMenuBar();
@@ -133,17 +141,43 @@ public class Frame implements ActionListener {
 				}
 			}
 		}
+		if (evt.getSource() == serializeToXML){
+			JFileChooser chooser = new JFileChooser();
+			chooser.setFileFilter(new FileNameExtensionFilter("XML file","xml"));
+			int result = chooser.showSaveDialog(null);
+			if (result == JFileChooser.APPROVE_OPTION){
+				File fi = chooser.getSelectedFile();
+				try{
+					String path = fi.getPath();
+					if (!path.endsWith(".xml")){
+						path += ".xml";
+					}
+					XMLEncoder x = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(path)));
+					x.writeObject(EventList.getEvents());
+					x.close();
+				}
+				catch(Exception e){
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
+			}
+		}
 		if(evt.getSource() == filterByFrom){
-			JOptionPane.showInputDialog(null, "Type beging date (must be in HH:mm format");
+			String from = JOptionPane.showInputDialog(null, "Type beging date (must be in HH:mm format");
+			SearchWindow.init(EventList.filterByFrom(from));
+
 		}
 		if(evt.getSource() == filterByTo){
-			JOptionPane.showInputDialog(null, "Type ending date (must be in HH:mm format");
+			String to = JOptionPane.showInputDialog(null, "Type ending date (must be in HH:mm format");
+			SearchWindow.init(EventList.fiterByTo(to));
+
 		}
 		if(evt.getSource() == filterByDescription){
-			JOptionPane.showInputDialog(null, "Type description");
+			String desc = JOptionPane.showInputDialog(null, "Type description");
+			SearchWindow.init(EventList.filterByDesc(desc));
 		}
 		if(evt.getSource() == filterByPlace){
-			JOptionPane.showInputDialog(null, "Type place");
+			String place = JOptionPane.showInputDialog(null, "Type place");
+			SearchWindow.init(EventList.fiterByPlace(place));
 		}
 	}
 }
