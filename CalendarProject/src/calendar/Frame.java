@@ -24,6 +24,8 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.toedter.calendar.JCalendar;
+import java.awt.Point;
+import java.awt.Dimension;
 
 public class Frame implements ActionListener {
 	
@@ -32,7 +34,7 @@ public class Frame implements ActionListener {
 	private JMenu menu;
 	private JMenuItem menuItem;
 	private JMenu editMenu;
-	private JMenuItem newFile;
+	private JMenuItem newEvent;
 	private JMenuItem exit;
 	private JFrame frame;
 	private JMenuItem filterByPlace;
@@ -40,6 +42,9 @@ public class Frame implements ActionListener {
 	private JMenuItem filterByFrom;
 	private JMenuItem filterByTo;
 	private JMenuItem serializeToXML;
+	
+	private int currentMonth;
+	private int currentYear;
 	public Frame(){
 		init();
 	}
@@ -48,20 +53,29 @@ public class Frame implements ActionListener {
 		
 		calendar = new JCalendar();
 		calendar.setBounds(0,0,350,350);
+		Calendar c = calendar.getCalendar();
+		currentMonth = c.get(Calendar.MONTH);
+		currentYear = c.get(Calendar.YEAR);
 		calendar.addPropertyChangeListener("calendar", new PropertyChangeListener() {
 
 		    @Override
-		    public void propertyChange(PropertyChangeEvent e) { // Zmiana miesiaca i roku powoduje otwarcie okna ..
-		    	
+		    public void propertyChange(PropertyChangeEvent e) {
+		    
 		    	final Calendar c = (Calendar) e.getNewValue();    
-		        DayEvents.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
-		        //CreateEventWindow.init(c);
-		        
+		        if (currentMonth != c.get(Calendar.MONTH) || currentYear != c.get(Calendar.YEAR)){
+		        	
+		        }
+		        else{
+		        	DayEvents.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
+		        	//CreateEventWindow.init(c);
+		        }
+	        	currentMonth = c.get(Calendar.MONTH);
+	        	currentYear = c.get(Calendar.YEAR);
 		    }
 		});	
 		
 		
-		menuItem = new JMenuItem("Deserialize events from XML file", KeyEvent.VK_D);
+		menuItem = new JMenuItem("Load events from XML file", KeyEvent.VK_L);
 		menuItem.addActionListener(this);
 		serializeToXML = new JMenuItem("Save all events to XML file", KeyEvent.VK_S);
 		serializeToXML.addActionListener(this);
@@ -75,8 +89,8 @@ public class Frame implements ActionListener {
 		filterByTo = new JMenuItem("ending date");
 		filterByTo.addActionListener(this);
 		
-		newFile = new JMenuItem("New", KeyEvent.VK_N);
-		newFile.addActionListener(this);
+		newEvent = new JMenuItem("New", KeyEvent.VK_N);
+		newEvent.addActionListener(this);
 
 		exit = new JMenuItem("Exit", KeyEvent.VK_E);
 		exit.addActionListener(this);
@@ -92,7 +106,8 @@ public class Frame implements ActionListener {
 		
 		menu = new JMenu("Menu");
 		menu.setMnemonic(KeyEvent.VK_M);
-		menu.add(newFile);
+		menu.add(newEvent);
+		menu.addSeparator();
 		menu.add(menuItem);
 		menu.add(serializeToXML);
 		menu.addSeparator();
@@ -103,17 +118,24 @@ public class Frame implements ActionListener {
 		menuBar.add(editMenu);
 		
 		frame = new JFrame("Event Calendar");
-		frame.setLayout(null);
+		frame.setMinimumSize(new Dimension(355, 400));
+		frame.setSize(new Dimension(355, 400));
+		frame.setLocation(new Point(600, 300));
+		frame.getContentPane().setLayout(null);
 		frame.setJMenuBar(menuBar);
-		frame.add(calendar);
-		frame.setSize(365, 410);
+		frame.getContentPane().add(calendar);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
+		frame.setResizable(false);		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {
+		
+		if (evt.getSource() == newEvent ){
+			final Calendar c = calendar.getCalendar();
+	        CreateEventWindow.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
+		}
 		
 		if (evt.getSource() == exit){
 			int odp = JOptionPane.showConfirmDialog( null , "Do you really want to exit?", "Question", JOptionPane.YES_NO_OPTION);
@@ -139,6 +161,7 @@ public class Frame implements ActionListener {
 				catch(Exception e){
 					JOptionPane.showMessageDialog(null, e.getMessage());
 				}
+				JOptionPane.showMessageDialog(null, "Events imported properly.", "Success", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		if (evt.getSource() == serializeToXML){

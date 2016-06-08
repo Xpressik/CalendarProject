@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
+import java.awt.Point;
 
 public class CreateEventWindow extends JFrame {
 	/**
@@ -47,6 +48,8 @@ public class CreateEventWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public CreateEventWindow(final String date) {
+		setTitle("Event Creator");
+		setLocation(new Point(220, 700));
 		
 		this.date = date;
 		//this.date = c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR);
@@ -136,19 +139,6 @@ public class CreateEventWindow extends JFrame {
 		});
 		btnCreate.setBounds(180, 192, 89, 23);
 		getContentPane().add(btnCreate);
-		
-		JButton btnPrnt = new JButton("Prnt");
-		btnPrnt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				EventList.printEvents();
-				List<Event> test = EventList.getEventListForSpecifiedDate(date); 
-				for(Event x : test){
-					System.out.println(x.getDate() + " " + x.getDescription());
-				}
-			}
-		});
-		btnPrnt.setBounds(26, 103, 89, 23);
-		getContentPane().add(btnPrnt);
 		
 		final JCheckBox chckbxWholeDay = new JCheckBox("Whole Day");
 		chckbxWholeDay.addActionListener(new ActionListener() {
