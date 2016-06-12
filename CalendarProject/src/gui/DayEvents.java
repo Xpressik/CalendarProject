@@ -1,9 +1,11 @@
-package calendar;
+package gui;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import data.*;
 
 import java.util.List;
 

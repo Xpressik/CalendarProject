@@ -1,4 +1,4 @@
-package calendar;
+package data;
 
 import java.util.List;
 import java.util.Vector;
@@ -37,7 +37,7 @@ public class EventList {
 		}
 		return result;
 	}
-	public static List<Event> fiterByPlace(String place){
+	public static List<Event> filterByPlace(String place){
 		List<Event> result = new Vector<Event>();
 		for( Event e : events){
 			if(e.getPlace().equals(place))
@@ -53,7 +53,7 @@ public class EventList {
 		}
 		return result;
 	}
-	public static List<Event> fiterByTo(String to){
+	public static List<Event> filterByTo(String to){
 		List<Event> result = new Vector<Event>();
 		for( Event e : events){
 			if(e.getTo().equals(to))

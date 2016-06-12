@@ -1,4 +1,4 @@
-package calendar;
+package data;
 
 public class Event {
 	private String description;

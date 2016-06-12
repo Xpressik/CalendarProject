@@ -1,14 +1,16 @@
-package calendar;
+package gui;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.text.MaskFormatter;
+
+import data.*;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.text.ParseException;
-import java.util.List;
 
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;

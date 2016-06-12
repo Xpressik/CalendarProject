@@ -1,8 +1,12 @@
-package calendar;
+package gui;
+
+import data.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.XMLDecoder;
@@ -42,9 +46,11 @@ public class Frame implements ActionListener {
 	private JMenuItem filterByFrom;
 	private JMenuItem filterByTo;
 	private JMenuItem serializeToXML;
+	private JMenuItem events;
 	
 	private int currentMonth;
 	private int currentYear;
+	
 	public Frame(){
 		init();
 	}
@@ -74,9 +80,12 @@ public class Frame implements ActionListener {
 		    }
 		});	
 		
+		events = new JMenuItem("Events",KeyEvent.VK_E);
+		events.addActionListener(this);
 		
 		menuItem = new JMenuItem("Load events from XML file", KeyEvent.VK_L);
 		menuItem.addActionListener(this);
+		
 		serializeToXML = new JMenuItem("Save all events to XML file", KeyEvent.VK_S);
 		serializeToXML.addActionListener(this);
 		
@@ -107,6 +116,7 @@ public class Frame implements ActionListener {
 		menu = new JMenu("Menu");
 		menu.setMnemonic(KeyEvent.VK_M);
 		menu.add(newEvent);
+		menu.add(events);
 		menu.addSeparator();
 		menu.add(menuItem);
 		menu.add(serializeToXML);
@@ -125,8 +135,23 @@ public class Frame implements ActionListener {
 		frame.setJMenuBar(menuBar);
 		frame.getContentPane().add(calendar);
 		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);		
+		
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frame.addWindowListener(new WindowAdapter() {
+		    @Override
+		    public void windowClosing(WindowEvent we)
+		    { 
+		        String ObjButtons[] = {"Yes","No"};
+		        int promptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit?","Question",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+		        if(promptResult ==JOptionPane.YES_OPTION)
+		        {
+		            System.exit(0);
+		        }
+		    }
+		});
+		
 	}
 
 	@Override
@@ -138,10 +163,16 @@ public class Frame implements ActionListener {
 		}
 		
 		if (evt.getSource() == exit){
-			int odp = JOptionPane.showConfirmDialog( null , "Do you really want to exit?", "Question", JOptionPane.YES_NO_OPTION);
-			if(odp == JOptionPane.YES_OPTION){
+			int promptResult = JOptionPane.showConfirmDialog( null , "Do you really want to exit?", "Question", JOptionPane.YES_NO_OPTION);
+			if(promptResult == JOptionPane.YES_OPTION){
 				frame.dispose();
 			}
+		}
+		
+		if (evt.getSource() == events )
+		{
+			final Calendar c = calendar.getCalendar();	
+			DayEvents.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
 		}
 		if (evt.getSource() == menuItem){
 			JFileChooser chooser = new JFileChooser();
@@ -186,21 +217,35 @@ public class Frame implements ActionListener {
 		}
 		if(evt.getSource() == filterByFrom){
 			String from = JOptionPane.showInputDialog(null, "Type beging date (must be in HH:mm format");
-			SearchWindow.init(EventList.filterByFrom(from));
-
+			if ( from.isEmpty() )	
+				JOptionPane.showMessageDialog(null, "Field can not be empty.", "Empty", JOptionPane.ERROR_MESSAGE);
+		    else	
+				SearchWindow.init(EventList.filterByFrom(from));
+			
+			
 		}
 		if(evt.getSource() == filterByTo){
 			String to = JOptionPane.showInputDialog(null, "Type ending date (must be in HH:mm format");
-			SearchWindow.init(EventList.fiterByTo(to));
+			if ( to.isEmpty() )	
+				JOptionPane.showMessageDialog(null, "Field can not be empty.", "Empty", JOptionPane.ERROR_MESSAGE);
+		    else	
+				SearchWindow.init(EventList.filterByTo(to));
 
 		}
 		if(evt.getSource() == filterByDescription){
 			String desc = JOptionPane.showInputDialog(null, "Type description");
-			SearchWindow.init(EventList.filterByDesc(desc));
+			if ( desc.isEmpty() )	
+				JOptionPane.showMessageDialog(null, "Field can not be empty.", "Empty", JOptionPane.ERROR_MESSAGE);
+		    else	
+				SearchWindow.init(EventList.filterByDesc(desc));
 		}
 		if(evt.getSource() == filterByPlace){
 			String place = JOptionPane.showInputDialog(null, "Type place");
-			SearchWindow.init(EventList.fiterByPlace(place));
+			if ( place.isEmpty() )	
+				JOptionPane.showMessageDialog(null, "Field can not be empty.", "Empty", JOptionPane.ERROR_MESSAGE);
+		    else	
+				SearchWindow.init(EventList.filterByPlace(place));
 		}
+	
 	}
 }

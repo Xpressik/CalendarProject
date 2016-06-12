@@ -1,4 +1,6 @@
-package calendar;
+package gui;
+
+import data.*;
 
 import java.awt.EventQueue;
 import java.util.List;
