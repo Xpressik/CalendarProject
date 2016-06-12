@@ -47,6 +47,8 @@ public class Frame implements ActionListener {
 	private JMenuItem filterByTo;
 	private JMenuItem serializeToXML;
 	private JMenuItem events;
+	private JMenuItem DBconnect;
+	private DBWindow dbWindow;
 	
 	private int currentMonth;
 	private int currentYear;
@@ -98,6 +100,9 @@ public class Frame implements ActionListener {
 		filterByTo = new JMenuItem("ending date");
 		filterByTo.addActionListener(this);
 		
+		DBconnect = new JMenuItem("Connect with DB", KeyEvent.VK_C);
+		DBconnect.addActionListener(this);
+		
 		newEvent = new JMenuItem("New", KeyEvent.VK_N);
 		newEvent.addActionListener(this);
 
@@ -117,6 +122,8 @@ public class Frame implements ActionListener {
 		menu.setMnemonic(KeyEvent.VK_M);
 		menu.add(newEvent);
 		menu.add(events);
+		menu.addSeparator();
+		menu.add(DBconnect);
 		menu.addSeparator();
 		menu.add(menuItem);
 		menu.add(serializeToXML);
@@ -245,6 +252,10 @@ public class Frame implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Field can not be empty.", "Empty", JOptionPane.ERROR_MESSAGE);
 		    else	
 				SearchWindow.init(EventList.filterByPlace(place));
+		}
+		if (evt.getSource() == DBconnect){
+			dbWindow = new DBWindow();
+			
 		}
 	
 	}
