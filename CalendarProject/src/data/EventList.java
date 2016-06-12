@@ -9,6 +9,9 @@ public class EventList {
 	public static List<Event> getEvents() {
 		return events;
 	}
+	public static void deleteEvent (Event evt){ //
+		events.remove(evt);
+	}
 	public static void setEvents(List<Event> events) {
 		EventList.events = events;
 	}

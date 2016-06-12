@@ -74,7 +74,9 @@ public class Frame implements ActionListener {
 		        	
 		        }
 		        else{
-		        	DayEvents.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
+		        	//DayEvents.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
+		        	DayList.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
+
 		        	//CreateEventWindow.init(c);
 		        }
 	        	currentMonth = c.get(Calendar.MONTH);

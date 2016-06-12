@@ -8,6 +8,7 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,7 +31,7 @@ public class DBWindow extends JFrame implements ActionListener{
 	char[] input;
 	String inputString;
 	JButton enterButton;
-	JLabel enteredPassword;
+	JLabel result;
 	
 	public DBWindow(){
 		init();
@@ -41,8 +42,9 @@ public class DBWindow extends JFrame implements ActionListener{
 		jPanel = new JPanel();
 		passwordLabel = new JLabel("Enter password to Database");
 		jPanel.add(passwordLabel);
-		this.add(jPanel);
-		enteredPassword= new JLabel();
+		getContentPane().add(jPanel);
+		result= new JLabel();
+		result.setMaximumSize(new Dimension(230, 50));
 				
 		menuBar = new JMenuBar();
 		menuBar.setVisible(true);
@@ -58,17 +60,32 @@ public class DBWindow extends JFrame implements ActionListener{
 		enterButton = new JButton("ENTER");
 		enterButton.setSize(new Dimension(20, 20));
 		jPanel.add(enterButton);
-		jPanel.add(enteredPassword);
+		jPanel.add(result);
 		
 		enterButton.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+
 				input = passwordField.getPassword();
-				DBConnection conn = new DBConnection(inputString);
-				enteredPassword.setText("connecting...");
-				jPanel.add(enteredPassword);
+
+				if(input.length == 0)
+					inputString = "";
+				else
+					inputString = input.toString();
+				DBConnection conn = null;
+				try{
+					conn = new DBConnection(inputString);
+				}
+				catch(SQLException ex){
+					result.setText(ex.toString());
+					System.out.println("Error: " + ex);
+					return;
+				} catch (ClassNotFoundException e1) {
+					//result.setText(e1.toString());
+					return;
+				}
+				result.setText("connected");
 				conn.getData();
 			}
 			
@@ -79,7 +96,7 @@ public class DBWindow extends JFrame implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				inputString.valueOf(input);
+				inputString.valueOf(input);				
 			}
 			
 		});
@@ -92,7 +109,6 @@ public class DBWindow extends JFrame implements ActionListener{
 		this.setJMenuBar(menuBar);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(false);
 	}
 
 	@Override
