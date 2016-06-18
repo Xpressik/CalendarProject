@@ -2,6 +2,8 @@ package data;
 
 import java.sql.*;
 
+import logic.IncorrectPasswordException;
+
 public class DBConnection {
 
 	private Connection connect;
@@ -23,13 +25,19 @@ public class DBConnection {
 	
 	}
 	
-	public DBConnection(String password) throws ClassNotFoundException, SQLException{
+	public DBConnection(String password) throws IncorrectPasswordException{
 		this.password = password;
-		
+		try{
 			Class.forName("com.mysql.jdbc.Driver");
 		    connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/prokom", "root", password);
-		    
 		    statement = connect.createStatement();
+		}
+		catch(SQLException e){
+			throw new IncorrectPasswordException();
+		}
+		catch(ClassNotFoundException e){
+			
+		}
 	}
 	
 	public void getData(){

@@ -1,7 +1,10 @@
 package gui;
 
 import data.*;
+import logic.Listener;
+import logic.PopClickListener;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -25,10 +28,13 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.toedter.calendar.JCalendar;
 import java.awt.Point;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 
 public class Frame implements ActionListener {
@@ -52,6 +58,7 @@ public class Frame implements ActionListener {
 	
 	private int currentMonth;
 	private int currentYear;
+	private JMenu settingsMenu;
 	
 	public Frame(){
 		init();
@@ -59,11 +66,14 @@ public class Frame implements ActionListener {
 	
 	private void init(){
 		
+		Timer t = new Timer(1000, new Listener());
+		
 		calendar = new JCalendar();
 		calendar.setBounds(0,0,350,350);
 		Calendar c = calendar.getCalendar();
 		currentMonth = c.get(Calendar.MONTH);
 		currentYear = c.get(Calendar.YEAR);
+		
 		calendar.addPropertyChangeListener("calendar", new PropertyChangeListener() {
 
 		    @Override
@@ -71,16 +81,15 @@ public class Frame implements ActionListener {
 		    
 		    	final Calendar c = (Calendar) e.getNewValue();    
 		        if (currentMonth != c.get(Calendar.MONTH) || currentYear != c.get(Calendar.YEAR)){
-		        	
+
 		        }
 		        else{
 		        	//DayEvents.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
 		        	DayList.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
-
-		        	//CreateEventWindow.init(c);
 		        }
 	        	currentMonth = c.get(Calendar.MONTH);
 	        	currentYear = c.get(Calendar.YEAR);
+				colorDayWithEvents(EventList.getEventListForSpecifiedMonth(Integer.toString(currentMonth+1)));
 		    }
 		});	
 		
@@ -142,9 +151,31 @@ public class Frame implements ActionListener {
 		frame.setLocation(new Point(600, 300));
 		frame.getContentPane().setLayout(null);
 		frame.setJMenuBar(menuBar);
+		
+		settingsMenu = new JMenu("Settings");
+		menuBar.add(settingsMenu);
+		
+		JMenuItem preferencesMenuItem = new JMenuItem("Preferences");
+		preferencesMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PreferencesWindow.init();
+				
+				JPanel panel= calendar.getDayChooser().getDayPanel();
+				Component [] components = panel.getComponents(); 
+				for (int i= 8; i<49 ; i++ ){
+					components[i].setBackground(Color.CYAN);
+				}
+				for(int i= 13; i<49; i+= 7){
+					components[i].setBackground(Color.RED);
+				}
+			}
+		});
+		settingsMenu.add(preferencesMenuItem);
+		
+		
 		frame.getContentPane().add(calendar);
 		frame.setVisible(true);
-		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		frame.setResizable(false);		
 		
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -160,7 +191,6 @@ public class Frame implements ActionListener {
 		        }
 		    }
 		});
-		
 	}
 
 	@Override
@@ -213,7 +243,7 @@ public class Frame implements ActionListener {
 				try{
 					String path = fi.getPath();
 					if (!path.endsWith(".xml")){
-						path += ".xml";
+						path += ".xml";	
 					}
 					XMLEncoder x = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(path)));
 					x.writeObject(EventList.getEvents());
@@ -256,9 +286,17 @@ public class Frame implements ActionListener {
 				SearchWindow.init(EventList.filterByPlace(place));
 		}
 		if (evt.getSource() == DBconnect){
-			dbWindow = new DBWindow();
-			
+			dbWindow = new DBWindow();			
 		}
 	
+	}
+	public void colorDayWithEvents(List<Event> eventList){
+		JPanel panel= calendar.getDayChooser().getDayPanel();
+		Component [] components = panel.getComponents(); 
+		for(Event evt : eventList){
+			int day = Integer.parseInt(evt.getDate().substring(0, 2).replaceAll("-", ""));
+			components[day+8].setBackground(Color.green);
+
+		}
 	}
 }

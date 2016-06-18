@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.text.ParseException;
+import java.util.List;
 
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
@@ -20,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 import java.awt.Point;
+import javax.swing.JComboBox;
 
 public class CreateEventWindow extends JFrame {
 	/**
@@ -28,6 +30,7 @@ public class CreateEventWindow extends JFrame {
 	private static final long serialVersionUID = -2111993159030174208L;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JComboBox comboBoxReminder;
 	
 	private String date;
 	/**
@@ -79,11 +82,11 @@ public class CreateEventWindow extends JFrame {
 		textField_1.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("From");
-		lblNewLabel_2.setBounds(71, 168, 36, 14);
+		lblNewLabel_2.setBounds(85, 132, 36, 14);
 		getContentPane().add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("To");
-		lblNewLabel_3.setBounds(326, 168, 24, 14);
+		lblNewLabel_3.setBounds(340, 132, 24, 14);
 		getContentPane().add(lblNewLabel_3);
 			
 		MaskFormatter mask = null;
@@ -97,12 +100,12 @@ public class CreateEventWindow extends JFrame {
 		
 		final JFormattedTextField formattedTextField = new JFormattedTextField(mask);
 		formattedTextField.setHorizontalAlignment(SwingConstants.CENTER);
-		formattedTextField.setBounds(61, 193, 46, 20);
+		formattedTextField.setBounds(75, 157, 46, 20);
 		getContentPane().add(formattedTextField);
 		
 		final JFormattedTextField formattedTextField_1 = new JFormattedTextField(mask);
 		formattedTextField_1.setHorizontalAlignment(SwingConstants.CENTER);
-		formattedTextField_1.setBounds(312, 193, 46, 20);
+		formattedTextField_1.setBounds(326, 157, 46, 20);
 		getContentPane().add(formattedTextField_1);
 		
 		JLabel lblNewLabel_4 = new JLabel("Current Date");
@@ -122,6 +125,10 @@ public class CreateEventWindow extends JFrame {
 					String[] to = formattedTextField_1.getText().split(":");
 					 toHour = Integer.parseInt(to[0]);
 					 toMinutes = Integer.parseInt(to[1]);
+					Object reminder = comboBoxReminder.getSelectedItem();
+					if ( reminder != null ){
+						
+					}
 				}
 				catch(NumberFormatException e){
 					JOptionPane.showMessageDialog(null, "You have to type hours.", "Wrong hours", JOptionPane.OK_OPTION);
@@ -139,7 +146,7 @@ public class CreateEventWindow extends JFrame {
 				}
 			}
 		});
-		btnCreate.setBounds(180, 192, 89, 23);
+		btnCreate.setBounds(177, 227, 89, 23);
 		getContentPane().add(btnCreate);
 		
 		final JCheckBox chckbxWholeDay = new JCheckBox("Whole Day");
@@ -163,7 +170,16 @@ public class CreateEventWindow extends JFrame {
 				
 			}
 		});
-		chckbxWholeDay.setBounds(180, 144, 86, 23);
+		chckbxWholeDay.setBounds(180, 156, 86, 23);
 		getContentPane().add(chckbxWholeDay);
+		
+		comboBoxReminder = new JComboBox( new String[] {null, "5 min", "10 min", "15 min", "30 min", "1h", "2h", "6h", "12h"} );
+		comboBoxReminder.setBounds(180, 196, 86, 20);
+		getContentPane().add(comboBoxReminder);	
+		
+		JLabel lblReminder = new JLabel("Reminder");
+		lblReminder.setBounds(121, 199, 68, 14);
+		getContentPane().add(lblReminder);
+		
 	}
 }

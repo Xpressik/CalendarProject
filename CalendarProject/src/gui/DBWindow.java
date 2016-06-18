@@ -1,6 +1,7 @@
 package gui;
 
 import data.DBConnection;
+import logic.IncorrectPasswordException;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -55,7 +56,6 @@ public class DBWindow extends JFrame implements ActionListener{
 		
 		passwordField = new JPasswordField(20);
 		jPanel.add(passwordField);
-		//jPanel.add(enteredPassword);
 		
 		enterButton = new JButton("ENTER");
 		enterButton.setSize(new Dimension(20, 20));
@@ -77,6 +77,11 @@ public class DBWindow extends JFrame implements ActionListener{
 				try{
 					conn = new DBConnection(inputString);
 				}
+				catch(IncorrectPasswordException ex){ 
+					result.setText("Incorrect password");
+					return;
+				}
+				/*
 				catch(SQLException ex){
 					result.setText(ex.toString());
 					System.out.println("Error: " + ex);
@@ -84,7 +89,7 @@ public class DBWindow extends JFrame implements ActionListener{
 				} catch (ClassNotFoundException e1) {
 					//result.setText(e1.toString());
 					return;
-				}
+				}*/
 				result.setText("connected");
 				conn.getData();
 			}
@@ -108,7 +113,6 @@ public class DBWindow extends JFrame implements ActionListener{
 		//this.setContentPane().setLayout(null);
 		this.setJMenuBar(menuBar);
 		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	@Override

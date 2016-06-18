@@ -5,7 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.sun.xml.internal.ws.api.ComponentsFeature;
+
 import data.*;
+import logic.PopClickListener;
 
 import java.util.List;
 
@@ -128,19 +131,39 @@ public class DayList extends JFrame {
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(list);
 		
-		
-		
 		JButton btnNewButton_1 = new JButton("Delete"); // uniemozliwic usuwanie jesli nic nie jest klikniete
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int selectedEventIndex = list.getSelectedIndex();
-				EventList.deleteEvent(eventList.get(selectedEventIndex));
+				try{
+					EventList.deleteEvent(eventList.get(selectedEventIndex));
+				
 				eventList.remove(selectedEventIndex);
 				DayList.repaintList(list, eventList);
+				}
+				catch(Exception e){
+					
+				}
 			}
 		});
+		
+		//Component cmp = list.getComponents(); // DODAÆ DO KA¯DEGO ELEMENTU LISTY LISTENERA DO POPMENU
+		
 		btnNewButton_1.setBounds(412, 39, 89, 23);
 		getContentPane().add(btnNewButton_1);
+		
+		JButton btnEdit = new JButton("Edit");
+		btnEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		btnEdit.setBounds(412, 88, 89, 23);
+		getContentPane().add(btnEdit);
+		
+		
+		list.addMouseListener(new PopClickListener());
+		
 
 	}
 	public static void repaintList(JList list, List<Event> eventList){
