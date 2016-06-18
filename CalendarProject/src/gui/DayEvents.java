@@ -49,7 +49,7 @@ public class DayEvents extends JFrame {
 		
 		this.date = date;
 
-		List<Event> eventList = EventList.getEventListForSpecifiedDate(date);
+		final List<Event> eventList = EventList.getEventListForSpecifiedDate(date);
 
 		
 		setTitle("Events");
