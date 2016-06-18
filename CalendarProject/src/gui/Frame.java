@@ -1,6 +1,7 @@
 package gui;
 
 import data.*;
+import logic.DBConnection;
 import logic.Listener;
 import logic.PopClickListener;
 
@@ -187,7 +188,9 @@ public class Frame implements ActionListener {
 		        int promptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit?","Question",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
 		        if(promptResult ==JOptionPane.YES_OPTION)
 		        {
-		            System.exit(0);
+		            DBConnection db = new DBConnection();
+		            db.saveData();
+		        	System.exit(0);
 		        }
 		    }
 		});

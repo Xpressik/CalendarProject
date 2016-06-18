@@ -12,9 +12,6 @@ public class EventList {
 	public static void deleteEvent (Event evt){ //
 		events.remove(evt);
 	}
-	public static void setEvents(List<Event> events) {
-		EventList.events = events;
-	}
 	public static void addEvent(Event evt){
 		events.add(evt);
 	}

@@ -1,6 +1,6 @@
 package gui;
 
-import data.DBConnection;
+import logic.DBConnection;
 import logic.IncorrectPasswordException;
 
 import java.awt.Dimension;
@@ -80,6 +80,8 @@ public class DBWindow extends JFrame implements ActionListener{
 				catch(IncorrectPasswordException ex){ 
 					result.setText("Incorrect password");
 					return;
+				} catch (ClassNotFoundException e1) {
+					result.setText(e1.getMessage());
 				}
 				/*
 				catch(SQLException ex){
