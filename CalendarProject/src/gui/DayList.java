@@ -55,7 +55,7 @@ public class DayList extends JFrame {
 		
 		this.date = date;
 
-		List<Event> eventList = EventList.getEventListForSpecifiedDate(date);
+		final List<Event> eventList = EventList.getEventListForSpecifiedDate(date);
 
 		
 		setTitle("Events");
@@ -125,7 +125,7 @@ public class DayList extends JFrame {
 		scrollPane.setBounds(10, 68, 402, 182);
 		getContentPane().add(scrollPane);
 		
-		JList list = new JList();
+		final JList list = new JList();
 		DayList.repaintList(list, eventList);
 		
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
