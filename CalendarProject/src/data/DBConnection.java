@@ -9,7 +9,6 @@ public class DBConnection {
 	private Connection connect;
 	private Statement statement;
 	private ResultSet resultSet;
-	private String password;
 
 	public DBConnection(){
 		
@@ -26,7 +25,6 @@ public class DBConnection {
 	}
 	
 	public DBConnection(String password) throws IncorrectPasswordException{
-		this.password = password;
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 		    connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/prokom", "root", password);
@@ -44,11 +42,9 @@ public class DBConnection {
 		try{
 			String query = "select * from events2";
 			resultSet = statement.executeQuery(query);
-			System.out.println("Records from database:");
 			while(resultSet.next()){
-				String desc = resultSet.getString("description");
-				String place = resultSet.getString("place");
-				System.out.println("DESC: " + desc + " | PLACE: " + place);
+				
+				EventList.addEvent(new Event(resultSet.getString("description"),resultSet.getString("place"), resultSet.getString("fromHour"), resultSet.getString("toHour"), resultSet.getString("date").replaceAll("-0", "-")));				
 			}	
 		}
 		catch(Exception e){

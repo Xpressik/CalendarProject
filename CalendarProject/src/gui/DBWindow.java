@@ -24,15 +24,15 @@ import com.toedter.calendar.JCalendar;
 
 public class DBWindow extends JFrame implements ActionListener{
 	
-	JMenuBar menuBar;
-	JMenuItem connect;
-	JPasswordField passwordField;
-	JPanel jPanel;
-	JLabel passwordLabel;
-	char[] input;
-	String inputString;
-	JButton enterButton;
-	JLabel result;
+	private JMenuBar menuBar;
+	private JMenuItem connect;
+	private JPasswordField passwordField;
+	private JPanel jPanel;
+	private JLabel passwordLabel;
+	private char[] input;
+	private String inputString;
+	private JButton enterButton;
+	private JLabel result;
 	
 	public DBWindow(){
 		init();

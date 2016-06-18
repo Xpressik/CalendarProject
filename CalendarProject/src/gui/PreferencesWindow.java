@@ -6,14 +6,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JSlider;
 
 public class PreferencesWindow extends JFrame {
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void init() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -28,9 +27,6 @@ public class PreferencesWindow extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public PreferencesWindow() {
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
