@@ -6,6 +6,8 @@ import logic.DBData;
 import logic.IncorrectPasswordException;
 import logic.Listener;
 import logic.PopClickListener;
+import logic.Reminder;
+
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -40,6 +42,10 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Frame implements ActionListener {
 	
 	private JCalendar calendar;
@@ -63,14 +69,15 @@ public class Frame implements ActionListener {
 	private int currentYear;
 	private JMenu settingsMenu;
 	
+	private Timer timer;
+
+	
 	public Frame(DBData dbData){
 		init(dbData);
 	}
 	
 	private void init(DBData dbData){
-		
-		Timer t = new Timer(1000, new Listener());
-		
+				
 		calendar = new JCalendar();
 		calendar.setBounds(0,0,350,350);
 		Calendar c = calendar.getCalendar();
@@ -87,8 +94,9 @@ public class Frame implements ActionListener {
 
 		        }
 		        else{
-		        	//DayEvents.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
-		        	DayList.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
+		        	//DayList.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
+		        	LocalDate ld = LocalDate.now();	
+		        	DayList.init(ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		        }
 	        	currentMonth = c.get(Calendar.MONTH);
 	        	currentYear = c.get(Calendar.YEAR);
@@ -188,7 +196,6 @@ public class Frame implements ActionListener {
 			
 		});
 		
-		
 		frame.getContentPane().add(calendar);
 		frame.setVisible(true);
 		
@@ -215,6 +222,22 @@ public class Frame implements ActionListener {
 		        }
 		    }
 		});
+		
+		
+		System.out.println("Create timer");
+ 		timer = new javax.swing.Timer(1000, new ActionListener() {
+ 			@Override
+ 			public void actionPerformed(ActionEvent e) {
+				System.out.println("WORKING...");
+ 				String message = Reminder.toRemind();
+ 				if (message != null && !"".equals(message)) {
+ 					System.out.println("message " + message);
+ 					ReminderWindow reminderW = new ReminderWindow(message);
+ 				}
+ 			}
+ 		}){{setInitialDelay( 0 );}};
+ 		timer.start();
+		
 	}
 
 	@Override
@@ -222,7 +245,7 @@ public class Frame implements ActionListener {
 		
 		if (evt.getSource() == newEvent ){
 			final Calendar c = calendar.getCalendar();
-	        CreateEventWindow.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
+			CreateEventWindow.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
 		}
 		
 		if (evt.getSource() == exit){
@@ -235,7 +258,9 @@ public class Frame implements ActionListener {
 		if (evt.getSource() == events )
 		{
 			final Calendar c = calendar.getCalendar();	
-			DayList.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
+		//	DayList.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
+			LocalDate ld = LocalDate.now();	
+			DayList.init(ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		}
 		if (evt.getSource() == menuItem){
 			JFileChooser chooser = new JFileChooser();

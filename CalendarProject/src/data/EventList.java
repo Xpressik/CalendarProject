@@ -44,7 +44,7 @@ public class EventList {
 	}
 	public static void printEvents(){
 		for( Event x : events ){
-			System.out.println(x.getDescription() + x.getPlace() + " " + x.getFrom() + " - " + x.getTo());
+			System.out.println(x.getDescription() + x.getPlace() + " " + x.getFrom() + " - " + x.getTo() + x.getReminder());
 		}
 	}
 	public static List<Event> filterByDesc(String desc){

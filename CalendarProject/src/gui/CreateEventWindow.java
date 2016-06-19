@@ -6,12 +6,22 @@ import javax.swing.JFrame;
 import javax.swing.text.MaskFormatter;
 
 import data.*;
+import logic.Reminder;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
@@ -33,6 +43,18 @@ public class CreateEventWindow extends JFrame {
 	private JComboBox comboBoxReminder;
 	
 	private String date;
+	
+	private static final Map<Integer, Integer> mapping = new HashMap<Integer, Integer>(){{
+		put(1, 5);
+		put(2, 10);
+		put(3, 15);
+		put(4, 30);
+		put(5, 60);
+		put(6, 120);
+		put(7, 360);
+		put(8, 720);	
+	}};
+	
 	/**
 	 * Launch the application.
 	 */
@@ -116,7 +138,7 @@ public class CreateEventWindow extends JFrame {
 		JButton btnCreate = new JButton("Create");
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) { 
-				
+				Date reminder = null;
 				int fromHour = 0, fromMinutes = 0, toHour = 0, toMinutes = 0;
 				try{
 					String[] from = formattedTextField.getText().split(":");
@@ -125,13 +147,20 @@ public class CreateEventWindow extends JFrame {
 					String[] to = formattedTextField_1.getText().split(":");
 					 toHour = Integer.parseInt(to[0]);
 					 toMinutes = Integer.parseInt(to[1]);
-					Object reminder = comboBoxReminder.getSelectedItem();
-					if ( reminder != null ){
+					int reminderIdx = comboBoxReminder.getSelectedIndex();
+					if ( reminderIdx > 0 ){
+						LocalDate ld = LocalDate.parse(date);
+						LocalDateTime ldt = LocalDateTime.of(ld.getYear(), ld.getMonth(), ld.getDayOfMonth(), 0, 0);
+						ldt = ldt.withHour(fromHour).withMinute(fromMinutes).minusMinutes(mapping.get(reminderIdx));
+						System.out.println("From h: " + fromHour + " m: " + fromMinutes);
+						System.out.println("Event date: " + ldt);
 						
+						reminder = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
 					}
 				}
-				catch(NumberFormatException e){
-					JOptionPane.showMessageDialog(null, "You have to type hours.", "Wrong hours", JOptionPane.OK_OPTION);
+				catch(Exception e){
+					e.printStackTrace();
+					JOptionPane.showMessageDialog(null, "You have to type hours.", "Wrong hours: " + e.getMessage(), JOptionPane.OK_OPTION);
 					return;
 				}
 				
@@ -139,7 +168,15 @@ public class CreateEventWindow extends JFrame {
 					JOptionPane.showMessageDialog(null, "Event end before it starts.", "Wrong hours", JOptionPane.OK_OPTION);
 				}
 				else{
-					EventList.addEvent(new Event(textField.getText(), textField_1.getText(), formattedTextField.getText(), formattedTextField_1.getText(), date)); 
+					Event event = new Event(
+							textField.getText(), 
+							textField_1.getText(), 
+							formattedTextField.getText(), 
+							formattedTextField_1.getText(), 
+							date, 
+							reminder);
+					
+					EventList.addEvent(event); 
 					JOptionPane.showMessageDialog(null, "Event created propertly.", "Success", JOptionPane.INFORMATION_MESSAGE);
 					dispose();
 					DayList.init(date);
@@ -174,7 +211,7 @@ public class CreateEventWindow extends JFrame {
 		chckbxWholeDay.setBounds(180, 156, 86, 23);
 		getContentPane().add(chckbxWholeDay);
 		
-		comboBoxReminder = new JComboBox( new String[] {null, "5 min", "10 min", "15 min", "30 min", "1h", "2h", "6h", "12h"} );
+		comboBoxReminder = new JComboBox( new String[] {null, "5 min", "10 min", "15 min", "30 min", "1 h", "2 h", "6 h", "12 h"} );
 		comboBoxReminder.setBounds(180, 196, 86, 20);
 		getContentPane().add(comboBoxReminder);	
 		

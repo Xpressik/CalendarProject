@@ -33,7 +33,6 @@ public class Main {
 		}
 		
 		Frame window = new Frame(dbData);
-		
 	}
 
 }
