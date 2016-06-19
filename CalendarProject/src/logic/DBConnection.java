@@ -56,15 +56,18 @@ public class DBConnection {
 	}
 	public void saveData(){
 		try{
-			String query = "INSERT INTO events2 VALUES (";
+			String query;
+			query = "DELETE FROM `events2` WHERE 1";
+			statement.executeUpdate(query);
 			List <Event> events  = EventList.getEvents();
 			for(int i=0; i< events.size(); i++){
+				query = "INSERT INTO events2 (description, place, fromHour, toHour, evtDate) VALUES (";
 				query += 
-				events.get(i).getDescription() + "," + 
-				events.get(i).getPlace() + "," +
-				events.get(i).getFrom() + "," + 
-				events.get(i).getTo() + "," +
-				events.get(i).getDate() + ");";
+				"'" + events.get(i).getDescription() + "', " + 
+				"'" + events.get(i).getPlace() + "', " +
+				"'" + events.get(i).getFrom() + "', " + 
+				"'" + events.get(i).getTo() + "', " +
+				"'" + events.get(i).getDate() + "');";
 				statement.executeUpdate(query);
 			}
 		}
