@@ -1,11 +1,18 @@
 package data;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class Event {
 	private String description;
 	private String place;
 	private String from;
 	private String to;
-	private String date; 
+	private String date;
+	private Date reminder;
 		
 	public Event(){
 		setDescription(null);
@@ -14,12 +21,13 @@ public class Event {
 		setTo(null);
 		setDate(null);
 	}
-	public Event(String desc, String place, String from, String to, String date){
+	public Event(String desc, String place, String from, String to, String date, Date reminder){
 		this.setDescription(desc);
 		this.setPlace(place);
 		this.setFrom(from);
 		this.setTo(to);
 		this.setDate(date);
+		this.reminder = reminder;
 	}
 	public String getDescription() {
 		return description;
@@ -50,5 +58,15 @@ public class Event {
 	}
 	public void setDate(String date) {
 		this.date = date;
+	}
+	public Date getReminder(){
+		return this.reminder;
+	}
+	public Date getToDate(){
+		@SuppressWarnings("deprecation")
+		Date format;
+		format = new Date();
+		format.parse(getTo());
+		return format;
 	}
 }

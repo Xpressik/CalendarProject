@@ -47,7 +47,7 @@ public class DBConnection {
 			resultSet = statement.executeQuery(query);
 			while(resultSet.next()){
 				
-				EventList.addEvent(new Event(resultSet.getString("description"),resultSet.getString("place"), resultSet.getString("fromHour"), resultSet.getString("toHour"), resultSet.getString("evtDate").replaceAll("-0", "-")));				
+				EventList.addEvent(new Event(resultSet.getString("description"),resultSet.getString("place"), resultSet.getString("fromHour"), resultSet.getString("toHour"), resultSet.getString("evtDate").replaceAll("-0", "-"), resultSet.getDate("reminder")));				
 			}	
 		}
 		catch(Exception e){
@@ -67,7 +67,9 @@ public class DBConnection {
 				"'" + events.get(i).getPlace() + "', " +
 				"'" + events.get(i).getFrom() + "', " + 
 				"'" + events.get(i).getTo() + "', " +
-				"'" + events.get(i).getDate() + "');";
+				"'" + events.get(i).getDate() + "', " +
+				"'" + events.get(i).getReminder()
+						+ ");";
 				statement.executeUpdate(query);
 			}
 		}
