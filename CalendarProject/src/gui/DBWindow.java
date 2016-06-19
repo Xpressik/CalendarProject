@@ -83,15 +83,6 @@ public class DBWindow extends JFrame implements ActionListener{
 				} catch (ClassNotFoundException e1) {
 					result.setText(e1.getMessage());
 				}
-				/*
-				catch(SQLException ex){
-					result.setText(ex.toString());
-					System.out.println("Error: " + ex);
-					return;
-				} catch (ClassNotFoundException e1) {
-					//result.setText(e1.toString());
-					return;
-				}*/
 				result.setText("connected");
 				conn.getData();
 			}

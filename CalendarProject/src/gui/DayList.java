@@ -72,11 +72,11 @@ public class DayList extends JFrame {
 		getContentPane().add(lblTo);
 		
 		JLabel lblDesc = new JLabel("Description");
-		lblDesc.setBounds(122, 43, 69, 14);
+		lblDesc.setBounds(168, 43, 69, 14);
 		getContentPane().add(lblDesc);
 		
 		JLabel lblNewLabel_3 = new JLabel("Place");
-		lblNewLabel_3.setBounds(264, 43, 46, 14);
+		lblNewLabel_3.setBounds(337, 43, 46, 14);
 		getContentPane().add(lblNewLabel_3);
 		
 		JButton btnCreateEvent = new JButton("Create Event");
@@ -131,7 +131,7 @@ public class DayList extends JFrame {
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(list);
 		
-		JButton btnNewButton_1 = new JButton("Delete"); // uniemozliwic usuwanie jesli nic nie jest klikniete
+		JButton btnNewButton_1 = new JButton("Delete"); 
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int selectedEventIndex = list.getSelectedIndex();
@@ -152,26 +152,29 @@ public class DayList extends JFrame {
 		btnNewButton_1.setBounds(412, 39, 89, 23);
 		getContentPane().add(btnNewButton_1);
 		
-		JButton btnEdit = new JButton("Edit");
-		btnEdit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		});
-		btnEdit.setBounds(412, 88, 89, 23);
-		getContentPane().add(btnEdit);
-		
 		
 		list.addMouseListener(new PopClickListener());
 		
 
 	}
+	private static String alignment(int length){
+		
+		String result = new String();		
+		length = 40 - length;
+		
+		while(length > 0){
+			result += "  ";
+			length--;
+		}
+		return result;
+	}
+	
 	public static void repaintList(JList list, List<Event> eventList){
 		int size = eventList.size();
 		String [] str = new String[size];
 		for (int i= 0; i< size; i++){
 			Event event = eventList.get(i);
-			str[i] = (event.getFrom() + " " + event.getTo() + " " + event.getDescription() + " "  + event.getPlace());
+			str[i] = (event.getFrom() + "    " + event.getTo() + "    " + event.getDescription() + alignment(event.getDescription().length()) + event.getPlace());
 		}
 		list.setListData(str);
 	}

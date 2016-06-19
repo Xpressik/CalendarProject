@@ -68,7 +68,7 @@ public class CreateEventWindow extends JFrame {
 		getContentPane().add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setBounds(180, 48, 86, 20);
+		textField.setBounds(138, 48, 189, 20);
 		getContentPane().add(textField);
 		textField.setColumns(10);
 		
@@ -142,7 +142,8 @@ public class CreateEventWindow extends JFrame {
 					EventList.addEvent(new Event(textField.getText(), textField_1.getText(), formattedTextField.getText(), formattedTextField_1.getText(), date)); 
 					JOptionPane.showMessageDialog(null, "Event created propertly.", "Success", JOptionPane.INFORMATION_MESSAGE);
 					dispose();
-					DayEvents.init(date);
+					DayList.init(date);
+					//DayEvents.init(date);
 				}
 			}
 		});

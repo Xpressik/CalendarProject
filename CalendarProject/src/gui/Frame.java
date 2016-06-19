@@ -2,6 +2,8 @@ package gui;
 
 import data.*;
 import logic.DBConnection;
+import logic.DBData;
+import logic.IncorrectPasswordException;
 import logic.Listener;
 import logic.PopClickListener;
 
@@ -47,7 +49,7 @@ public class Frame implements ActionListener {
 	private JMenu editMenu;
 	private JMenuItem newEvent;
 	private JMenuItem exit;
-	private JFrame frame;
+	private  JFrame frame;
 	private JMenuItem filterByPlace;
 	private JMenuItem filterByDescription;
 	private JMenuItem filterByFrom;
@@ -61,11 +63,11 @@ public class Frame implements ActionListener {
 	private int currentYear;
 	private JMenu settingsMenu;
 	
-	public Frame(){
-		init();
+	public Frame(DBData dbData){
+		init(dbData);
 	}
 	
-	private void init(){
+	private void init(DBData dbData){
 		
 		Timer t = new Timer(1000, new Listener());
 		
@@ -161,17 +163,30 @@ public class Frame implements ActionListener {
 			public void actionPerformed(ActionEvent arg0) {
 				PreferencesWindow.init();
 				
-				JPanel panel= calendar.getDayChooser().getDayPanel();
+				
+			/*	JPanel panel= calendar.getDayChooser().getDayPanel();				
 				Component [] components = panel.getComponents(); 
 				for (int i= 8; i<49 ; i++ ){
-					components[i].setBackground(Color.CYAN);
-				}
-				for(int i= 13; i<49; i+= 7){
+					components[i].setBackground(PreferencesWindow.getBackgroundColor());
+				} */
+				/*for(int i= 13; i<49; i+= 7){
 					components[i].setBackground(Color.RED);
-				}
+				}*/
 			}
 		});
 		settingsMenu.add(preferencesMenuItem);
+		
+		JMenu helpMenu = new JMenu("Help");
+		menuBar.add(helpMenu);
+		
+		JMenuItem mntmAboutProgram = new JMenuItem("About Program");
+		helpMenu.add(mntmAboutProgram);
+		mntmAboutProgram.addActionListener(new ActionListener(){	
+			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(null, "Event Calendar\nDawid Dziedziczak Micha³ Mackiewicz", "About", JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+		});
 		
 		
 		frame.getContentPane().add(calendar);
@@ -188,8 +203,14 @@ public class Frame implements ActionListener {
 		        int promptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit?","Question",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
 		        if(promptResult ==JOptionPane.YES_OPTION)
 		        {
-		            DBConnection db = new DBConnection();
-		            db.saveData();
+		            DBConnection db;
+					try {
+						db = new DBConnection(dbData);
+						db.saveData();
+					} catch (IncorrectPasswordException | ClassNotFoundException e) {
+						JOptionPane.showMessageDialog(null, "There has been some problems with database.\nOr you have typed wrong data.", "Database failure", JOptionPane.WARNING_MESSAGE);
+					}
+		            
 		        	System.exit(0);
 		        }
 		    }
@@ -214,7 +235,7 @@ public class Frame implements ActionListener {
 		if (evt.getSource() == events )
 		{
 			final Calendar c = calendar.getCalendar();	
-			DayEvents.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
+			DayList.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
 		}
 		if (evt.getSource() == menuItem){
 			JFileChooser chooser = new JFileChooser();

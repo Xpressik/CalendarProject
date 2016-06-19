@@ -13,7 +13,8 @@ public class DBConnection {
 	private Statement statement;
 	private ResultSet resultSet;
 
-	public DBConnection(){
+	
+	public DBConnection() throws IncorrectPasswordException, ClassNotFoundException{
 		
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
@@ -21,16 +22,33 @@ public class DBConnection {
 		      
 		    statement = connect.createStatement();
 		}
-		catch(Exception e){
-			System.out.println("Error: " + e);
+		catch(SQLException e){
+			throw new IncorrectPasswordException();
 		}
+		catch(ClassNotFoundException e){
+			throw new ClassNotFoundException();
+		}
+	}
 	
+	public DBConnection(DBData dbData) throws IncorrectPasswordException, ClassNotFoundException{
+		try{
+			Class.forName("com.mysql.jdbc.Driver");			
+			connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + dbData.getDbName(), dbData.getDbUser(), dbData.getDbPassword());
+		    statement = connect.createStatement();
+		}
+		catch(SQLException e){
+			throw new IncorrectPasswordException();
+		}
+		catch(ClassNotFoundException e){
+			throw new ClassNotFoundException();
+		}
 	}
 	
 	public DBConnection(String password) throws IncorrectPasswordException, ClassNotFoundException{
 		try{
-			Class.forName("com.mysql.jdbc.Driver");
-		    connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/prokom", "root", password);
+			Class.forName("com.mysql.jdbc.Driver");			
+			//connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + dbName, dbUser, password);
+			connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/prokom", "root", password);
 		    statement = connect.createStatement();
 		}
 		catch(SQLException e){
@@ -48,7 +66,7 @@ public class DBConnection {
 			while(resultSet.next()){
 				
 				EventList.addEvent(new Event(resultSet.getString("description"),resultSet.getString("place"), resultSet.getString("fromHour"), resultSet.getString("toHour"), resultSet.getString("evtDate").replaceAll("-0", "-")));				
-			}	
+			}
 		}
 		catch(Exception e){
 			System.out.println("Error: " + e);
@@ -70,6 +88,7 @@ public class DBConnection {
 				"'" + events.get(i).getDate() + "');";
 				statement.executeUpdate(query);
 			}
+			connect.close();
 		}
 		catch(Exception e){
 			System.out.println("Error: " + e);
