@@ -6,14 +6,36 @@ import java.sql.*;
 import data.Event;
 import data.EventList;
 import logic.IncorrectPasswordException;
-
+/**
+ * Klasa odpowiedzialna za po³¹czenie z baz¹ danych <br>
+ * oraz pobieranie i zapisywanie wydarzeñ w bazie danych.
+ * @author Dawid
+ *
+ */
 public class DBConnection {
-
+	/*
+	 * 
+	 */
 	private Connection connect;
+	/*
+	 * 
+	 */
 	private Statement statement;
+	/*
+	 * 
+	 */
 	private ResultSet resultSet;
 
-	
+	/**
+	 * Domyœlny konstruktor, który tworzy instancjê klasy DBConnection. <br>
+	 * Umo¿liwia po³¹czenie siê z baz¹ danych przy pomocy domyœlnych danych tj:<br>
+	 * adres bazy danych: localhost:3306 <br>
+	 * nazwa bazy danych: prokom <br>
+	 * nazwa u¿ytkownika: root <br>
+	 * haslo: "" <br>
+	 * @throws IncorrectPasswordException
+	 * @throws ClassNotFoundException
+	 */
 	public DBConnection() throws IncorrectPasswordException, ClassNotFoundException{
 		
 		try{
@@ -29,7 +51,13 @@ public class DBConnection {
 			throw new ClassNotFoundException();
 		}
 	}
-	
+	/**
+	 * Konstruktor, który tworzy na stercie instancjê klasy DBConnection.<br>
+	 * Umo¿liwia po³¹czenie z baz¹ danych wykorzystuj¹c przekazane informacje tj: nazwê bazy, nazwê u¿ytkownika, haslo	
+	 * @param dbData - przechowuje dane dostêpu do bazy danych.
+	 * @throws IncorrectPasswordException
+	 * @throws ClassNotFoundException
+	 */
 	public DBConnection(DBData dbData) throws IncorrectPasswordException, ClassNotFoundException{
 		try{
 			Class.forName("com.mysql.jdbc.Driver");			
@@ -43,7 +71,13 @@ public class DBConnection {
 			throw new ClassNotFoundException();
 		}
 	}
-	
+	/**
+	 * Konstruktor, który tworzy na stercie instancjê klasy DBConnection.<br>
+	 * Umo¿liwia po³¹czenie z baz¹ danych wykorzystuj¹c przekazane haslo
+	 * @param password - haslo dostepu do bazy. 
+	 * @throws IncorrectPasswordException
+	 * @throws ClassNotFoundException
+	 */
 	public DBConnection(String password) throws IncorrectPasswordException, ClassNotFoundException{
 		try{
 			Class.forName("com.mysql.jdbc.Driver");			
@@ -58,7 +92,10 @@ public class DBConnection {
 			throw new ClassNotFoundException();
 		}
 	}
-	
+	/**
+	 * Metoda pobieraj¹ca wszystkie wydarzenia z bazy danych z tabeli events2.
+	 * <br>W programie wywo³ywana podczas uruchamiania aby pobraæ wszystkie wczeœniej utworzone wydarzenia. 
+	 */
 	public void getData(){
 		try{
 			String query = "select * from events2";
@@ -73,6 +110,10 @@ public class DBConnection {
 			System.out.println("Error: " + e);
 		}
 	}
+	/**
+	 * Metoda zapisuj¹ca wszystkie wydarzenia z Listy do bazy danych.<br>
+	 * W programie jest wywo³ywana bezpoœrednio przed zamkniêciem aplikacji aby zachowaæ dane na sta³e. 
+	 */
 	public void saveData(){
 		try{
 			String query;

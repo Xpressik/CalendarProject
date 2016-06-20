@@ -4,8 +4,6 @@ import data.*;
 import logic.DBConnection;
 import logic.DBData;
 import logic.IncorrectPasswordException;
-import logic.Listener;
-import logic.PopClickListener;
 import logic.Reminder;
 
 
@@ -43,7 +41,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Frame implements ActionListener {
@@ -55,7 +52,7 @@ public class Frame implements ActionListener {
 	private JMenu editMenu;
 	private JMenuItem newEvent;
 	private JMenuItem exit;
-	private  JFrame frame;
+	private JFrame frame;
 	private JMenuItem filterByPlace;
 	private JMenuItem filterByDescription;
 	private JMenuItem filterByFrom;
@@ -63,7 +60,6 @@ public class Frame implements ActionListener {
 	private JMenuItem serializeToXML;
 	private JMenuItem events;
 	private JMenuItem DBconnect;
-	private DBWindow dbWindow;
 	
 	private int currentMonth;
 	private int currentYear;
@@ -96,7 +92,7 @@ public class Frame implements ActionListener {
 		        else{
 		        	//DayList.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
 		        	LocalDate ld = LocalDate.now();	
-		        	DayList.init(ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		        	DayList.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR), ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		        }
 	        	currentMonth = c.get(Calendar.MONTH);
 	        	currentYear = c.get(Calendar.YEAR);
@@ -110,7 +106,7 @@ public class Frame implements ActionListener {
 		menuItem = new JMenuItem("Load events from XML file", KeyEvent.VK_L);
 		menuItem.addActionListener(this);
 		
-		serializeToXML = new JMenuItem("Save all events to XML file", KeyEvent.VK_S);
+		serializeToXML = new JMenuItem("Save all events to XML file", 'S');
 		serializeToXML.addActionListener(this);
 		
 		filterByPlace = new JMenuItem("place");
@@ -121,10 +117,7 @@ public class Frame implements ActionListener {
 		filterByFrom.addActionListener(this);
 		filterByTo = new JMenuItem("ending date");
 		filterByTo.addActionListener(this);
-		
-		DBconnect = new JMenuItem("Connect with DB", KeyEvent.VK_C);
-		DBconnect.addActionListener(this);
-		
+				
 		newEvent = new JMenuItem("New", KeyEvent.VK_N);
 		newEvent.addActionListener(this);
 
@@ -144,8 +137,6 @@ public class Frame implements ActionListener {
 		menu.setMnemonic(KeyEvent.VK_M);
 		menu.add(newEvent);
 		menu.add(events);
-		menu.addSeparator();
-		menu.add(DBconnect);
 		menu.addSeparator();
 		menu.add(menuItem);
 		menu.add(serializeToXML);
@@ -245,7 +236,8 @@ public class Frame implements ActionListener {
 		
 		if (evt.getSource() == newEvent ){
 			final Calendar c = calendar.getCalendar();
-			CreateEventWindow.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
+        	LocalDate ld = LocalDate.now();	
+			CreateEventWindow.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR), ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		}
 		
 		if (evt.getSource() == exit){
@@ -260,7 +252,7 @@ public class Frame implements ActionListener {
 			final Calendar c = calendar.getCalendar();	
 		//	DayList.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
 			LocalDate ld = LocalDate.now();	
-			DayList.init(ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+			DayList.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR), ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		}
 		if (evt.getSource() == menuItem){
 			JFileChooser chooser = new JFileChooser();
@@ -333,9 +325,6 @@ public class Frame implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Field can not be empty.", "Empty", JOptionPane.ERROR_MESSAGE);
 		    else	
 				SearchWindow.init(EventList.filterByPlace(place));
-		}
-		if (evt.getSource() == DBconnect){
-			dbWindow = new DBWindow();			
 		}
 	
 	}

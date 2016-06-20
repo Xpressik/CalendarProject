@@ -6,22 +6,12 @@ import javax.swing.JFrame;
 import javax.swing.text.MaskFormatter;
 
 import data.*;
-import logic.Reminder;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
@@ -32,6 +22,16 @@ import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 import java.awt.Point;
 import javax.swing.JComboBox;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+
 
 public class CreateEventWindow extends JFrame {
 	/**
@@ -45,24 +45,23 @@ public class CreateEventWindow extends JFrame {
 	private String date;
 	
 	private static final Map<Integer, Integer> mapping = new HashMap<Integer, Integer>(){{
-		put(1, 5);
-		put(2, 10);
-		put(3, 15);
-		put(4, 30);
-		put(5, 60);
-		put(6, 120);
-		put(7, 360);
-		put(8, 720);	
-	}};
-	
+		 		put(1, 5);
+		 		put(2, 10);
+		 		put(3, 15);
+		 		put(4, 30);
+		 		put(5, 60);
+		 		put(6, 120);
+		 		put(7, 360);
+		 		put(8, 720);	
+		 	}};
 	/**
 	 * Launch the application.
 	 */
-	public static void init(final String date){    // USUNAC METODE INIT DODAC JEJ CIALO DO KONSTRUKOTRA
+	public static void init(final String date, String formattedDate){    // USUNAC METODE INIT DODAC JEJ CIALO DO KONSTRUKOTRA
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CreateEventWindow frame = new CreateEventWindow(date);
+					CreateEventWindow frame = new CreateEventWindow(date, formattedDate);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -74,12 +73,11 @@ public class CreateEventWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CreateEventWindow(final String date) {
+	public CreateEventWindow(final String date, String formattedDate) {
 		setTitle("Event Creator");
 		setLocation(new Point(220, 700));
 		
 		this.date = date;
-		//this.date = c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR);
 				
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -137,7 +135,9 @@ public class CreateEventWindow extends JFrame {
 		
 		JButton btnCreate = new JButton("Create");
 		btnCreate.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent arg0) { 
+			
 				Date reminder = null;
 				int fromHour = 0, fromMinutes = 0, toHour = 0, toMinutes = 0;
 				try{
@@ -147,20 +147,18 @@ public class CreateEventWindow extends JFrame {
 					String[] to = formattedTextField_1.getText().split(":");
 					 toHour = Integer.parseInt(to[0]);
 					 toMinutes = Integer.parseInt(to[1]);
-					int reminderIdx = comboBoxReminder.getSelectedIndex();
-					if ( reminderIdx > 0 ){
-						LocalDate ld = LocalDate.parse(date);
-						LocalDateTime ldt = LocalDateTime.of(ld.getYear(), ld.getMonth(), ld.getDayOfMonth(), 0, 0);
-						ldt = ldt.withHour(fromHour).withMinute(fromMinutes).minusMinutes(mapping.get(reminderIdx));
-						System.out.println("From h: " + fromHour + " m: " + fromMinutes);
-						System.out.println("Event date: " + ldt);
-						
-						reminder = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
-					}
+					 int reminderIdx = comboBoxReminder.getSelectedIndex();
+					 LocalDate ld = LocalDate.parse(formattedDate);
+					 if ( reminderIdx > 0 ){
+						 LocalDateTime ldt = LocalDateTime.of(ld.getYear(), ld.getMonth(), ld.getDayOfMonth(), 0, 0);
+						 ldt = ldt.withHour(fromHour).withMinute(fromMinutes).minusMinutes(mapping.get(reminderIdx));
+						 System.out.println("From h: " + fromHour + " m: " + fromMinutes);
+						 System.out.println("Event date: " + ldt);
+						 reminder = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
+					 }
 				}
-				catch(Exception e){
-					e.printStackTrace();
-					JOptionPane.showMessageDialog(null, "You have to type hours.", "Wrong hours: " + e.getMessage(), JOptionPane.OK_OPTION);
+				catch(NumberFormatException e){
+					JOptionPane.showMessageDialog(null, "You have to type hours.", "Wrong hours", JOptionPane.OK_OPTION);
 					return;
 				}
 				
@@ -168,19 +166,11 @@ public class CreateEventWindow extends JFrame {
 					JOptionPane.showMessageDialog(null, "Event end before it starts.", "Wrong hours", JOptionPane.OK_OPTION);
 				}
 				else{
-					Event event = new Event(
-							textField.getText(), 
-							textField_1.getText(), 
-							formattedTextField.getText(), 
-							formattedTextField_1.getText(), 
-							date, 
-							reminder);
-					
-					EventList.addEvent(event); 
+					EventList.addEvent(new Event(textField.getText(), textField_1.getText(), formattedTextField.getText(), formattedTextField_1.getText(), date, reminder)); 
 					JOptionPane.showMessageDialog(null, "Event created propertly.", "Success", JOptionPane.INFORMATION_MESSAGE);
 					dispose();
-					DayList.init(date);
-					//DayEvents.init(date);
+					LocalDate ld = LocalDate.now();	
+					DayList.init(date, ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				}
 			}
 		});

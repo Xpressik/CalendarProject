@@ -8,9 +8,22 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
+/**
+ * Klasa reprezentuj¹ca okno, które wyœwietla wydarzenia przefiltrowane zgodnie z zadanym kluczem
+ * @author Dawid
+ *
+ */
 public class SearchWindow extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Metoda s³u¿¹ca do stworzenia i wyœwietlenia okna SearchWindow, które wyœwietla przefiltrowane z godnie z zadancym kluczem wydarzenia. 
+	 * @param evt - Lista wydarzeñ przefiltrowana zgodnie z wczeœniej wybranym kluczem
+	 */
 	public static void init(final List<Event> evt){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -24,7 +37,10 @@ public class SearchWindow extends JFrame {
 		});
 	}
 	
-	
+	/**
+	 * Konstruktor tworz¹cy na stercie instancjê klasy SearchWindow.
+	 * @param evt - Lista wydarzeñ przefiltrowana zgodnie z wczeœniej wybranym kluczem
+	 */
 	public SearchWindow(final List<Event> evt) {
 		setTitle("Filtered Events");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

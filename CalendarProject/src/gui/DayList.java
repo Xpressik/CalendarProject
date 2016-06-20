@@ -5,10 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.sun.xml.internal.ws.api.ComponentsFeature;
-
 import data.*;
-import logic.PopClickListener;
 
 import java.util.List;
 
@@ -22,24 +19,29 @@ import java.beans.XMLEncoder;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.JList;
 
 public class DayList extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String date;
 	/**
 	 * Launch the application.
 	 * @return 
 	 */
-	public static void init(final String date){
+	public static void init(final String date, String formattedDate){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DayList frame = new DayList(date);
+					DayList frame = new DayList(date, formattedDate);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +53,7 @@ public class DayList extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DayList(final String date) {
+	public DayList(final String date, String formattedDate) {
 		
 		this.date = date;
 
@@ -82,7 +84,8 @@ public class DayList extends JFrame {
 		JButton btnCreateEvent = new JButton("Create Event");
 		btnCreateEvent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				CreateEventWindow.init(date);
+				LocalDate ld = LocalDate.now();
+				CreateEventWindow.init(date, ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				dispose();
 			}
 		});
@@ -147,14 +150,9 @@ public class DayList extends JFrame {
 			}
 		});
 		
-		//Component cmp = list.getComponents(); // DODAÆ DO KA¯DEGO ELEMENTU LISTY LISTENERA DO POPMENU
 		
 		btnNewButton_1.setBounds(412, 39, 89, 23);
-		getContentPane().add(btnNewButton_1);
-		
-		
-		list.addMouseListener(new PopClickListener());
-		
+		getContentPane().add(btnNewButton_1);		
 
 	}
 	private static String alignment(int length){

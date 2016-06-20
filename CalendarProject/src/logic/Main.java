@@ -7,9 +7,16 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 import gui.Frame;
-
+/**
+ * Klasa, która odpowiada za uruchomienie aplikacji. Otwarcie okna kalendarza oraz pobranie wydarzeñ z bazy danych. 
+ * @author Dawid
+ *
+ */
 public class Main {
-
+	/**
+	 * Metoda main rozpoczyna dzia³anie aplikacji pobieraj¹c wydarzenia z bazydancyh oraz nastêpnie wyœwietlaj¹c okno kalendarza.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		
 		DBData dbData = null;

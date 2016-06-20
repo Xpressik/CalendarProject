@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,28 +12,43 @@ import javax.swing.border.EmptyBorder;
 
 import logic.DBData;
 
-import javax.swing.JCheckBox;
 import javax.swing.JSeparator;
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JPasswordField;
-import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JButton;
 
-public class PreferencesWindow extends JFrame implements ActionListener {
-
-	private JPanel contentPane;
-	private JComboBox comboBox;
-	private static Color backgroundColor = Color.GRAY;
-	private JPasswordField passwordField;
-	private JTextField textField;
-	private JTextField textField_1;
+/**
+ * Klasa reprezentuj¹ca okno ustawieñ programu, gdzie mo¿na ustawiæ dane po³¹czenia z baz¹ danych.
+ * @author Dawid
+ *
+ */
+public class PreferencesWindow extends JFrame {
 
 	
+	private static final long serialVersionUID = 1L;
+	/**
+	 * Panel, który umo¿liwa rozmieszczenie kompomentów w oknie.
+	 */
+	private JPanel contentPane;
+	/**
+	 * Pole, w które u¿ytkownik wpisuje has³o dostêpu do bazy danych.
+	 */
+	private JPasswordField passwordField;
+	/**
+	 * Pole, w które u¿ytkownik wpisuje nazwê u¿ytkownika bazy danych 
+	 */
+	private JTextField textField;
+	/**
+	 * Pole, w które u¿ytkownik wpisuje nazwê bazy danych 
+	 */
+	private JTextField textField_1;
+
+	/**
+	 * Metoda s³u¿¹ca do stworzenia i wyœwietlenia okna ustawieñ aplikacji. 
+	 */
 	public static void init() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -48,11 +62,13 @@ public class PreferencesWindow extends JFrame implements ActionListener {
 			}
 		});
 	}
-
+	/**
+	 * Konstruktor tworz¹cy na stercie obiekt klasy PreferencesWindow.<br> 
+	 * Tworzy i wyœwietla okno ustawieñ aplikacji, gdzie mo¿emy zmieniæ dane po³¹czenia z baz¹ danych.
+	 */
 	public PreferencesWindow() {
 		setTitle("Preferences");
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 462, 219);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -61,11 +77,6 @@ public class PreferencesWindow extends JFrame implements ActionListener {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(5, 99, 419, 2);
 		contentPane.add(separator);
-		
-		comboBox = new JComboBox(new String []{ "black", "green", "cyan", "grey", "yellow", "red"});
-		comboBox.setBounds(5, 136, 92, 20);
-		comboBox.addActionListener(this);
-		contentPane.add(comboBox);
 		
 		passwordField = new JPasswordField(20);
 		passwordField.setBounds(301, 56, 123, 20);
@@ -122,31 +133,7 @@ public class PreferencesWindow extends JFrame implements ActionListener {
 				
 			}
 		});
-		btnNewButton.setBounds(326, 227, 98, 23);
+		btnNewButton.setBounds(326, 144, 98, 23);
 		contentPane.add(btnNewButton);
-	}
-
-	/**
-	 * @return the backgroundColor
-	 */
-	public static Color getBackgroundColor() {
-		return backgroundColor;
-	}
-
-	/**
-	 * @param backgroundColor the backgroundColor to set
-	 */
-	public void setBackgroundColor(Color backgroundColor) {
-		this.backgroundColor = backgroundColor;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		if( arg0.getSource() == comboBox){
-			Color [] colorArray = {Color.BLACK,Color.GREEN, Color.CYAN, Color.GRAY, Color.YELLOW, Color.RED };
-			backgroundColor = colorArray[comboBox.getSelectedIndex()];
-			System.out.println(backgroundColor.toString());
-		}
-		
 	}
 }
