@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import logic.DBData;
+import logic.SaveButtonListener;
 
 import javax.swing.JSeparator;
 import javax.swing.JPasswordField;
@@ -110,29 +111,7 @@ public class PreferencesWindow extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		JButton btnNewButton = new JButton("Save");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				char [] input = passwordField.getPassword();
-				String inputString;
-				if(input.length == 0)
-					inputString = "";
-				else
-					inputString = input.toString();
-				
-				DBData data = new DBData(textField_1.getText(), textField.getText(), inputString);
-				try{
-					PrintWriter toFile = new PrintWriter("dbData.txt");
-					toFile.println(data.getDbName());
-					toFile.println(data.getDbUser());
-					toFile.println(data.getDbPassword());
-					toFile.close();
-				}
-				catch(FileNotFoundException e){
-					JOptionPane.showMessageDialog(null, "There has been some problems with file.\n Try again", "File not found", JOptionPane.WARNING_MESSAGE);
-				}
-				
-			}
-		});
+		btnNewButton.addActionListener(new SaveButtonListener(textField_1, textField, passwordField));
 		btnNewButton.setBounds(326, 144, 98, 23);
 		contentPane.add(btnNewButton);
 	}

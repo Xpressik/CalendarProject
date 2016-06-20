@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import data.*;
+import logic.DeleteButtonListener;
+import logic.SaveXMLListener;
 
 import java.util.List;
 
@@ -97,30 +99,7 @@ public class DayList extends JFrame {
 		getContentPane().add(lblEventsFor);
 		
 		JButton btnNewButton = new JButton("Save to XML");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				JFileChooser chooser = new JFileChooser();
-				chooser.setFileFilter(new FileNameExtensionFilter("XML file","xml"));
-				int result = chooser.showSaveDialog(null);
-				if (result == JFileChooser.APPROVE_OPTION){
-					File fi = chooser.getSelectedFile();
-					try{
-						String path = fi.getPath();
-						if (!path.endsWith(".xml")){
-							path += ".xml";
-						}
-						XMLEncoder x = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(path)));
-						x.writeObject(eventList);
-						x.close();
-					}
-					catch(Exception e){
-						JOptionPane.showMessageDialog(null, e.getMessage());
-					}
-				}
-				
-			}
-		});
+		btnNewButton.addActionListener(new SaveXMLListener(eventList));
 		btnNewButton.setBounds(306, 11, 106, 23);
 		getContentPane().add(btnNewButton);
 		
@@ -135,22 +114,7 @@ public class DayList extends JFrame {
 		scrollPane.setViewportView(list);
 		
 		JButton btnNewButton_1 = new JButton("Delete"); 
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				int selectedEventIndex = list.getSelectedIndex();
-				try{
-					EventList.deleteEvent(eventList.get(selectedEventIndex));
-				
-				eventList.remove(selectedEventIndex);
-				DayList.repaintList(list, eventList);
-				}
-				catch(Exception e){
-					
-				}
-			}
-		});
-		
-		
+		btnNewButton_1.addActionListener(new DeleteButtonListener(list, eventList));	
 		btnNewButton_1.setBounds(412, 39, 89, 23);
 		getContentPane().add(btnNewButton_1);		
 

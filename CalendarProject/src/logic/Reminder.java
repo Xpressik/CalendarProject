@@ -14,7 +14,13 @@ import data.EventList;
  */
 public class Reminder {
 	
-	
+	/**
+	 * Zwraca ró¿nicê czasu pomiêdzy przekazanymi argumetami.<br> Wykorzystywana przy sprawdzaniu kiedy ma zostaæ wyœwietlone powiadomienie dla nadchodz¹cego wydarzenia.
+	 * 
+	 * @param dateOne - godzina od której odejmujemy
+	 * @param dateTwo - godzina któr¹ odejmujemy
+	 * @return Zwraca ró¿nicê pomiêdzy parametrami (dateOne - dateTwo).
+	 */
 	public static String getTimeDiff(Date dateOne, Date dateTwo) {        
 		String diff = "";        
 		long timeDiff = Math.abs(dateOne.getTime() - dateTwo.getTime());        
@@ -23,6 +29,11 @@ public class Reminder {
 				TimeUnit.MILLISECONDS.toMinutes(timeDiff) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(timeDiff)));        
 		return diff;}
 	
+	/**
+	 * Zwraca String message z wiadomoœci¹ o nadchodz¹cym wydarzeniu.
+	 * 
+	 * @return String message z wiadomoœci¹ o nadchodz¹cym wydarzeniu.
+	 */
 	public static String toRemind(){
 		List<Event> events = EventList.getEvents();
 		String message = "";
