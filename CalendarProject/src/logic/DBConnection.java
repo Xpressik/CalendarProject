@@ -1,7 +1,10 @@
 package logic;
 
 import java.util.List;
+import java.util.Locale;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import data.Event;
 import data.EventList;
@@ -101,9 +104,9 @@ public class DBConnection {
 			String query = "select * from events2";
 			resultSet = statement.executeQuery(query);
 			while(resultSet.next()){
-				
+				DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
 
-				EventList.addEvent(new Event(resultSet.getString("description"),resultSet.getString("place"), resultSet.getString("fromHour"), resultSet.getString("toHour"), resultSet.getString("evtDate").replaceAll("-0", "-"), resultSet.getDate("reminder")));				
+				EventList.addEvent(new Event(resultSet.getString("description"),resultSet.getString("place"), resultSet.getString("fromHour"), resultSet.getString("toHour"), resultSet.getString("evtDate").replaceAll("-0", "-"),  formatter.parse(resultSet.getString("reminder"))/* (java.util.Date)formatter.parse(resultSet.getString("reminder")) *//*.getDate("reminder")*/));				
 			}	
 		}
 		catch(Exception e){
@@ -121,21 +124,25 @@ public class DBConnection {
 			statement.executeUpdate(query);
 			List <Event> events  = EventList.getEvents();
 			for(int i=0; i< events.size(); i++){
-				query = "INSERT INTO events2 (description, place, fromHour, toHour, evtDate) VALUES (";
+				query = "INSERT INTO events2 (description, place, fromHour, toHour, evtDate, reminder) VALUES (";
 				query += 
 				"'" + events.get(i).getDescription() + "', " + 
 				"'" + events.get(i).getPlace() + "', " +
 				"'" + events.get(i).getFrom() + "', " + 
 				"'" + events.get(i).getTo() + "', " +
 				"'" + events.get(i).getDate() + "', " +
-				"'" + events.get(i).getReminder()
-						+ ");";
+				"'" + events.get(i).getReminder().toString() + "' "
+					+ ");";
 				statement.executeUpdate(query);
 			}
 			connect.close();
 		}
-		catch(Exception e){
-			System.out.println("Error: " + e);
+		catch(SQLException e){
+			System.out.println(e.getMessage());
 		}
+		catch(Exception e){
+			System.out.println(e.toString());
+		}
+
 	}
 }

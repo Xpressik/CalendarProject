@@ -8,10 +8,12 @@ import java.util.concurrent.TimeUnit;
 
 import data.Event;
 import data.EventList;
-
+/**
+ * Klasa odpowiedzialna za dzia³anie powiadomieñ. 
+ *
+ */
 public class Reminder {
 	
-	static List <Event> events  = EventList.getEvents();
 	
 	public static String getTimeDiff(Date dateOne, Date dateTwo) {        
 		String diff = "";        
@@ -32,7 +34,7 @@ public class Reminder {
 		Date dt2= Date.from(ldt2.atZone(ZoneId.systemDefault()).toInstant());
 		for (Event event : events) {
 			if (event.getReminder() != null) {
-				System.out.println("ldt " + ldt + " dt " + dt + "event " + event.getReminder());
+			//	System.out.println("ldt " + ldt + " dt " + dt + "event " + event.getReminder());
 				if (event.getReminder().equals(dt)/* || event.getReminder().after(dt1) && event.getReminder().before(dt2)*/) {
 					message += "You have an event on: " + event.getDate() + " from: " + event.getFrom() + " to: " +
 							event.getTo() + " " + "Description: " + event.getDescription() + "\n";

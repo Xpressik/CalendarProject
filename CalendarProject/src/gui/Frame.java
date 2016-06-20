@@ -90,13 +90,11 @@ public class Frame implements ActionListener {
 
 		        }
 		        else{
-		        	//DayList.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
 		        	LocalDate ld = LocalDate.now();	
 		        	DayList.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR), ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		        }
 	        	currentMonth = c.get(Calendar.MONTH);
 	        	currentYear = c.get(Calendar.YEAR);
-				colorDayWithEvents(EventList.getEventListForSpecifiedMonth(Integer.toString(currentMonth+1)));
 		    }
 		});	
 		
@@ -161,16 +159,6 @@ public class Frame implements ActionListener {
 		preferencesMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				PreferencesWindow.init();
-				
-				
-			/*	JPanel panel= calendar.getDayChooser().getDayPanel();				
-				Component [] components = panel.getComponents(); 
-				for (int i= 8; i<49 ; i++ ){
-					components[i].setBackground(PreferencesWindow.getBackgroundColor());
-				} */
-				/*for(int i= 13; i<49; i+= 7){
-					components[i].setBackground(Color.RED);
-				}*/
 			}
 		});
 		settingsMenu.add(preferencesMenuItem);
@@ -215,14 +203,14 @@ public class Frame implements ActionListener {
 		});
 		
 		
-		System.out.println("Create timer");
+		//System.out.println("Create timer");
  		timer = new javax.swing.Timer(1000, new ActionListener() {
  			@Override
  			public void actionPerformed(ActionEvent e) {
-				System.out.println("WORKING...");
+			//	System.out.println("WORKING...");
  				String message = Reminder.toRemind();
  				if (message != null && !"".equals(message)) {
- 					System.out.println("message " + message);
+ 				//	System.out.println("message " + message);
  					ReminderWindow reminderW = new ReminderWindow(message);
  				}
  			}
@@ -250,7 +238,6 @@ public class Frame implements ActionListener {
 		if (evt.getSource() == events )
 		{
 			final Calendar c = calendar.getCalendar();	
-		//	DayList.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR));
 			LocalDate ld = LocalDate.now();	
 			DayList.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR), ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		}
@@ -328,13 +315,5 @@ public class Frame implements ActionListener {
 		}
 	
 	}
-	public void colorDayWithEvents(List<Event> eventList){
-		JPanel panel= calendar.getDayChooser().getDayPanel();
-		Component [] components = panel.getComponents(); 
-		for(Event evt : eventList){
-			int day = Integer.parseInt(evt.getDate().substring(0, 2).replaceAll("-", ""));
-			components[day+8].setBackground(Color.green);
-
-		}
-	}
+	
 }
