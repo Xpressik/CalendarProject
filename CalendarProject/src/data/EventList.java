@@ -1,3 +1,4 @@
+
 package data;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class EventList {
 	 * Metoda s³u¿¹ca do filtrowania wydarzeñ. Zwraca wydarzenia, które maj¹ odbyæ siê dla podanej daty.
 	 *
 	 * @param date - data wydarzeñ
-	 * @return List<Event> - lista wydarzeñ dla zadanej daty.
+	 * @return List - lista wydarzeñ dla zadanej daty.
 	 */
 	public static List<Event> getEventListForSpecifiedDate(String date){
 		List<Event> results = new Vector<Event>();
@@ -50,7 +51,7 @@ public class EventList {
 	/**
 	 * Metoda s³u¿¹ca do filtrowania wydarzeñ. Zwraca wydarzenia, które maj¹ odbyæ siê w ci¹gu zadanego miesi¹ca.
 	 * @param month - numer miesi¹ca, w którym maj¹ szukamy wydarzeñ
-	 * @return List<Event> - zwraca listê wydarzeñ, dla szukanego miesi¹ca
+	 * @return List - zwraca listê wydarzeñ, dla szukanego miesi¹ca
 	 */
 	public static List<Event> getEventListForSpecifiedMonth(String month){
 		List<Event> results = new Vector<Event>();

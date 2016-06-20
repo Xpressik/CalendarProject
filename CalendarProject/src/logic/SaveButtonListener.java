@@ -32,6 +32,9 @@ public class SaveButtonListener implements ActionListener {
 	/**
 	 * Konstruktor tworzzy na stercie obiekt klasy SaveButtonListener.<br>
 	 * Ustawiaj¹c odpowiednie parametry przekazane z klasy, któr¹ nas³uchuje. Tak aby móg³ odpowiednio zareagowaæ na zainsta³¹ sytuacjê.
+	 * @param textField_1 - nazwa bazy danych
+	 * @param textField - nazwa uzytkownika bazy danych
+	 * @param passwordField - haslo dostepu do bazy danych
 	 */
 	public SaveButtonListener( JTextField textField_1, JTextField textField, JPasswordField passwordField)
 	{

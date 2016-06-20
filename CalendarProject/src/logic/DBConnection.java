@@ -36,8 +36,8 @@ public class DBConnection {
 	 * nazwa bazy danych: prokom <br>
 	 * nazwa u¿ytkownika: root <br>
 	 * haslo: "" <br>
-	 * @throws IncorrectPasswordException
-	 * @throws ClassNotFoundException
+	 * @throws IncorrectPasswordException - wlasny wyjatek rzucany gdy podane haslo jest niepoprawne
+	 * @throws ClassNotFoundException - wyjatek rzucany gdy wystapi blad podczas laczenia z baza danych
 	 */
 	public DBConnection() throws IncorrectPasswordException, ClassNotFoundException{
 		
@@ -58,8 +58,8 @@ public class DBConnection {
 	 * Konstruktor, który tworzy na stercie instancjê klasy DBConnection.<br>
 	 * Umo¿liwia po³¹czenie z baz¹ danych wykorzystuj¹c przekazane informacje tj: nazwê bazy, nazwê u¿ytkownika, haslo	
 	 * @param dbData - przechowuje dane dostêpu do bazy danych.
-	 * @throws IncorrectPasswordException
-	 * @throws ClassNotFoundException
+	 * @throws IncorrectPasswordException - wlasny wyjatek rzucany jesli podane haslo jest niepoprawne
+	 * @throws ClassNotFoundException wyjatek rzucany gdy wystapi blad podczas laczenia z baza danych
 	 */
 	public DBConnection(DBData dbData) throws IncorrectPasswordException, ClassNotFoundException{
 		try{
@@ -78,8 +78,8 @@ public class DBConnection {
 	 * Konstruktor, który tworzy na stercie instancjê klasy DBConnection.<br>
 	 * Umo¿liwia po³¹czenie z baz¹ danych wykorzystuj¹c przekazane haslo
 	 * @param password - haslo dostepu do bazy. 
-	 * @throws IncorrectPasswordException
-	 * @throws ClassNotFoundException
+	 * @throws IncorrectPasswordException  wlasny wyjatek rzucany jesli podane haslo jest niepoprawne
+	 * @throws ClassNotFoundException wyjatek rzucany gdy wystapi blad podczas laczenia z baza danych
 	 */
 	public DBConnection(String password) throws IncorrectPasswordException, ClassNotFoundException{
 		try{

@@ -15,7 +15,7 @@ import gui.Frame;
 public class Main {
 	/**
 	 * Metoda main rozpoczyna dzia³anie aplikacji pobieraj¹c wydarzenia z bazydancyh oraz nastêpnie wyœwietlaj¹c okno kalendarza.
-	 * @param args
+	 * @param args - argumenty uruchomienia programu
 	 */
 	public static void main(String[] args) {
 		

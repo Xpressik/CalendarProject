@@ -1,3 +1,8 @@
+
+
+/**
+ * Pakiet zawieraj¹cy klasy odpowiedzialne za logikê aplikacji<br>Warstwa logiki aplikacji
+ */
 package logic;
 
 import java.awt.event.ActionEvent;
@@ -28,8 +33,8 @@ public class SaveXMLListener implements ActionListener {
 	
 	/**
 	 * Konstruktor tworzy na stercie instancjê klasy SaveXMLListener.<br>
-	 *  Ustawia otrzyman¹ przez parametr listê jako swoje pole List<Event> w celu dalszego korzystania z niej.
-	 * @param lst
+	 *  Ustawia otrzyman¹ przez parametr listê jako swoje pole List w celu dalszego korzystania z niej.
+	 * @param lst - lista wydarzen ktore maja zostac zserializowane
 	 */
 	public SaveXMLListener(List<Event> lst){
 		this.eventList = lst;

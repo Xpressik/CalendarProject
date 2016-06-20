@@ -91,6 +91,8 @@ public class CreateEventWindow extends JFrame {
 	/**
 	 * Konstruktor tworz¹cy na stercie instancjê klasy CreateEventWindow.<br>
 	 * Tworzy okno oraz implemenuje odpowiednie zachowania i mo¿liwoœæ interakcji z u¿ytkownikiem podczas tworzenia wydarzeñ.
+	 * @param date - data dla której ma zostaæ stworzone wydarzenie
+	 * @param formattedDate - sfromatowana data na potrzeby ustawienia powiadomienia
 	 */
 	public CreateEventWindow(final String date, String formattedDate) {
 		setTitle("Event Creator");
