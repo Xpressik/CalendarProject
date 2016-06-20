@@ -4,9 +4,6 @@ import java.awt.Point;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
-import javafx.scene.text.Font;
-import logic.Reminder;
 /**
  * Klasa wyœwietlaj¹ca okno  z powiadomieniem / informacj¹ o nadchodz¹cym wydarzeniu.
  *

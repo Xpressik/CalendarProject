@@ -31,47 +31,110 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.toedter.calendar.JCalendar;
 import java.awt.Point;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Klasa odpowiedzialna za wyœwietlanie g³ównego okna aplikacji wraz z kalendarzem i ca³ym menu. <br>
+ * Umo¿liwia u¿ytkownikowi wybór dnia dla którego chce obejrzeæ b¹dz stworzyæ wydarzenia. <br>
+ * Poprzez menu u¿ytkownik mo¿e zmieniaæ ustawienia aplikacji, tworzyæ oraz ogl¹daæ wydarzenia a tak¿e je filtrowaæ.
+ * @author Dawid
+ *
+ */
 public class Frame implements ActionListener {
 	
+	/**
+	 * Komponent reprezenuj¹cy kalendarz, który wyœwietlamy w g³ownym oknie aplikacji
+	 */
 	private JCalendar calendar;
+	/**
+	 * Element menu
+	 */
 	private JMenuBar menuBar;
+	/**
+	 * Element menu
+	 */
 	private JMenu menu;
+	/**
+	 * Element menu
+	 */
 	private JMenuItem menuItem;
+	/**
+	 * Element menu
+	 */
 	private JMenu editMenu;
+	/**
+	 * Element menu
+	 */
 	private JMenuItem newEvent;
+	/**
+	 * Element menu
+	 */
 	private JMenuItem exit;
+	/**
+	 * Element menu
+	 */
 	private JFrame frame;
+	/**
+	 * Element menu
+	 */
 	private JMenuItem filterByPlace;
+	/**
+	 * Element menu
+	 */
 	private JMenuItem filterByDescription;
+	/**
+	 * Element menu
+	 */
 	private JMenuItem filterByFrom;
+	/**
+	 * Element menu
+	 */
 	private JMenuItem filterByTo;
+	/**
+	 * Element menu
+	 */
 	private JMenuItem serializeToXML;
+	/**
+	 * Element menu
+	 */
 	private JMenuItem events;
-	private JMenuItem DBconnect;
-	
+	/**
+	 * Zmienna przechowuj¹ca obecny miesi¹c
+	 */
 	private int currentMonth;
+	/**
+	 * Zmienna przechowuj¹ca obecny rok
+	 */
 	private int currentYear;
+	/**
+	 * Obiekt Menu, do którego przypiêty jest przycisk Prefereces
+	 */
 	private JMenu settingsMenu;
-	
+	/**
+	 * 
+	 */
 	private Timer timer;
 
-	
+	/**
+	 * Konstruktor tworz¹cy na stercie instancjê klasy Frame.<br>
+	 * Wywo³uje metodê init z paramterem dbData
+	 * @param dbData - obiekt zawieraj¹cy informacje niezbêdne do po³¹czenia z baz¹ danych (dane logowania).
+	 */
 	public Frame(DBData dbData){
 		init(dbData);
 	}
 	
+	/**
+	 * Metoda odpowiedzialna za stworzenie g³ównego okna aplikacji i umo¿liwienie u¿ytkownikowi interakcjê z programem. Poprzez wybór dni, tworzenie, przegl¹danie, filtrowanie wydarzen. Umo¿liwia dobór ustawieñ oraz wyœwietlenie informacji.
+	 * @param dbData
+	 */
 	private void init(DBData dbData){
 				
 		calendar = new JCalendar();
@@ -170,7 +233,8 @@ public class Frame implements ActionListener {
 		helpMenu.add(mntmAboutProgram);
 		mntmAboutProgram.addActionListener(new ActionListener(){	
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, "Event Calendar\nDawid Dziedziczak Micha³ Mackiewicz", "About", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Event Calendar 1.0.\nAllows to:\ncreate events with set reminders,\nfilter existing events with specified filters,\ndelete chosen events,"
+					+ "\nload and save events from\\to XML files,\nconnect calendar with data bases. \n\n\nCreated by Dawid Dziedziczak Micha³ Mackiewicz", "About", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
 		});
@@ -219,6 +283,9 @@ public class Frame implements ActionListener {
 		
 	}
 
+	/**
+	 * Metoda nas³uchuj¹ca umo¿liwia tworzenie oraz przegl¹danie ju¿ istniej¹cych wydarzeñ, odpowienie zamykanie aplikacji, wczytywanie wydarzeñ z plików XML (deserializacja) oraz filtorwanie wydarzeñ.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 		

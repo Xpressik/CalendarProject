@@ -11,8 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.text.ParseException;
-import java.util.List;
-
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import javax.swing.SwingConstants;
@@ -22,7 +20,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 import java.awt.Point;
 import javax.swing.JComboBox;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -32,18 +29,36 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-
+/**
+ * Klasa odpowiedzialna za umo¿liwienie u¿ytkownikowi tworzenia nowych wydarzeñ. Wyœwietla okno, w którym u¿ytkownik wprowadzaj¹c odpowiedenie dane tworzy nowe wydarzenia.
+ * @author Dawid
+ *
+ */
 public class CreateEventWindow extends JFrame {
 	/**
-	 * 
+	 * Klasa wyœwietlaj¹ca okno tworzenia nowego wydarzenia.
 	 */
 	private static final long serialVersionUID = -2111993159030174208L;
+	/**
+	 * Pole tekstowe do którego u¿ytkownik wpisuje s³owny opis wydarzenia
+	 */
 	private JTextField textField;
+	/**
+	 * Pole tekstowe do którego u¿ytkownik wpisuje miejsce wydarzenia
+	 */
 	private JTextField textField_1;
+	/**
+	 * ComboBox z którego u¿ytkownik mo¿e ustawiæ powiadomienie o wydarzeniu
+	 */
 	private JComboBox comboBoxReminder;
-	
+	/**
+	 * String przechowuj¹cy datê, dla której chcemy stworzyæ wydarzenie
+	 */
 	private String date;
 	
+	/**
+	 * Mapa, która umo¿liwa wybór odpowiedniego interwa³u czasu dla powiadomieñ.
+	 */
 	private static final Map<Integer, Integer> mapping = new HashMap<Integer, Integer>(){{
 		 		put(0, 0);
 		        put(1, 5);
@@ -56,9 +71,11 @@ public class CreateEventWindow extends JFrame {
 		 		put(8, 720);	
 		 	}};
 	/**
-	 * Launch the application.
+	 * Uruchamia okno tworzenia wydarzeñ poprzez wywo³anie konstruktora klasy CreateEventWindow oraz ustawienie widocznoœci okna.
+	 * @param date - data dla której ma zostaæ stworzone wydarzenie
+	 * @param formattedDate - sfromatowana data na potrzeby ustawienia powiadomienia
 	 */
-	public static void init(final String date, String formattedDate){    // USUNAC METODE INIT DODAC JEJ CIALO DO KONSTRUKOTRA
+	public static void init(final String date, String formattedDate){    
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -72,7 +89,8 @@ public class CreateEventWindow extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Konstruktor tworz¹cy na stercie instancjê klasy CreateEventWindow.<br>
+	 * Tworzy okno oraz implemenuje odpowiednie zachowania i mo¿liwoœæ interakcji z u¿ytkownikiem podczas tworzenia wydarzeñ.
 	 */
 	public CreateEventWindow(final String date, String formattedDate) {
 		setTitle("Event Creator");

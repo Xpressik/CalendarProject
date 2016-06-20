@@ -1,22 +1,15 @@
 package gui;
 
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import logic.DBData;
 import logic.SaveButtonListener;
 
 import javax.swing.JSeparator;
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JButton;

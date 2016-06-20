@@ -3,8 +3,6 @@ package gui;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import data.*;
 import logic.DeleteButtonListener;
 import logic.SaveXMLListener;
@@ -12,22 +10,19 @@ import logic.SaveXMLListener;
 import java.util.List;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
-
 import java.awt.event.ActionListener;
-import java.beans.XMLEncoder;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.JList;
-
+/**
+ * Klasa odpowiedzialna za wyœwietlanie okna z list¹ wydarzeñ dla danego dnia oraz umo¿liwianie u¿ytkownikowi tworzenie nowych wydarzeñ,
+ * zapis wybranych wydarzeñ do plików XML oraz usuwanie wybranych wydarzeñ.
+ * @author Dawid
+ */
 public class DayList extends JFrame {
 	
 	/**
@@ -36,7 +31,7 @@ public class DayList extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private String date;
 	/**
-	 * Launch the application.
+	 * Tworzy okno wyœwietlaj¹ce wydarzenia dla danego dniapoprzez wywo³anie konstruktora klasy DayList oraz odpowienie skonfigurowanie okna.
 	 * @return 
 	 */
 	public static void init(final String date, String formattedDate){
@@ -53,7 +48,14 @@ public class DayList extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Konstruktor tworzy na stercie obiekt klasy DayList <br> 
+	 * Tworzy okno, które wyœwietla listê wydarzeñ dla danego dnia oraz implemenuje odpowiednie zachowania i mo¿liwoœæ interakcji z u¿ytkowniem poprzez: <br>
+	 *  - usuwanie wybranych wydarzeñ,<br>
+	 *  - zapis wybranych wydarzeñ do formatu XML (serializacja),<br>
+	 *  - tworzenie nowych wydarzeñ dla tego dnia.
+	 * 
+	 * @params date - data dla której maj¹ zostaæ wyœwietlone wydarzenia
+	 * @params formattedDate - odpowiednio sformatowana data na potrzeby przypomnieñ
 	 */
 	public DayList(final String date, String formattedDate) {
 		
