@@ -3,13 +3,13 @@ package data;
 
 import java.util.Date;
 /**
- * Klasa reprezentuj¹ca pojedyncze wydarzenie.<br> 
+ * Klasa reprezentujaca pojedyncze wydarzenie.<br> 
  * Zawiera takie informacje jak:<br>
  *  - opis wydarzenia<br> 
  *  - miejsce wydarzenia<br> 
- *  - godzinê rozpoczêcia <br> 
- *  - godzinê zakoñczenia <br> 
- *  - datê wydarzenia <br> 
+ *  - godzine rozpoczecia <br> 
+ *  - godzine zakonczenia <br> 
+ *  - date wydarzenia <br> 
  *  - informacje o przypomnieniu
  * 
  */
@@ -19,15 +19,15 @@ public class Event {
 	 */
 	private String description;
 	/**
-	 * Miejsce w którym ma siê odbyæ wydarzenie
+	 * Miejsce w ktorym ma sie odbyc wydarzenie
 	 */
 	private String place;
 	/**
-	 * Godzina rozpoczêcia wydarzenia
+	 * Godzina rozpoczecia wydarzenia
 	 */
 	private String from;
 	/**
-	 * Godzina zakoñczenia wydarzenia
+	 * Godzina zakonczenia wydarzenia
 	 */
 	private String to;
 	/**
@@ -35,11 +35,11 @@ public class Event {
 	 */
 	private String date;
 	/**
-	 * Data oraz godzina, podczas której ma wyst¹piæ powiadomienie o wydarzeniu
+	 * Data oraz godzina, podczas ktorej ma wystapic powiadomienie o wydarzeniu
 	 */
 	private Date reminder;
 	/**
-	 * Domyœlny konstruktor, który tworzy instacjê klasy Event, czyli zdarzenie.
+	 * Domyslny konstruktor, ktory tworzy instacje klasy Event, czyli zdarzenie.
 	 */
 	public Event(){
 		description = null;
@@ -49,11 +49,11 @@ public class Event {
 		date = null;				
 	}
 	/**
-	 * Konstruktor, który tworzy instacjê klasy Event ustawiaj¹c stosowne parametry : 
+	 * Konstruktor, ktory tworzy instacje klasy Event ustawiajac stosowne parametry : 
 	 * @param desc - opis wydarzenia 
 	 * @param place - miejsce wydarzenia
-	 * @param from - godzina rozpoczêcia
-	 * @param to - godzina zakoñczenia 
+	 * @param from - godzina rozpoczecia
+	 * @param to - godzina zakonczenia 
 	 * @param date - data wydarzenia 
 	 * @param reminder - data oraz godzina powiadomienia
 	 */
@@ -81,35 +81,35 @@ public class Event {
 	}
 	/**
 	 * Getter pola from
-	 * @return String from - zwraca godzinê rozpoczêcia wydarzenia
+	 * @return String from - zwraca godzine rozpoczecia wydarzenia
 	 */
 	public String getFrom() {
 		return from;
 	}
 	/**
 	 * Getter pola to
-	 * @return String to - zwraca godzinê zakoñczenia wydarzenia
+	 * @return String to - zwraca godzine zakonczenia wydarzenia
 	 */
 	public String getTo() {
 		return to;
 	}
 	/**
 	 * Getter pola date
-	 * @return String date - zwraca datê wydarzenia
+	 * @return String date - zwraca date wydarzenia
 	 */
 	public String getDate() {
 		return date;
 	}
 	/**
 	 * Getter pola reminder
-	 * @return Date reminder - zwraca datê oraz godzinê wydarzenia 
+	 * @return Date reminder - zwraca date oraz godzine wydarzenia 
 	 */
 	public Date getReminder(){
 		return this.reminder;
 	}
 	/**
-	 * Zwraca godzinê zakoñczenia wydarzenia typu Date
-	 * @return Date to - godzina zakoñczenia wydarzenia typu Date
+	 * Zwraca godzine zakonczenia wydarzenia typu Date
+	 * @return Date to - godzina zakonczenia wydarzenia typu Date
 	 */
 	@SuppressWarnings("deprecation")
 	public Date getToDate(){

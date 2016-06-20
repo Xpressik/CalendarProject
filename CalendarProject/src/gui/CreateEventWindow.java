@@ -30,34 +30,34 @@ import java.util.Map;
 
 
 /**
- * Klasa odpowiedzialna za umo¿liwienie u¿ytkownikowi tworzenia nowych wydarzeñ. Wyœwietla okno, w którym u¿ytkownik wprowadzaj¹c odpowiedenie dane tworzy nowe wydarzenia.
+ * Klasa odpowiedzialna za umozliwienie uzytkownikowi tworzenia nowych wydarzen. Wyswietla okno, w ktorym uzytkownik wprowadzajac odpowiedenie dane tworzy nowe wydarzenia.
  * @author Dawid
  *
  */
 public class CreateEventWindow extends JFrame {
 	/**
-	 * Klasa wyœwietlaj¹ca okno tworzenia nowego wydarzenia.
+	 * Klasa wyswietlajaca okno tworzenia nowego wydarzenia.
 	 */
 	private static final long serialVersionUID = -2111993159030174208L;
 	/**
-	 * Pole tekstowe do którego u¿ytkownik wpisuje s³owny opis wydarzenia
+	 * Pole tekstowe do ktorego uzytkownik wpisuje slowny opis wydarzenia
 	 */
 	private JTextField textField;
 	/**
-	 * Pole tekstowe do którego u¿ytkownik wpisuje miejsce wydarzenia
+	 * Pole tekstowe do ktorego uzytkownik wpisuje miejsce wydarzenia
 	 */
 	private JTextField textField_1;
 	/**
-	 * ComboBox z którego u¿ytkownik mo¿e ustawiæ powiadomienie o wydarzeniu
+	 * ComboBox z ktorego uzytkownik moze ustawic powiadomienie o wydarzeniu
 	 */
 	private JComboBox comboBoxReminder;
 	/**
-	 * String przechowuj¹cy datê, dla której chcemy stworzyæ wydarzenie
+	 * String przechowujacy date, dla ktorej chcemy stworzyc wydarzenie
 	 */
 	private String date;
 	
 	/**
-	 * Mapa, która umo¿liwa wybór odpowiedniego interwa³u czasu dla powiadomieñ.
+	 * Mapa, ktora umozliwa wybor odpowiedniego interwalu czasu dla powiadomien.
 	 */
 	private static final Map<Integer, Integer> mapping = new HashMap<Integer, Integer>(){{
 		 		put(0, 0);
@@ -71,8 +71,8 @@ public class CreateEventWindow extends JFrame {
 		 		put(8, 720);	
 		 	}};
 	/**
-	 * Uruchamia okno tworzenia wydarzeñ poprzez wywo³anie konstruktora klasy CreateEventWindow oraz ustawienie widocznoœci okna.
-	 * @param date - data dla której ma zostaæ stworzone wydarzenie
+	 * Uruchamia okno tworzenia wydarzen poprzez wywolanie konstruktora klasy CreateEventWindow oraz ustawienie widocznosci okna.
+	 * @param date - data dla ktorej ma zostac stworzone wydarzenie
 	 * @param formattedDate - sfromatowana data na potrzeby ustawienia powiadomienia
 	 */
 	public static void init(final String date, String formattedDate){    
@@ -89,9 +89,9 @@ public class CreateEventWindow extends JFrame {
 	}
 
 	/**
-	 * Konstruktor tworz¹cy na stercie instancjê klasy CreateEventWindow.<br>
-	 * Tworzy okno oraz implemenuje odpowiednie zachowania i mo¿liwoœæ interakcji z u¿ytkownikiem podczas tworzenia wydarzeñ.
-	 * @param date - data dla której ma zostaæ stworzone wydarzenie
+	 * Konstruktor tworzacy na stercie instancje klasy CreateEventWindow.<br>
+	 * Tworzy okno oraz implemenuje odpowiednie zachowania i mozliwosc interakcji z uzytkownikiem podczas tworzenia wydarzen.
+	 * @param date - data dla ktorej ma zostac stworzone wydarzenie
 	 * @param formattedDate - sfromatowana data na potrzeby ustawienia powiadomienia
 	 */
 	public CreateEventWindow(final String date, String formattedDate) {
@@ -188,7 +188,7 @@ public class CreateEventWindow extends JFrame {
 				}
 				else{
 					EventList.addEvent(new Event(textField.getText(), textField_1.getText(), formattedTextField.getText(), formattedTextField_1.getText(), date, reminder)); 
-					JOptionPane.showMessageDialog(null, "Event created propertly.", "Success", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Event created properly.", "Success", JOptionPane.INFORMATION_MESSAGE);
 					dispose();
 					LocalDate ld = LocalDate.now();	
 					DayList.init(date, ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));

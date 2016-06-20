@@ -1,7 +1,7 @@
 
 
 /**
- * Pakiet zawieraj¹cy klasy odpowiedzialne za logikê aplikacji<br>Warstwa logiki aplikacji
+ * Pakiet zawierajacy klasy odpowiedzialne za logike aplikacji<br>Warstwa logiki aplikacji
  */
 package logic;
 
@@ -19,28 +19,28 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import data.Event;
 /**
- * Klasa nas³uchuj¹ca. Implementuje odpowiednie zachowanie po klikniêciu na przycisk Save to XML .<br>
- * Odpowiada za serializacjê obiektu klasy Event (wydarzenia) do pliku XML.
+ * Klasa nasluchujaca. Implementuje odpowiednie zachowanie po kliknieciu na przycisk Save to XML .<br>
+ * Odpowiada za serializacje obiektu klasy Event (wydarzenia) do pliku XML.
  * @author Dawid
  *
  */
 public class SaveXMLListener implements ActionListener {
 
 	/**
-	 * Lista zdarzeñ, z których wybrane ma zostaæ zserializowane
+	 * Lista zdarzen, z ktorych wybrane ma zostac zserializowane
 	 */
 	private List<Event> eventList;
 	
 	/**
-	 * Konstruktor tworzy na stercie instancjê klasy SaveXMLListener.<br>
-	 *  Ustawia otrzyman¹ przez parametr listê jako swoje pole List w celu dalszego korzystania z niej.
+	 * Konstruktor tworzy na stercie instancje klasy SaveXMLListener.<br>
+	 *  Ustawia otrzymana przez parametr liste jako swoje pole List w celu dalszego korzystania z niej.
 	 * @param lst - lista wydarzen ktore maja zostac zserializowane
 	 */
 	public SaveXMLListener(List<Event> lst){
 		this.eventList = lst;
 	}
 	/**
-	 * Metoda nas³uchuj¹ca. Implementuje serializacjê wybranych wydarzeñ do formatu XML.
+	 * Metoda nasluchujaca. Implementuje serializacje wybranych wydarzen do formatu XML.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

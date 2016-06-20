@@ -10,8 +10,8 @@ import data.Event;
 import data.EventList;
 import logic.IncorrectPasswordException;
 /**
- * Klasa odpowiedzialna za po³¹czenie z baz¹ danych <br>
- * oraz pobieranie i zapisywanie wydarzeñ w bazie danych.
+ * Klasa odpowiedzialna za polaczenie z baza danych <br>
+ * oraz pobieranie i zapisywanie wydarzen w bazie danych.
  * @author Dawid
  *
  */
@@ -30,11 +30,11 @@ public class DBConnection {
 	private ResultSet resultSet;
 
 	/**
-	 * Domyœlny konstruktor, który tworzy instancjê klasy DBConnection. <br>
-	 * Umo¿liwia po³¹czenie siê z baz¹ danych przy pomocy domyœlnych danych tj:<br>
+	 * Domyslny konstruktor, ktory tworzy instancje klasy DBConnection. <br>
+	 * Umozliwia polaczenie sie z baza danych przy pomocy domyslnych danych tj:<br>
 	 * adres bazy danych: localhost:3306 <br>
 	 * nazwa bazy danych: prokom <br>
-	 * nazwa u¿ytkownika: root <br>
+	 * nazwa uzytkownika: root <br>
 	 * haslo: "" <br>
 	 * @throws IncorrectPasswordException - wlasny wyjatek rzucany gdy podane haslo jest niepoprawne
 	 * @throws ClassNotFoundException - wyjatek rzucany gdy wystapi blad podczas laczenia z baza danych
@@ -55,9 +55,9 @@ public class DBConnection {
 		}
 	}
 	/**
-	 * Konstruktor, który tworzy na stercie instancjê klasy DBConnection.<br>
-	 * Umo¿liwia po³¹czenie z baz¹ danych wykorzystuj¹c przekazane informacje tj: nazwê bazy, nazwê u¿ytkownika, haslo	
-	 * @param dbData - przechowuje dane dostêpu do bazy danych.
+	 * Konstruktor, ktory tworzy na stercie instancje klasy DBConnection.<br>
+	 * Umozliwia polaczenie z baza danych wykorzystujac przekazane informacje tj: nazwe bazy, nazwe uzytkownika, haslo	
+	 * @param dbData - przechowuje dane dostepu do bazy danych.
 	 * @throws IncorrectPasswordException - wlasny wyjatek rzucany jesli podane haslo jest niepoprawne
 	 * @throws ClassNotFoundException wyjatek rzucany gdy wystapi blad podczas laczenia z baza danych
 	 */
@@ -75,8 +75,8 @@ public class DBConnection {
 		}
 	}
 	/**
-	 * Konstruktor, który tworzy na stercie instancjê klasy DBConnection.<br>
-	 * Umo¿liwia po³¹czenie z baz¹ danych wykorzystuj¹c przekazane haslo
+	 * Konstruktor, ktory tworzy na stercie instancje klasy DBConnection.<br>
+	 * Umozliwia polaczenie z baza danych wykorzystujac przekazane haslo
 	 * @param password - haslo dostepu do bazy. 
 	 * @throws IncorrectPasswordException  wlasny wyjatek rzucany jesli podane haslo jest niepoprawne
 	 * @throws ClassNotFoundException wyjatek rzucany gdy wystapi blad podczas laczenia z baza danych
@@ -96,8 +96,8 @@ public class DBConnection {
 		}
 	}
 	/**
-	 * Metoda pobieraj¹ca wszystkie wydarzenia z bazy danych z tabeli events2.
-	 * <br>W programie wywo³ywana podczas uruchamiania aby pobraæ wszystkie wczeœniej utworzone wydarzenia. 
+	 * Metoda pobierajaca wszystkie wydarzenia z bazy danych z tabeli events2.
+	 * <br>W programie wywolywana podczas uruchamiania aby pobrac wszystkie wczesniej utworzone wydarzenia. 
 	 */
 	public void getData(){
 		try{
@@ -114,8 +114,8 @@ public class DBConnection {
 		}
 	}
 	/**
-	 * Metoda zapisuj¹ca wszystkie wydarzenia z Listy do bazy danych.<br>
-	 * W programie jest wywo³ywana bezpoœrednio przed zamkniêciem aplikacji aby zachowaæ dane na sta³e. 
+	 * Metoda zapisujaca wszystkie wydarzenia z Listy do bazy danych.<br>
+	 * W programie jest wywolywana bezposrednio przed zamknieciem aplikacji aby zachowac dane na stale. 
 	 */
 	public void saveData(){
 		try{

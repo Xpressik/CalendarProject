@@ -1,31 +1,31 @@
 package logic;
 /**
- * Klasa przechowuj¹ca dane dostêpu do bazy danych tj:<br>
+ * Klasa przechowujaca dane dostepu do bazy danych tj:<br>
  *  - nazwa bazy danych
- *  - nazwa u¿ytkownika
- *  - has³o dostêpu
+ *  - nazwa uzytkownika
+ *  - haslo dostepu
  *
  * @author Dawid
  */
 public class DBData {
 	/**
-	 * Pole typu String.<br>Przechowuje nazwê bazy danych.
+	 * Pole typu String.<br>Przechowuje nazwe bazy danych.
 	 */
 	private String dbName;
 	/**
-	 * Pole typu String.<br>Przechowuje nazwê has³o dostêpu do bazy.
+	 * Pole typu String.<br>Przechowuje nazwe haslo dostepu do bazy.
 	 */
 	private String dbPassword;
 	/**
-	 * Pole typu String.<br>Przechowuje nazwê u¿ytkownika.
+	 * Pole typu String.<br>Przechowuje nazwe uzytkownika.
 	 */
 	private String dbUser;
 	
 	/**
-	 * Konstruktor, który tworzy na stercie instacjê klasy DBData przechowuj¹cej dane dostêpu do bazy.
-	 * @param name - String zawieraj¹cy nazwê bazy danych
-	 * @param user - String zawieraj¹cy nazwê u¿ytkownika
-	 * @param pass - String zawieraj¹cy has³o dostêpu
+	 * Konstruktor, ktory tworzy na stercie instacje klasy DBData przechowujacej dane dostepu do bazy.
+	 * @param name - String zawierajacy nazwe bazy danych
+	 * @param user - String zawierajacy nazwe uzytkownika
+	 * @param pass - String zawierajacy haslo dostepu
 	 */
 	public DBData(String name, String user, String pass){
 		dbName = name;
@@ -33,21 +33,21 @@ public class DBData {
 		dbUser = user;
 	}
 	/**
-	 * Zwraca String zawieraj¹cy nazwê bazy danych
+	 * Zwraca String zawierajacy nazwe bazy danych
 	 * @return String dbName
 	 */
 	public String getDbName() {
 		return dbName;
 	}
 	/**
-	 * Zwraca String zawieraj¹cy has³o dostêpu do bazy dancyh
+	 * Zwraca String zawierajacy haslo dostepu do bazy dancyh
 	 * @return String dbPassword
 	 */
 	public String getDbPassword() {
 		return dbPassword;
 	}
 	/**
-	 * Zwraca String zawieraj¹cy nazwê u¿ytkownika 
+	 * Zwraca String zawierajacy nazwe uzytkownika 
 	 * @return String dbUser
 	 */
 	public String getDbUser() {

@@ -4,41 +4,41 @@ package data;
 import java.util.List;
 import java.util.Vector;
 /**
- * Klasa reprezentuj¹ca listê wydarzeñ
+ * Klasa reprezentujaca liste wydarzen
  * @author Dawid 
  *
  */
 public class EventList {
 	/**
-	 * Lista, która przechowuje wszystkie wydarzenia
+	 * Lista, ktora przechowuje wszystkie wydarzenia
 	 */
 	private static List<Event> events = new Vector<Event>();
 	/**
-	 * Zwraca listê wszystkich wydarzeñ
-	 * @return events - lista wydarzeñ
+	 * Zwraca liste wszystkich wydarzen
+	 * @return events - lista wydarzen
 	 */
 	public static List<Event> getEvents() {
 		return events;
 	}
 	/**
-	 * Metoda umo¿liwiaj¹ca usuwanie wydarzeñ z listy.
-	 * @param evt - wydarzenie, które ma zostaæ usuniête z listy.
+	 * Metoda umozliwiajaca usuwanie wydarzen z listy.
+	 * @param evt - wydarzenie, ktore ma zostac usuniete z listy.
 	 */
 	public static void deleteEvent (Event evt){ 
 		events.remove(evt);
 	}
 	/**
-	 * Metoda umo¿liwiaj¹ca dodawanie przekazanych wydarzeñ do listy events.
-	 * @param evt - wydarzenie, które ma zostaæ dodane do listy.
+	 * Metoda umozliwiajaca dodawanie przekazanych wydarzen do listy events.
+	 * @param evt - wydarzenie, ktore ma zostac dodane do listy.
 	 */
 	public static void addEvent(Event evt){
 		events.add(evt);
 	}
 	/**
-	 * Metoda s³u¿¹ca do filtrowania wydarzeñ. Zwraca wydarzenia, które maj¹ odbyæ siê dla podanej daty.
+	 * Metoda sluzaca do filtrowania wydarzen. Zwraca wydarzenia, ktore maja odbyc sie dla podanej daty.
 	 *
-	 * @param date - data wydarzeñ
-	 * @return List - lista wydarzeñ dla zadanej daty.
+	 * @param date - data wydarzen
+	 * @return List - lista wydarzen dla zadanej daty.
 	 */
 	public static List<Event> getEventListForSpecifiedDate(String date){
 		List<Event> results = new Vector<Event>();
@@ -49,9 +49,9 @@ public class EventList {
 		return results;
 	}
 	/**
-	 * Metoda s³u¿¹ca do filtrowania wydarzeñ. Zwraca wydarzenia, które maj¹ odbyæ siê w ci¹gu zadanego miesi¹ca.
-	 * @param month - numer miesi¹ca, w którym maj¹ szukamy wydarzeñ
-	 * @return List - zwraca listê wydarzeñ, dla szukanego miesi¹ca
+	 * Metoda sluzaca do filtrowania wydarzen. Zwraca wydarzenia, ktore maja odbyc sie w ciagu zadanego miesiaca.
+	 * @param month - numer miesiaca, w ktorym maja szukamy wydarzen
+	 * @return List - zwraca liste wydarzen, dla szukanego miesiaca
 	 */
 	public static List<Event> getEventListForSpecifiedMonth(String month){
 		List<Event> results = new Vector<Event>();
@@ -73,7 +73,7 @@ public class EventList {
 		return results;
 	}
 	/**
-	 * Metoda wyœwietlaj¹ca w konsoli wszytkie wydarzenia z listy.
+	 * Metoda wyswietlajaca w konsoli wszytkie wydarzenia z listy.
 	 */
 	public static void printEvents(){
 		for( Event x : events ){
@@ -81,9 +81,9 @@ public class EventList {
 		}
 	}
 	/**
-	 * Metoda s³u¿¹ca do filtrowania wydarzeñ. Zwraca wydarzenia, które zawieraj¹ zadany opis
-	 * @param desc - szukany opis wydarzeñ
-	 * @return List - zwraca listê wydarzeñ o zadanym opisie.
+	 * Metoda sluzaca do filtrowania wydarzen. Zwraca wydarzenia, ktore zawieraja zadany opis
+	 * @param desc - szukany opis wydarzen
+	 * @return List - zwraca liste wydarzen o zadanym opisie.
 	 */
 	public static List<Event> filterByDesc(String desc){
 		
@@ -95,9 +95,9 @@ public class EventList {
 		return result;
 	}
 	/**
-	 * Metoda s³u¿¹ca do filtrowania wydarzeñ. Zwraca wydarzenia, które maj¹ siê odbyæ w wybranym miejscu
-	 * @param place - szukane miejsce wydarzeñ
-	 * @return List - zwraca listê wydarzeñ, które maj¹ siê odbyæ w wybranym miejscu
+	 * Metoda sluzaca do filtrowania wydarzen. Zwraca wydarzenia, ktore maja sie odbyc w wybranym miejscu
+	 * @param place - szukane miejsce wydarzen
+	 * @return List - zwraca liste wydarzen, ktore maja sie odbyc w wybranym miejscu
 	 */
 	public static List<Event> filterByPlace(String place){
 		List<Event> result = new Vector<Event>();
@@ -108,9 +108,9 @@ public class EventList {
 		return result;
 	}
 	/**
-	 * Metoda s³u¿¹ca do filtrowania wydarzeñ. Zwraca wydarzenia, które zaczynaj¹ siê o zadanej godzinie.
-	 * @param from - godzina rozpoczêcia wydarzenia
-	 * @return List - zwraca listê wydarzeñ, ktore rozpoczynaj¹ siê o wybranej godzinie.
+	 * Metoda sluzaca do filtrowania wydarzen. Zwraca wydarzenia, ktore zaczynaja sie o zadanej godzinie.
+	 * @param from - godzina rozpoczecia wydarzenia
+	 * @return List - zwraca liste wydarzen, ktore rozpoczynaja sie o wybranej godzinie.
 	 */
 	public static List<Event> filterByFrom(String from){
 		List<Event> result = new Vector<Event>();
@@ -121,9 +121,9 @@ public class EventList {
 		return result;
 	}
 	/**
-	 * Metoda s³u¿¹ca do filtrowania wydarzeñ. Zwraca wydarzenia, które koñcz¹ siê o zadanej godzinie.
+	 * Metoda sluzaca do filtrowania wydarzen. Zwraca wydarzenia, ktore koncza sie o zadanej godzinie.
 	 * @param to godzina zakoczenia wydarzenia
-	 * @return List - zwraca listê wydarzeñ, które koñcz¹ siê o zadanej godzinie.
+	 * @return List - zwraca liste wydarzen, ktore koncza sie o zadanej godzinie.
 	 */
 	public static List<Event> filterByTo(String to){
 		List<Event> result = new Vector<Event>();

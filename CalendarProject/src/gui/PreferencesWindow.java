@@ -15,7 +15,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 
 /**
- * Klasa reprezentuj¹ca okno ustawieñ programu, gdzie mo¿na ustawiæ dane po³¹czenia z baz¹ danych.
+ * Klasa reprezentujaca okno ustawien programu, gdzie mozna ustawic dane polaczenia z baza danych.
  * @author Dawid
  *
  */
@@ -24,24 +24,24 @@ public class PreferencesWindow extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	/**
-	 * Panel, który umo¿liwa rozmieszczenie kompomentów w oknie.
+	 * Panel, ktory umozliwa rozmieszczenie kompomentow w oknie.
 	 */
 	private JPanel contentPane;
 	/**
-	 * Pole, w które u¿ytkownik wpisuje has³o dostêpu do bazy danych.
+	 * Pole, w ktore uzytkownik wpisuje haslo dostepu do bazy danych.
 	 */
 	private JPasswordField passwordField;
 	/**
-	 * Pole, w które u¿ytkownik wpisuje nazwê u¿ytkownika bazy danych 
+	 * Pole, w ktore uzytkownik wpisuje nazwe uzytkownika bazy danych 
 	 */
 	private JTextField textField;
 	/**
-	 * Pole, w które u¿ytkownik wpisuje nazwê bazy danych 
+	 * Pole, w ktore uzytkownik wpisuje nazwe bazy danych 
 	 */
 	private JTextField textField_1;
 
 	/**
-	 * Metoda s³u¿¹ca do stworzenia i wyœwietlenia okna ustawieñ aplikacji. 
+	 * Metoda sluzaca do stworzenia i wyswietlenia okna ustawien aplikacji. 
 	 */
 	public static void init() {
 		EventQueue.invokeLater(new Runnable() {
@@ -57,8 +57,8 @@ public class PreferencesWindow extends JFrame {
 		});
 	}
 	/**
-	 * Konstruktor tworz¹cy na stercie obiekt klasy PreferencesWindow.<br> 
-	 * Tworzy i wyœwietla okno ustawieñ aplikacji, gdzie mo¿emy zmieniæ dane po³¹czenia z baz¹ danych.
+	 * Konstruktor tworzacy na stercie obiekt klasy PreferencesWindow.<br> 
+	 * Tworzy i wyswietla okno ustawien aplikacji, gdzie mozemy zmienic dane polaczenia z baza danych.
 	 */
 	public PreferencesWindow() {
 		setTitle("Preferences");

@@ -2,9 +2,9 @@ package logic;
 
 
 /** 
- * Klasa reprezenuj¹ca wyj¹tek IncorrectPasswordException.<br>
- * Wyj¹tek wykorzysywany przy sprawdzaniu poprawnoœci hase³.<br>
- * Sygnalizuje, ¿e wprowadzone has³o jest niepoprawne.
+ * Klasa reprezenujaca wyjatek IncorrectPasswordException.<br>
+ * Wyjatek wykorzysywany przy sprawdzaniu poprawnosci hasel.<br>
+ * Sygnalizuje, ze wprowadzone haslo jest niepoprawne.
  */
 public class IncorrectPasswordException extends RuntimeException {
 	
@@ -13,14 +13,14 @@ public class IncorrectPasswordException extends RuntimeException {
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * Domyœlny konstruktor, który tworzy instacjê klasy IncorrectPasswordException
+	 * Domyslny konstruktor, ktory tworzy instacje klasy IncorrectPasswordException
 	 */
 	public IncorrectPasswordException(){
 		
 	}
 	/**
-	 * Konstruktor tworz¹cy instancjê klasy IncorrectPasswordException przy u¿yciu String msg.
-	 * @param msg - wiadomoœæ zawieraj¹ca informacje o wyj¹tku.
+	 * Konstruktor tworzacy instancje klasy IncorrectPasswordException przy uzyciu String msg.
+	 * @param msg - wiadomosc zawierajaca informacje o wyjatku.
 	 */
 	public IncorrectPasswordException(String msg){
 		super(msg);

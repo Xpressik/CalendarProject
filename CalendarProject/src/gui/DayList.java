@@ -19,8 +19,8 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.JList;
 /**
- * Klasa odpowiedzialna za wyœwietlanie okna z list¹ wydarzeñ dla danego dnia oraz umo¿liwianie u¿ytkownikowi tworzenie nowych wydarzeñ,
- * zapis wybranych wydarzeñ do plików XML oraz usuwanie wybranych wydarzeñ.
+ * Klasa odpowiedzialna za wyswietlanie okna z lista wydarzen dla danego dnia oraz umozliwianie uzytkownikowi tworzenie nowych wydarzen,
+ * zapis wybranych wydarzen do plikow XML oraz usuwanie wybranych wydarzen.
  * @author Dawid
  */
 public class DayList extends JFrame {
@@ -31,8 +31,8 @@ public class DayList extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private String date;
 	/**
-	 * Tworzy okno wyœwietlaj¹ce wydarzenia dla danego dniapoprzez wywo³anie konstruktora klasy DayList oraz odpowienie skonfigurowanie okna.
-	 * @param date - data dla której maja zostaæ wyswietlone wydarzenia
+	 * Tworzy okno wyswietlajace wydarzenia dla danego dniapoprzez wywolanie konstruktora klasy DayList oraz odpowienie skonfigurowanie okna.
+	 * @param date - data dla ktorej maja zostac wyswietlone wydarzenia
 	 * @param formattedDate - sfromatowana data na potrzeby powiadomien
 	 */
 	public static void init(final String date, String formattedDate){
@@ -50,13 +50,13 @@ public class DayList extends JFrame {
 
 	/**
 	 * Konstruktor tworzy na stercie obiekt klasy DayList <br> 
-	 * Tworzy okno, które wyœwietla listê wydarzeñ dla danego dnia oraz implemenuje odpowiednie zachowania i mo¿liwoœæ interakcji z u¿ytkowniem poprzez: <br>
-	 *  - usuwanie wybranych wydarzeñ,<br>
-	 *  - zapis wybranych wydarzeñ do formatu XML (serializacja),<br>
-	 *  - tworzenie nowych wydarzeñ dla tego dnia.
+	 * Tworzy okno, ktore wyswietla liste wydarzen dla danego dnia oraz implemenuje odpowiednie zachowania i mozliwosc interakcji z uzytkowniem poprzez: <br>
+	 *  - usuwanie wybranych wydarzen,<br>
+	 *  - zapis wybranych wydarzen do formatu XML (serializacja),<br>
+	 *  - tworzenie nowych wydarzen dla tego dnia.
 	 * 
-	 * @param date - data dla której maj¹ zostaæ wyœwietlone wydarzenia
-	 * @param formattedDate - odpowiednio sformatowana data na potrzeby przypomnieñ
+	 * @param date - data dla ktorej maja zostac wyswietlone wydarzenia
+	 * @param formattedDate - odpowiednio sformatowana data na potrzeby przypomnien
 	 */
 	public DayList(final String date, String formattedDate) {
 		

@@ -10,28 +10,28 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
- * Listener, który obs³uguje klikniêcie przycisku Save w oknie ustawieñ PreferencesWindow.
+ * Listener, ktary obsluguje klikniecie przycisku Save w oknie ustawien PreferencesWindow.
  * @author Dawid
  *
  */
 public class SaveButtonListener implements ActionListener {
 
 	/**
-	 * Pole, w które u¿ytkownik wpisuje haslo dostêpu do bzy dancyh
+	 * Pole, w ktore uzytkownik wpisuje haslo dostepu do bazy dancych
 	 */
 	private JPasswordField passwordField;
 	/**
-	 * Pole, w które u¿ytkownik wpisuje nazwê u¿ytkownika bazy danych 
+	 * Pole, w ktore uzytkownik wpisuje nazwe uzytkownika bazy danych 
 	 */
 	private JTextField textField;
 	/**
-	 * Pole, w które u¿ytkownik wpisuje nazwê bazy danych 
+	 * Pole, w ktore uzytkownik wpisuje nazwe bazy danych 
 	 */
 	private JTextField textField_1;
 	
 	/**
-	 * Konstruktor tworzzy na stercie obiekt klasy SaveButtonListener.<br>
-	 * Ustawiaj¹c odpowiednie parametry przekazane z klasy, któr¹ nas³uchuje. Tak aby móg³ odpowiednio zareagowaæ na zainsta³¹ sytuacjê.
+	 * Konstruktor tworzy na stercie obiekt klasy SaveButtonListener.<br>
+	 * Ustawiajac odpowiednie parametry przekazane z klasy, ktara nasluchuje. Tak aby mogl odpowiednio zareagowac na zainstala sytuacje.
 	 * @param textField_1 - nazwa bazy danych
 	 * @param textField - nazwa uzytkownika bazy danych
 	 * @param passwordField - haslo dostepu do bazy danych
@@ -43,7 +43,7 @@ public class SaveButtonListener implements ActionListener {
 		this.textField_1 = textField_1;
 	}
 	/**
-	 * Metoda nas³uchuj¹ca. Podczas wywo³ania pobiera z okien nazwê u¿ytkownika, nazwê bazy oraz has³o i zapisuje je do pliku txt aby przy ka¿dym kolejny uruchomieniu program móg³ pobraæ dane z bazy.
+	 * Metoda nasluchujaca. Podczas wywolania pobiera z okien nazwe uzytkownika, nazwe bazy oraz haslo i zapisuje je do pliku txt aby przy kazdym kolejny uruchomieniu program mogl pobrac dane z bazy.
 	 */
 	public void actionPerformed(ActionEvent arg0) {
 		char [] input = passwordField.getPassword();

@@ -5,14 +5,14 @@ import java.awt.Point;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 /**
- * Klasa wyœwietlaj¹ca okno  z powiadomieniem / informacj¹ o nadchodz¹cym wydarzeniu.
+ * Klasa wyswietlajaca okno  z powiadomieniem / informacja o nadchodzacym wydarzeniu.
  *
  */
 public class ReminderWindow extends JFrame {
 	
 	/**
-	 * Konstruktor tworz¹cy na stercie instancjê klasy ReminderWindow.<br>
-	 * Tworzy i wyœwietla okno z powiadomieniem o nadchodz¹cym wydarzeniu.
+	 * Konstruktor tworzacy na stercie instancje klasy ReminderWindow.<br>
+	 * Tworzy i wyswietla okno z powiadomieniem o nadchodzacym wydarzeniu.
 	 * @param message - informacje o wydarzeniu ( miejsce, opis, data)
 	 */
 	public ReminderWindow(String message){

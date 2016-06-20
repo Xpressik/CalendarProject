@@ -41,16 +41,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Klasa odpowiedzialna za wyœwietlanie g³ównego okna aplikacji wraz z kalendarzem i ca³ym menu. <br>
- * Umo¿liwia u¿ytkownikowi wybór dnia dla którego chce obejrzeæ b¹dz stworzyæ wydarzenia. <br>
- * Poprzez menu u¿ytkownik mo¿e zmieniaæ ustawienia aplikacji, tworzyæ oraz ogl¹daæ wydarzenia a tak¿e je filtrowaæ.
+ * Klasa odpowiedzialna za wyswietlanie glownego okna aplikacji wraz z kalendarzem i calym menu. <br>
+ * Umozliwia uzytkownikowi wybor dnia dla ktorego chce obejrzec badz stworzyc wydarzenia. <br>
+ * Poprzez menu uzytkownik moze zmieniac ustawienia aplikacji, tworzyc oraz ogladac wydarzenia a takze je filtrowac.
  * @author Dawid
  *
  */
 public class Frame implements ActionListener {
 	
 	/**
-	 * Komponent reprezenuj¹cy kalendarz, który wyœwietlamy w g³ownym oknie aplikacji
+	 * Komponent reprezenujacy kalendarz, ktory wyswietlamy w glownym oknie aplikacji
 	 */
 	private JCalendar calendar;
 	/**
@@ -106,15 +106,15 @@ public class Frame implements ActionListener {
 	 */
 	private JMenuItem events;
 	/**
-	 * Zmienna przechowuj¹ca obecny miesi¹c
+	 * Zmienna przechowujaca obecny miesiac
 	 */
 	private int currentMonth;
 	/**
-	 * Zmienna przechowuj¹ca obecny rok
+	 * Zmienna przechowujaca obecny rok
 	 */
 	private int currentYear;
 	/**
-	 * Obiekt Menu, do którego przypiêty jest przycisk Prefereces
+	 * Obiekt Menu, do ktorego przypiety jest przycisk Prefereces
 	 */
 	private JMenu settingsMenu;
 	/**
@@ -123,16 +123,16 @@ public class Frame implements ActionListener {
 	private Timer timer;
 
 	/**
-	 * Konstruktor tworz¹cy na stercie instancjê klasy Frame.<br>
-	 * Wywo³uje metodê init z paramterem dbData
-	 * @param dbData - obiekt zawieraj¹cy informacje niezbêdne do po³¹czenia z baz¹ danych (dane logowania).
+	 * Konstruktor tworzacy na stercie instancje klasy Frame.<br>
+	 * Wywoluje metode init z paramterem dbData
+	 * @param dbData - obiekt zawierajacy informacje niezbedne do polaczenia z baza danych (dane logowania).
 	 */
 	public Frame(DBData dbData){
 		init(dbData);
 	}
 	
 	/**
-	 * Metoda odpowiedzialna za stworzenie g³ównego okna aplikacji i umo¿liwienie u¿ytkownikowi interakcjê z programem. Poprzez wybór dni, tworzenie, przegl¹danie, filtrowanie wydarzen. Umo¿liwia dobór ustawieñ oraz wyœwietlenie informacji.
+	 * Metoda odpowiedzialna za stworzenie glownego okna aplikacji i umozliwienie uzytkownikowi interakcje z programem. Poprzez wybor dni, tworzenie, przegladanie, filtrowanie wydarzen. Umozliwia dobor ustawien oraz wyswietlenie informacji.
 	 * @param dbData
 	 */
 	private void init(DBData dbData){
@@ -233,8 +233,8 @@ public class Frame implements ActionListener {
 		helpMenu.add(mntmAboutProgram);
 		mntmAboutProgram.addActionListener(new ActionListener(){	
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, "Event Calendar 1.0.\nAllows to:\ncreate events with set reminders,\nfilter existing events with specified filters,\ndelete chosen events,"
-					+ "\nload and save events from\\to XML files,\nconnect calendar with data bases. \n\n\nCreated by Dawid Dziedziczak Micha³ Mackiewicz", "About", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Event Calendar 1.0\nAllows to:\ncreate events with set reminders,\nfilter existing events with specified filters,\ndelete chosen events,"
+					+ "\nload and save events from\\to XML files,\nconnect calendar with data bases. \n\n\nCreated by Dawid Dziedziczak and Michal Mackiewicz", "About", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
 		});
@@ -284,7 +284,7 @@ public class Frame implements ActionListener {
 	}
 
 	/**
-	 * Metoda nas³uchuj¹ca umo¿liwia tworzenie oraz przegl¹danie ju¿ istniej¹cych wydarzeñ, odpowienie zamykanie aplikacji, wczytywanie wydarzeñ z plików XML (deserializacja) oraz filtorwanie wydarzeñ.
+	 * Metoda nasluchujaca umozliwia tworzenie oraz przegladanie juz istniejacych wydarzen, odpowienie zamykanie aplikacji, wczytywanie wydarzen z plikow XML (deserializacja) oraz filtorwanie wydarzen.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent evt) {

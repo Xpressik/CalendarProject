@@ -9,17 +9,17 @@ import java.util.concurrent.TimeUnit;
 import data.Event;
 import data.EventList;
 /**
- * Klasa odpowiedzialna za dzia³anie powiadomieñ. 
+ * Klasa odpowiedzialna za dzialanie powiadomien. 
  *
  */
 public class Reminder {
 	
 	/**
-	 * Zwraca ró¿nicê czasu pomiêdzy przekazanymi argumetami.<br> Wykorzystywana przy sprawdzaniu kiedy ma zostaæ wyœwietlone powiadomienie dla nadchodz¹cego wydarzenia.
+	 * Zwraca roznice czasu pomiedzy przekazanymi argumetami.<br> Wykorzystywana przy sprawdzaniu kiedy ma zostac wyswietlone powiadomienie dla nadchodzacego wydarzenia.
 	 * 
-	 * @param dateOne - godzina od której odejmujemy
-	 * @param dateTwo - godzina któr¹ odejmujemy
-	 * @return Zwraca ró¿nicê pomiêdzy parametrami (dateOne - dateTwo).
+	 * @param dateOne - godzina od ktorej odejmujemy
+	 * @param dateTwo - godzina ktora odejmujemy
+	 * @return Zwraca roznice pomiedzy parametrami (dateOne - dateTwo).
 	 */
 	public static String getTimeDiff(Date dateOne, Date dateTwo) {        
 		String diff = "";        
@@ -30,9 +30,9 @@ public class Reminder {
 		return diff;}
 	
 	/**
-	 * Zwraca String message z wiadomoœci¹ o nadchodz¹cym wydarzeniu.
+	 * Zwraca String message z wiadomoscia o nadchodzacym wydarzeniu.
 	 * 
-	 * @return String message z wiadomoœci¹ o nadchodz¹cym wydarzeniu.
+	 * @return String message z wiadomoscia o nadchodzacym wydarzeniu.
 	 */
 	public static String toRemind(){
 		List<Event> events = EventList.getEvents();

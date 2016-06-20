@@ -8,13 +8,13 @@ import javax.swing.JOptionPane;
 
 import gui.Frame;
 /**
- * Klasa, która odpowiada za uruchomienie aplikacji. Otwarcie okna kalendarza oraz pobranie wydarzeñ z bazy danych. 
+ * Klasa, ktora odpowiada za uruchomienie aplikacji. Otwarcie okna kalendarza oraz pobranie wydarzen z bazy danych. 
  * @author Dawid
  *
  */
 public class Main {
 	/**
-	 * Metoda main rozpoczyna dzia³anie aplikacji pobieraj¹c wydarzenia z bazydancyh oraz nastêpnie wyœwietlaj¹c okno kalendarza.
+	 * Metoda main rozpoczyna dzialanie aplikacji pobierajac wydarzenia z bazydancyh oraz nastepnie wyswietlajac okno kalendarza.
 	 * @param args - argumenty uruchomienia programu
 	 */
 	public static void main(String[] args) {
