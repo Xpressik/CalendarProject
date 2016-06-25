@@ -4,5 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/JCalendar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JDBC Driver for MySQL"/>
+	<classpathentry kind="lib" path="/home/michal/Downloads/jcalendar/lib/jcalendar-1.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

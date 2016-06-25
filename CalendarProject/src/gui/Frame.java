@@ -121,27 +121,31 @@ public class Frame implements ActionListener {
 	 * 
 	 */
 	private Timer timer;
+	
+	private EventService eventService;
 
 	/**
 	 * Konstruktor tworzacy na stercie instancje klasy Frame.<br>
 	 * Wywoluje metode init z paramterem dbData
 	 * @param dbData - obiekt zawierajacy informacje niezbedne do polaczenia z baza danych (dane logowania).
 	 */
-	public Frame(DBData dbData){
-		init(dbData);
+	public Frame(DBData dbData, EventService eventService){
+		init(dbData, eventService);
 	}
 	
 	/**
 	 * Metoda odpowiedzialna za stworzenie glownego okna aplikacji i umozliwienie uzytkownikowi interakcje z programem. Poprzez wybor dni, tworzenie, przegladanie, filtrowanie wydarzen. Umozliwia dobor ustawien oraz wyswietlenie informacji.
 	 * @param dbData
 	 */
-	private void init(DBData dbData){
+	private void init(final DBData dbData, final EventService eventService){
 				
 		calendar = new JCalendar();
 		calendar.setBounds(0,0,350,350);
 		Calendar c = calendar.getCalendar();
 		currentMonth = c.get(Calendar.MONTH);
 		currentYear = c.get(Calendar.YEAR);
+		
+		this.eventService = eventService;
 		
 		calendar.addPropertyChangeListener("calendar", new PropertyChangeListener() {
 
@@ -154,7 +158,7 @@ public class Frame implements ActionListener {
 		        }
 		        else{
 		        	LocalDate ld = LocalDate.now();	
-		        	DayList.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR), ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		        	DayList.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR), ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), eventService);
 		        }
 	        	currentMonth = c.get(Calendar.MONTH);
 	        	currentYear = c.get(Calendar.YEAR);
@@ -255,14 +259,14 @@ public class Frame implements ActionListener {
 		        {
 		            DBConnection db;
 					try {
-						db = new DBConnection(dbData);
+						db = new DBConnection(dbData, eventService);
 						db.saveData();
 					} catch (IncorrectPasswordException | ClassNotFoundException e) {
 						JOptionPane.showMessageDialog(null, "There has been some problems with database.\nOr you have typed wrong data.", "Database failure", JOptionPane.WARNING_MESSAGE);
 					}
 		            
 		        	System.exit(0);
-		        }
+		      }
 		    }
 		});
 		
@@ -292,7 +296,7 @@ public class Frame implements ActionListener {
 		if (evt.getSource() == newEvent ){
 			final Calendar c = calendar.getCalendar();
         	LocalDate ld = LocalDate.now();	
-			CreateEventWindow.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR), ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+			CreateEventWindow.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR), ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), eventService);
 		}
 		
 		if (evt.getSource() == exit){
@@ -306,7 +310,7 @@ public class Frame implements ActionListener {
 		{
 			final Calendar c = calendar.getCalendar();	
 			LocalDate ld = LocalDate.now();	
-			DayList.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR), ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+			DayList.init(c.get(Calendar.DAY_OF_MONTH) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.YEAR), ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), eventService);
 		}
 		if (evt.getSource() == menuItem){
 			JFileChooser chooser = new JFileChooser();
@@ -319,7 +323,7 @@ public class Frame implements ActionListener {
 					Object obj = x.readObject();
 					List<Event> events = (List<Event>) obj;
 					for(Event e : events){
-						EventList.addEvent(e);
+						eventService.addEvent(e);
 					}
 					x.close();
 				}
@@ -341,7 +345,7 @@ public class Frame implements ActionListener {
 						path += ".xml";	
 					}
 					XMLEncoder x = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(path)));
-					x.writeObject(EventList.getEvents());
+					x.writeObject(eventService.getAllEvents());
 					x.close();
 				}
 				catch(Exception e){
@@ -354,7 +358,7 @@ public class Frame implements ActionListener {
 			if ( from.isEmpty() )	
 				JOptionPane.showMessageDialog(null, "Field can not be empty.", "Empty", JOptionPane.ERROR_MESSAGE);
 		    else	
-				SearchWindow.init(EventList.filterByFrom(from));
+				SearchWindow.init(eventService.filterWithStartHour(from));
 			
 			
 		}
@@ -363,7 +367,7 @@ public class Frame implements ActionListener {
 			if ( to.isEmpty() )	
 				JOptionPane.showMessageDialog(null, "Field can not be empty.", "Empty", JOptionPane.ERROR_MESSAGE);
 		    else	
-				SearchWindow.init(EventList.filterByTo(to));
+				SearchWindow.init(eventService.filterWithEndHour(to));
 
 		}
 		if(evt.getSource() == filterByDescription){
@@ -371,14 +375,14 @@ public class Frame implements ActionListener {
 			if ( desc.isEmpty() )	
 				JOptionPane.showMessageDialog(null, "Field can not be empty.", "Empty", JOptionPane.ERROR_MESSAGE);
 		    else	
-				SearchWindow.init(EventList.filterByDesc(desc));
+				SearchWindow.init(eventService.filterWithDescription(desc));
 		}
 		if(evt.getSource() == filterByPlace){
 			String place = JOptionPane.showInputDialog(null, "Type place");
 			if ( place.isEmpty() )	
 				JOptionPane.showMessageDialog(null, "Field can not be empty.", "Empty", JOptionPane.ERROR_MESSAGE);
 		    else	
-				SearchWindow.init(EventList.filterByPlace(place));
+				SearchWindow.init(eventService.filterWithPlace(place));
 		}
 	
 	}

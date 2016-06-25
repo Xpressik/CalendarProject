@@ -7,7 +7,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import data.Event;
-import data.EventList;
+import data.EventService;
 import logic.IncorrectPasswordException;
 /**
  * Klasa odpowiedzialna za polaczenie z baza danych <br>
@@ -28,6 +28,8 @@ public class DBConnection {
 	 * 
 	 */
 	private ResultSet resultSet;
+	
+	private EventService eventService;
 
 	/**
 	 * Domyslny konstruktor, ktory tworzy instancje klasy DBConnection. <br>
@@ -39,7 +41,7 @@ public class DBConnection {
 	 * @throws IncorrectPasswordException - wlasny wyjatek rzucany gdy podane haslo jest niepoprawne
 	 * @throws ClassNotFoundException - wyjatek rzucany gdy wystapi blad podczas laczenia z baza danych
 	 */
-	public DBConnection() throws IncorrectPasswordException, ClassNotFoundException{
+	public DBConnection(EventService eventService) throws IncorrectPasswordException, ClassNotFoundException{
 		
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
@@ -53,6 +55,8 @@ public class DBConnection {
 		catch(ClassNotFoundException e){
 			throw new ClassNotFoundException();
 		}
+		
+		this.eventService = eventService;
 	}
 	/**
 	 * Konstruktor, ktory tworzy na stercie instancje klasy DBConnection.<br>
@@ -61,7 +65,7 @@ public class DBConnection {
 	 * @throws IncorrectPasswordException - wlasny wyjatek rzucany jesli podane haslo jest niepoprawne
 	 * @throws ClassNotFoundException wyjatek rzucany gdy wystapi blad podczas laczenia z baza danych
 	 */
-	public DBConnection(DBData dbData) throws IncorrectPasswordException, ClassNotFoundException{
+	public DBConnection(DBData dbData, EventService eventService) throws IncorrectPasswordException, ClassNotFoundException{
 		try{
 			Class.forName("com.mysql.jdbc.Driver");			
 			connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + dbData.getDbName(), dbData.getDbUser(), dbData.getDbPassword());
@@ -73,6 +77,7 @@ public class DBConnection {
 		catch(ClassNotFoundException e){
 			throw new ClassNotFoundException();
 		}
+		this.eventService = eventService;
 	}
 	/**
 	 * Konstruktor, ktory tworzy na stercie instancje klasy DBConnection.<br>
@@ -81,7 +86,7 @@ public class DBConnection {
 	 * @throws IncorrectPasswordException  wlasny wyjatek rzucany jesli podane haslo jest niepoprawne
 	 * @throws ClassNotFoundException wyjatek rzucany gdy wystapi blad podczas laczenia z baza danych
 	 */
-	public DBConnection(String password) throws IncorrectPasswordException, ClassNotFoundException{
+	public DBConnection(String password, EventService eventService) throws IncorrectPasswordException, ClassNotFoundException{
 		try{
 			Class.forName("com.mysql.jdbc.Driver");			
 			//connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + dbName, dbUser, password);
@@ -94,6 +99,8 @@ public class DBConnection {
 		catch(ClassNotFoundException e){
 			throw new ClassNotFoundException();
 		}
+		
+		this.eventService = eventService;
 	}
 	/**
 	 * Metoda pobierajaca wszystkie wydarzenia z bazy danych z tabeli events2.
@@ -106,7 +113,7 @@ public class DBConnection {
 			while(resultSet.next()){
 				DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
 
-				EventList.addEvent(new Event(resultSet.getString("description"),resultSet.getString("place"), resultSet.getString("fromHour"), resultSet.getString("toHour"), resultSet.getString("evtDate").replaceAll("-0", "-"),  formatter.parse(resultSet.getString("reminder"))/* (java.util.Date)formatter.parse(resultSet.getString("reminder")) *//*.getDate("reminder")*/));				
+				eventService.addEvent(new Event(resultSet.getString("description"),resultSet.getString("place"), resultSet.getString("fromHour"), resultSet.getString("toHour"), resultSet.getString("evtDate").replaceAll("-0", "-"),  formatter.parse(resultSet.getString("reminder"))/* (java.util.Date)formatter.parse(resultSet.getString("reminder")) *//*.getDate("reminder")*/));				
 			}	
 		}
 		catch(Exception e){
@@ -122,7 +129,7 @@ public class DBConnection {
 			String query;
 			query = "DELETE FROM `events2` WHERE 1";
 			statement.executeUpdate(query);
-			List <Event> events  = EventList.getEvents();
+			List<Event> events  = eventService.getAllEvents();
 			for(int i=0; i< events.size(); i++){
 				query = "INSERT INTO events2 (description, place, fromHour, toHour, evtDate, reminder) VALUES (";
 				query += 

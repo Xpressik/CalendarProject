@@ -7,7 +7,7 @@ import java.util.List;
 import javax.swing.JList;
 
 import data.Event;
-import data.EventList;
+import data.EventService;
 import gui.DayList;
 
 /**
@@ -26,6 +26,8 @@ public class DeleteButtonListener implements ActionListener {
 	 */
 	private List<Event> eventList;
 	
+	private EventService eventService;
+	
 	/**
 	 * Konstruktor tworzy na stercie instancje klasy DeleteButtonListener, ktora jest odpowiedzialna za usuniecie odpowienich wydarzen po klinkieciu przez uzytkownika w przycisk Delete w oknie DayEvents.
 	 * @param lst - lista wydarzen dla danego dnia
@@ -35,6 +37,7 @@ public class DeleteButtonListener implements ActionListener {
 		
 		this.list = lst;
 		this.eventList = eventList;
+		this.eventService = eventService;
 	}
 	/**
 	 * Metoda nasluchujaca. W momencie wywolania usuwa wybrane wydarzenia.
@@ -43,7 +46,7 @@ public class DeleteButtonListener implements ActionListener {
 		
 		int selectedEventIndex = list.getSelectedIndex();
 		try{
-			EventList.deleteEvent(eventList.get(selectedEventIndex));
+			eventService.removeEvent(eventList.get(selectedEventIndex));
 
 			eventList.remove(selectedEventIndex);
 			DayList.repaintList(list, eventList);

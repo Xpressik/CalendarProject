@@ -56,12 +56,14 @@ public class CreateEventWindow extends JFrame {
 	 */
 	private String date;
 	
+	private EventService eventService;
+	
 	/**
 	 * Mapa, ktora umozliwa wybor odpowiedniego interwalu czasu dla powiadomien.
 	 */
 	private static final Map<Integer, Integer> mapping = new HashMap<Integer, Integer>(){{
 		 		put(0, 0);
-		        put(1, 5);
+		    put(1, 5);
 		 		put(2, 10);
 		 		put(3, 15);
 		 		put(4, 30);
@@ -70,16 +72,17 @@ public class CreateEventWindow extends JFrame {
 		 		put(7, 360);
 		 		put(8, 720);	
 		 	}};
+		 	
 	/**
 	 * Uruchamia okno tworzenia wydarzen poprzez wywolanie konstruktora klasy CreateEventWindow oraz ustawienie widocznosci okna.
 	 * @param date - data dla ktorej ma zostac stworzone wydarzenie
 	 * @param formattedDate - sfromatowana data na potrzeby ustawienia powiadomienia
 	 */
-	public static void init(final String date, String formattedDate){    
+	public static void init(final String date, final String formattedDate, final EventService eventService){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CreateEventWindow frame = new CreateEventWindow(date, formattedDate);
+					CreateEventWindow frame = new CreateEventWindow(date, formattedDate, eventService);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -94,12 +97,12 @@ public class CreateEventWindow extends JFrame {
 	 * @param date - data dla ktorej ma zostac stworzone wydarzenie
 	 * @param formattedDate - sfromatowana data na potrzeby ustawienia powiadomienia
 	 */
-	public CreateEventWindow(final String date, String formattedDate) {
+	public CreateEventWindow(final String date, final String formattedDate, final EventService eventService) {
 		setTitle("Event Creator");
 		setLocation(new Point(220, 700));
 		
 		this.date = date;
-				
+		this.eventService = eventService;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
@@ -187,11 +190,11 @@ public class CreateEventWindow extends JFrame {
 					JOptionPane.showMessageDialog(null, "Event end before it starts.", "Wrong hours", JOptionPane.OK_OPTION);
 				}
 				else{
-					EventList.addEvent(new Event(textField.getText(), textField_1.getText(), formattedTextField.getText(), formattedTextField_1.getText(), date, reminder)); 
+					eventService.addEvent(new Event(textField.getText(), textField_1.getText(), formattedTextField.getText(), formattedTextField_1.getText(), date, reminder)); 
 					JOptionPane.showMessageDialog(null, "Event created properly.", "Success", JOptionPane.INFORMATION_MESSAGE);
 					dispose();
 					LocalDate ld = LocalDate.now();	
-					DayList.init(date, ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+					DayList.init(date, ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), eventService);
 				}
 			}
 		});

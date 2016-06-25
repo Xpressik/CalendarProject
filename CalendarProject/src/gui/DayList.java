@@ -30,16 +30,18 @@ public class DayList extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String date;
+	
+	private static EventService eventService;
 	/**
 	 * Tworzy okno wyswietlajace wydarzenia dla danego dniapoprzez wywolanie konstruktora klasy DayList oraz odpowienie skonfigurowanie okna.
 	 * @param date - data dla ktorej maja zostac wyswietlone wydarzenia
 	 * @param formattedDate - sfromatowana data na potrzeby powiadomien
 	 */
-	public static void init(final String date, String formattedDate){
+	public static void init(final String date, final String formattedDate, final EventService eventService){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DayList frame = new DayList(date, formattedDate);
+					DayList frame = new DayList(date, formattedDate, eventService);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,11 +60,11 @@ public class DayList extends JFrame {
 	 * @param date - data dla ktorej maja zostac wyswietlone wydarzenia
 	 * @param formattedDate - odpowiednio sformatowana data na potrzeby przypomnien
 	 */
-	public DayList(final String date, String formattedDate) {
+	public DayList(final String date, String formattedDate, final EventService eventService) {
 		
+		this.eventService = eventService;
 		this.date = date;
-
-		final List<Event> eventList = EventList.getEventListForSpecifiedDate(date);
+		final List<Event> eventList = eventService.getEventsFromSpecifiedDay(date);
 
 		
 		setTitle("Events");
@@ -90,7 +92,7 @@ public class DayList extends JFrame {
 		btnCreateEvent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				LocalDate ld = LocalDate.now();
-				CreateEventWindow.init(date, ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+				CreateEventWindow.init(date, ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), eventService);
 				dispose();
 			}
 		});
