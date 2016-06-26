@@ -273,7 +273,8 @@ public class Frame implements ActionListener {
  			@Override
  			public void actionPerformed(ActionEvent e) {
 			//	System.out.println("WORKING...");
- 				String message = Reminder.toRemind();
+ 				Reminder reminderObject = new Reminder(eventService);
+ 				String message = reminderObject.toRemind();
  				if (message != null && !"".equals(message)) {
  				//	System.out.println("message " + message);
  					ReminderWindow reminderW = new ReminderWindow(message);
