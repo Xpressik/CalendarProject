@@ -2,6 +2,7 @@ package logic;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -9,17 +10,21 @@ import javax.swing.JOptionPane;
 import data.DataRepository;
 import data.EventService;
 import gui.Frame;
+import gui.TerminalDisplay;
 /**
  * Klasa, ktora odpowiada za uruchomienie aplikacji. Otwarcie okna kalendarza oraz pobranie wydarzen z bazy danych. 
  * @author Dawid
  *
  */
 public class Main {
+	
+	private static int mode;
 	/**
 	 * Metoda main rozpoczyna dzialanie aplikacji pobierajac wydarzenia z bazydancyh oraz nastepnie wyswietlajac okno kalendarza.
 	 * @param args - argumenty uruchomienia programu
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		DataRepository dataRepository = new DataRepository();
 		EventService eventService = new EventService(dataRepository);
@@ -43,7 +48,18 @@ public class Main {
 
 		}
 
-		Frame window = new Frame(dbData, eventService);
+		System.out.println("Press 1 to open Calendar in full gui version \nPress 2 to open Calendar in emergency terminal version");
+		mode = new Scanner(System.in).nextInt();
+		System.out.println(mode);
+		if (mode  == 1){
+			Frame window = new Frame(dbData, eventService);
+		}
+		else if (mode == 2){
+			TerminalDisplay terminal = new TerminalDisplay(eventService);
+		}
+		else {
+			System.out.println("Unknown operation");
+		}
 	}
 
 }

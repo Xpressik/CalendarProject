@@ -1,5 +1,6 @@
 package data;
 
+import java.util.Date;
 import java.util.List;
 
 public interface IEventService {
@@ -18,7 +19,6 @@ public interface IEventService {
 	
 	public List<Event> getAllEvents();
 	
-	
-	
-	
+	public Date createReminder(String eventDate, String fromHour, Integer remindIndex);
+	public List<Event> removeEventByIdx(String eventDate, Integer idx);
 }

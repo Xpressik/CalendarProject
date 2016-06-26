@@ -10,13 +10,11 @@ public class DataRepository implements IDataRepository {
 
 	@Override
 	public void addEvent(Event event) {
-		// TODO Auto-generated method stub
 		events.add(event);
 	}
 
 	@Override
 	public void removeEvent(Event event) {
-		// TODO Auto-generated method stub
 		events.remove(event);
 	}
 
