@@ -8,6 +8,7 @@ import java.util.List;
  * 
  */
 public interface IEventService {
+	
 	/**
 	 * Ustawia dataRepository na ktorym bedzie odbywal sie serwis 
 	 * @param dataRepository - repozytorium do ktorego dodajemy obsluge

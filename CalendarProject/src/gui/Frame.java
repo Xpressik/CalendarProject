@@ -304,7 +304,12 @@ public class Frame implements ActionListener {
 		if (evt.getSource() == exit){
 			int promptResult = JOptionPane.showConfirmDialog( null , "Do you really want to exit?", "Question", JOptionPane.YES_NO_OPTION);
 			if(promptResult == JOptionPane.YES_OPTION){
-				frame.dispose();
+				if (eventService.hasDbDataRepository()) {
+					eventService.saveEventsToDatabase();
+				} else if (eventService.hasXmlDataRepository()) {
+					eventService.saveEventsToXmlFile(null);
+				}
+				System.exit(0);
 			}
 		}
 		

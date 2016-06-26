@@ -18,7 +18,8 @@ import gui.TerminalDisplay;
  *
  */
 public class Main {
-	
+
+	private static int counter = 0;
 	private static int mode;
 	/**
 	 * Metoda main rozpoczyna dzialanie aplikacji pobierajac wydarzenia z bazydancyh oraz nastepnie wyswietlajac okno kalendarza.
@@ -26,6 +27,10 @@ public class Main {
 	 * @throws IOException - moze wyrzuc wyjatek typu IOException
 	 */
 	public static void main(String[] args) throws IOException {
+		
+		counter++;
+		if(counter <= 1 ){
+			
 		
 		DbDataRepository dbDataRepository = new DbDataRepository();
 		try {
@@ -51,5 +56,5 @@ public class Main {
 			System.out.println("Unknown operation");
 		}
 	}
-
+	}
 }

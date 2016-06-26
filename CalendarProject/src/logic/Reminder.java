@@ -52,7 +52,6 @@ public class Reminder {
 		Date dt2= Date.from(ldt2.atZone(ZoneId.systemDefault()).toInstant());
 		for (data.Event event : events) {
 			if (event.getReminder() != null) {
-			//	System.out.println("ldt " + ldt + " dt " + dt + "event " + event.getReminder());
 				if (event.getReminder().equals(dt)/* || event.getReminder().after(dt1) && event.getReminder().before(dt2)*/) {
 					message += "You have an event on: " + event.getDate() + " from: " + event.getFrom() + " to: " +
 							event.getTo() + " " + "Description: " + event.getDescription() + "\n";
