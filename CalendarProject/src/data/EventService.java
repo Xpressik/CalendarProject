@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 public class EventService implements IEventService {
 	
 	private static final Map<Integer, Integer> mapping = new HashMap<Integer, Integer>(){{
@@ -114,7 +116,7 @@ public class EventService implements IEventService {
 		}
 		Path path = Paths.get(filename);
 		if (!Files.exists(path) || Files.isDirectory(path)) {
-			System.out.println("File does not exist or is a directory");
+			JOptionPane.showMessageDialog(null, "File does not exist or is a directory.", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		XmlDataRepository xmlDataRepository = new XmlDataRepository(filename);
@@ -124,6 +126,7 @@ public class EventService implements IEventService {
 			ex.printStackTrace();
 			return;
 		}
+		JOptionPane.showMessageDialog(null, "Events imported properly.", "Success", JOptionPane.INFORMATION_MESSAGE);
 		this.repository = xmlDataRepository;
 	}
 

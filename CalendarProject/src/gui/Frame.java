@@ -272,7 +272,7 @@ public class Frame implements ActionListener {
  		timer = new javax.swing.Timer(1000, new ActionListener() {
  			@Override
  			public void actionPerformed(ActionEvent e) {
-			//	System.out.println("WORKING...");
+			//	System.out.println("WORKING...");	
  				Reminder reminderObject = new Reminder(eventService);
  				String message = reminderObject.toRemind();
  				if (message != null && !"".equals(message)) {
@@ -315,21 +315,10 @@ public class Frame implements ActionListener {
 			chooser.setFileFilter(new FileNameExtensionFilter("XML file","xml"));
 			int result = chooser.showOpenDialog(null);
 			if (result == JFileChooser.APPROVE_OPTION){
-				File fi = chooser.getSelectedFile();
-				try{
-					XMLDecoder x = new XMLDecoder(new BufferedInputStream(new FileInputStream(fi.getPath())));
-					Object obj = x.readObject();
-					List<Event> events = (List<Event>) obj;
-					for(Event e : events){
-						eventService.addEvent(e);
-					}
-					x.close();
-				}
-				catch(Exception e){
-					JOptionPane.showMessageDialog(null, e.getMessage());
-				}
-				JOptionPane.showMessageDialog(null, "Events imported properly.", "Success", JOptionPane.INFORMATION_MESSAGE);
+				String fi = chooser.getSelectedFile().toString();
+				eventService.loadEventsFromXmlFile(fi);
 			}
+			
 		}
 		if (evt.getSource() == serializeToXML){
 			JFileChooser chooser = new JFileChooser();
@@ -342,14 +331,12 @@ public class Frame implements ActionListener {
 					if (!path.endsWith(".xml")){
 						path += ".xml";	
 					}
-					XMLEncoder x = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(path)));
-					x.writeObject(eventService.getAllEvents());
-					x.close();
+					eventService.saveEventsToXmlFile(path);
 				}
 				catch(Exception e){
 					JOptionPane.showMessageDialog(null, e.getMessage());
 				}
-			}
+			}	
 		}
 		if(evt.getSource() == filterByFrom){
 			String from = JOptionPane.showInputDialog(null, "Type beging date (must be in HH:mm format");
