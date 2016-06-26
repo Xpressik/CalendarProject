@@ -272,6 +272,10 @@ public class Frame implements ActionListener {
  		timer = new javax.swing.Timer(1000, new ActionListener() {
  			@Override
  			public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
+=======
+				System.out.println("WORKING...");	
+>>>>>>> branch 'master' of https://github.com/Xpressik/CalendarProject.git
  				Reminder reminderObject = new Reminder(eventService);
  				String message = reminderObject.toRemind();
  				if (message != null && !"".equals(message)) {
