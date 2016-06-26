@@ -33,7 +33,7 @@ public class DeleteButtonListener implements ActionListener {
 	 * @param lst - lista wydarzen dla danego dnia
 	 * @param eventList - lista wszystkich wydarzen
 	 */
-	public DeleteButtonListener (JList lst, List<Event> eventList){
+	public DeleteButtonListener (JList lst, List<Event> eventList, EventService eventService){
 		
 		this.list = lst;
 		this.eventList = eventList;

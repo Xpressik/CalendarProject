@@ -119,7 +119,7 @@ public class DayList extends JFrame {
 		scrollPane.setViewportView(list);
 		
 		JButton btnNewButton_1 = new JButton("Delete"); 
-		btnNewButton_1.addActionListener(new DeleteButtonListener(list, eventList));	
+		btnNewButton_1.addActionListener(new DeleteButtonListener(list, eventList, eventService));	
 		btnNewButton_1.setBounds(412, 39, 89, 23);
 		getContentPane().add(btnNewButton_1);		
 

@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.text.MaskFormatter;
 
 import data.*;
+import logic.CreateEventListener;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -157,47 +158,14 @@ public class CreateEventWindow extends JFrame {
 		getContentPane().add(lblNewLabel_4);
 		lblNewLabel_4.setText(date);
 		
+		comboBoxReminder = new JComboBox( new String[] {"", "5 min", "10 min", "15 min", "30 min", "1 h", "2 h", "6 h", "12 h"} );
+		comboBoxReminder.setBounds(180, 196, 86, 20);
+		getContentPane().add(comboBoxReminder);	
+		
 		JButton btnCreate = new JButton("Create");
-		btnCreate.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) { 
-			
-				Date reminder = null;
-				int fromHour = 0, fromMinutes = 0, toHour = 0, toMinutes = 0;
-				try{
-					String[] from = formattedTextField.getText().split(":");
-					 fromHour = Integer.parseInt(from[0]);
-					 fromMinutes = Integer.parseInt(from[1]);
-					String[] to = formattedTextField_1.getText().split(":");
-					 toHour = Integer.parseInt(to[0]);
-					 toMinutes = Integer.parseInt(to[1]);
-					 int reminderIdx = comboBoxReminder.getSelectedIndex();
-					 LocalDate ld = LocalDate.parse(formattedDate);
-				//	 if ( reminderIdx > 0 ){
-						 LocalDateTime ldt = LocalDateTime.of(ld.getYear(), ld.getMonth(), ld.getDayOfMonth(), 0, 0);
-						 ldt = ldt.withHour(fromHour).withMinute(fromMinutes).minusMinutes(mapping.get(reminderIdx));
-						// System.out.println("From h: " + fromHour + " m: " + fromMinutes);
-						// System.out.println("Event date: " + ldt);
-						 reminder = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
-				//	 }
-				}
-				catch(NumberFormatException e){
-					JOptionPane.showMessageDialog(null, "You have to type hours.", "Wrong hours", JOptionPane.OK_OPTION);
-					return;
-				}
-				
-				if( fromHour > toHour || (fromHour == toHour && fromMinutes > toMinutes)){
-					JOptionPane.showMessageDialog(null, "Event end before it starts.", "Wrong hours", JOptionPane.OK_OPTION);
-				}
-				else{
-					eventService.addEvent(new Event(textField.getText(), textField_1.getText(), formattedTextField.getText(), formattedTextField_1.getText(), date, reminder)); 
-					JOptionPane.showMessageDialog(null, "Event created properly.", "Success", JOptionPane.INFORMATION_MESSAGE);
-					dispose();
-					LocalDate ld = LocalDate.now();	
-					DayList.init(date, ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), eventService);
-				}
-			}
-		});
+		btnCreate.addActionListener(new CreateEventListener(formattedTextField, formattedTextField_1, 
+				comboBoxReminder, formattedDate, mapping, textField,textField_1, date, this, eventService));
+		
 		btnCreate.setBounds(177, 227, 89, 23);
 		getContentPane().add(btnCreate);
 		
@@ -224,10 +192,6 @@ public class CreateEventWindow extends JFrame {
 		});
 		chckbxWholeDay.setBounds(180, 156, 86, 23);
 		getContentPane().add(chckbxWholeDay);
-		
-		comboBoxReminder = new JComboBox( new String[] {"", "5 min", "10 min", "15 min", "30 min", "1 h", "2 h", "6 h", "12 h"} );
-		comboBoxReminder.setBounds(180, 196, 86, 20);
-		getContentPane().add(comboBoxReminder);	
 		
 		JLabel lblReminder = new JLabel("Reminder");
 		lblReminder.setBounds(121, 199, 68, 14);
