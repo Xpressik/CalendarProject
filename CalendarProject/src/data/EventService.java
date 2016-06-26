@@ -112,6 +112,7 @@ public class EventService implements IEventService {
 	public void loadEventsFromXmlFile(String filename) {
 		if (filename == null || "".equals(filename)) {
 			System.out.println("No file name selected");
+			JOptionPane.showMessageDialog(null, "No file name selected", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		Path path = Paths.get(filename);
@@ -121,13 +122,12 @@ public class EventService implements IEventService {
 		}
 		XmlDataRepository xmlDataRepository = new XmlDataRepository(filename);
 		try {
-			xmlDataRepository.loadFromXmlFile();	
+			 repository = xmlDataRepository.loadFromXmlFile(repository);	
 		} catch(Exception ex) {
 			ex.printStackTrace();
 			return;
 		}
 		JOptionPane.showMessageDialog(null, "Events imported properly.", "Success", JOptionPane.INFORMATION_MESSAGE);
-		this.repository = xmlDataRepository;
 	}
 
 	@Override

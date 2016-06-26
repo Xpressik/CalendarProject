@@ -36,7 +36,7 @@ public class Main {
 		EventService eventService = new EventService(dbDataRepository);
 
 		System.out.println("Press 1 to open Calendar in full gui version \nPress 2 to open Calendar in emergency terminal version");
-		mode = new Scanner(System.in).nextInt();
+		mode  = 1;//new Scanner(System.in).nextInt();
 		System.out.println(mode);
 		if (mode  == 1){
 			Frame window = new Frame(eventService);

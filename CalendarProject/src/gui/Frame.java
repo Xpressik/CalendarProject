@@ -24,6 +24,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Calendar;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -258,7 +259,7 @@ public class Frame implements ActionListener {
 		        if(promptResult ==JOptionPane.YES_OPTION)
 		        {
 		        	if (eventService.hasDbDataRepository()) {
-		        		eventService.saveEventsToDatabase();
+		        			eventService.saveEventsToDatabase();
 		        	} else if (eventService.hasXmlDataRepository()) {
 		        		eventService.saveEventsToXmlFile(null);
 		        	}
@@ -268,19 +269,21 @@ public class Frame implements ActionListener {
 		});
 		
 		
-		//System.out.println("Create timer");
  		timer = new javax.swing.Timer(1000, new ActionListener() {
  			@Override
  			public void actionPerformed(ActionEvent e) {
-			//	System.out.println("WORKING...");	
  				Reminder reminderObject = new Reminder(eventService);
  				String message = reminderObject.toRemind();
  				if (message != null && !"".equals(message)) {
- 				//	System.out.println("message " + message);
  					ReminderWindow reminderW = new ReminderWindow(message);
  				}
  			}
- 		}){{setInitialDelay( 0 );}};
+ 		}){/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+		{setInitialDelay( 0 );}};
  		timer.start();
 		
 	}

@@ -15,15 +15,15 @@ public class XmlDataRepository extends DataRepository {
 		this.filename = filename;
 	}
 	
-	public void loadFromXmlFile() throws Exception {
+	public DataRepository loadFromXmlFile(DataRepository repository) throws Exception {
 		XMLDecoder xml = new XMLDecoder(new BufferedInputStream(new FileInputStream(filename)));
 		Object obj = xml.readObject();
-		removeAllEvents();
 		List<Event> events = (List<Event>) obj;
 		for(Event e : events){
-			addEvent(e);
+			repository.addEvent(e);
 		}
 		xml.close();
+		return repository;
 	}
 
 	public void saveToXmlFile() throws Exception {
