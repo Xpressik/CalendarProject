@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 
 import data.DataRepository;
 import data.Event;
-import data.EventService;
 import logic.IncorrectPasswordException;
 /**
  * Klasa odpowiedzialna za polaczenie z baza danych <br>

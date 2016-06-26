@@ -1,9 +1,6 @@
 package gui;
 
 import data.*;
-import logic.DBConnection;
-import logic.DBData;
-import logic.IncorrectPasswordException;
 import logic.Reminder;
 
 
@@ -15,17 +12,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.util.Calendar;
-import java.util.List;
-import java.util.NoSuchElementException;
-
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;

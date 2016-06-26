@@ -1,13 +1,8 @@
 package logic;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-import javax.swing.JOptionPane;
-
-import data.DataRepository;
 import data.DbDataRepository;
 import data.EventService;
 import gui.Frame;

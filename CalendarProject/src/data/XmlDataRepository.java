@@ -7,8 +7,6 @@ import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.List;
-
-import logic.IncorrectPasswordException;
 /**
  * Klasa ktora zawiera rozszerzenie DataBase ktora posiada metody do obslugi plikow xml.<br> 
  * Zawiera takie informacje jak:<br>

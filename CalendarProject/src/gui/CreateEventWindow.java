@@ -9,7 +9,6 @@ import data.*;
 import logic.CreateEventListener;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.text.ParseException;
 import javax.swing.JTextField;
@@ -21,11 +20,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 import java.awt.Point;
 import javax.swing.JComboBox;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
