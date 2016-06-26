@@ -78,6 +78,7 @@ public class CreateEventWindow extends JFrame {
 	 * Uruchamia okno tworzenia wydarzen poprzez wywolanie konstruktora klasy CreateEventWindow oraz ustawienie widocznosci okna.
 	 * @param date - data dla ktorej ma zostac stworzone wydarzenie
 	 * @param formattedDate - sfromatowana data na potrzeby ustawienia powiadomienia
+	 * @param eventService - obiekt typu EventService na potrzeby obslugi repozytorium
 	 */
 	public static void init(final String date, final String formattedDate, final EventService eventService){
 		EventQueue.invokeLater(new Runnable() {
@@ -97,6 +98,7 @@ public class CreateEventWindow extends JFrame {
 	 * Tworzy okno oraz implemenuje odpowiednie zachowania i mozliwosc interakcji z uzytkownikiem podczas tworzenia wydarzen.
 	 * @param date - data dla ktorej ma zostac stworzone wydarzenie
 	 * @param formattedDate - sfromatowana data na potrzeby ustawienia powiadomienia
+	 * @param eventService - obiekt typu EventService na potrzeby obslugi repozytorium
 	 */
 	public CreateEventWindow(final String date, final String formattedDate, final EventService eventService) {
 		setTitle("Event Creator");

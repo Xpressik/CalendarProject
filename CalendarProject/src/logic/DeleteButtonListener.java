@@ -32,6 +32,7 @@ public class DeleteButtonListener implements ActionListener {
 	 * Konstruktor tworzy na stercie instancje klasy DeleteButtonListener, ktora jest odpowiedzialna za usuniecie odpowienich wydarzen po klinkieciu przez uzytkownika w przycisk Delete w oknie DayEvents.
 	 * @param lst - lista wydarzen dla danego dnia
 	 * @param eventList - lista wszystkich wydarzen
+	 * @param eventService - inicjujemy zmienna lokalna eventService poprzez podany paramtr
 	 */
 	public DeleteButtonListener (JList lst, List<Event> eventList, EventService eventService){
 		

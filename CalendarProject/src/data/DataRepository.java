@@ -2,11 +2,13 @@ package data;
 
 import java.util.List;
 import java.util.Vector;
-
+/**
+ * Klasa ktora implementuje IDataRepository. Zawiera metody potrzebne do obslugi tego repozytorium.<br>  
+ */
 public class DataRepository implements IDataRepository {
 
 	private List<Event> events = new Vector<Event>();
-
+	
 	@Override
 	public void addEvents(List<Event> events) {
 		this.events.addAll(events);

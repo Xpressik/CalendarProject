@@ -128,7 +128,7 @@ public class Frame implements ActionListener {
 	/**
 	 * Konstruktor tworzacy na stercie instancje klasy Frame.<br>
 	 * Wywoluje metode init z paramterem dbData
-	 * @param dbData - obiekt zawierajacy informacje niezbedne do polaczenia z baza danych (dane logowania).
+	 * @param eventService - obiekt ktory umozliwia dzialanie na repozytorium z pozycji Frame
 	 */
 	public Frame(EventService eventService){
 		init(eventService);
@@ -136,7 +136,7 @@ public class Frame implements ActionListener {
 	
 	/**
 	 * Metoda odpowiedzialna za stworzenie glownego okna aplikacji i umozliwienie uzytkownikowi interakcje z programem. Poprzez wybor dni, tworzenie, przegladanie, filtrowanie wydarzen. Umozliwia dobor ustawien oraz wyswietlenie informacji.
-	 * @param dbData
+	 * @param eventService
 	 */
 	private void init(final EventService eventService){
 				

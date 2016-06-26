@@ -13,9 +13,17 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
-
+/**
+ * Klasa ktora zawiera implementacje intefejsu IEventService.
+ * Klasa z metodami do obslugi repozytorium.<br>
+ * Zawiera mape ktora umozliwia wybor odpowiedniego interwalu czasu dla powiadomien.<br>
+ * Zawiera zmienna lokacje do ktorej przypisany zostaje obiekt typu DataRepository dla ktorego wykonwywany zostanie serwis
+ */
 public class EventService implements IEventService {
 	
+	/**
+	 * Mapa, ktora umozliwa wybor odpowiedniego interwalu czasu dla powiadomien.
+	 */
 	private static final Map<Integer, Integer> mapping = new HashMap<Integer, Integer>(){{
  		put(0, 0);
     put(5, 5);

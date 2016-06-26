@@ -18,11 +18,20 @@ import javax.swing.Timer;
 import data.Event;
 import data.EventService;
 import logic.Reminder;
-
+/**
+ * Klasa odpowiedzialna za obsluge logiki programu w trybie awaryjnym - w konsoli.<br> 
+ * Zawiera takie informacje jak:<br>
+ *  - mapa ktora zamienia numer miesiaca na jego nazwe po ang.<br> 
+ *  - timer ktory jest potrzebny do odmierzania czasu do ustawiania powiadomien<br> 
+ *  - informacje o przypomnieniu
+ * 
+ */
 public class TerminalDisplay {
 	
 	private final EventService eventService;
-	
+	/**
+	 * mapa ktora zamienia numer miesiaca na jego nazwe po ang.
+	 */
 	private static final Map<Integer, String> monthMapping = new HashMap<Integer, String>(){{
  		put(1, "January");
     put(2, "February");
@@ -39,7 +48,14 @@ public class TerminalDisplay {
  	}};
 
 	private Timer timer;
-	
+	/**
+	 * Konstruktor domyslny ktory inicjuje zmienna lokalna typu EventService.<br>
+	 * Dzieki temu mozemy dzialac na repozytorium z pozycji konsoli
+	 * konstruktor tworzy obiekt typu Timer.<br>
+	 * Potrzebny jest do tworzenia obiektow powiadomien o zblizajacych sie wydarzeniach<br>
+	 * Uruchamia dzialanie glownej petli w ktorej odbywaja sie wszystkie akcje na repozytorium
+	 * @param eventService - obiekt ktory dostarcza logike obslugi zdarzen
+	 */
 	public TerminalDisplay(final EventService eventService){
 		this.eventService = eventService;
 		try {
@@ -63,7 +79,10 @@ public class TerminalDisplay {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Glowna petla w konsoli w ktorej odbywaja sie wszystkie operacje az do podania odpowiedniej wartosci ktora przerywa dzialanie petli
+	 * @throws IOException - metoda ta moze rzucac obiektami typu IOException
+	 */
 	public void mainLoop() throws IOException{
 		System.out.println("Tryb awaryjny - tekstowy");
 		
@@ -176,7 +195,10 @@ public class TerminalDisplay {
 		} while(action != 0);
 		System.out.println("The end");
 	}
-	
+	/**
+	 * Wyswietla w konsoli wszystkie eventy ktore odbywaja sie danego przez parametr dnia
+	 * @param datestr - string ktory reprezentuje date dla ktorej maja zostac pokazane eventy
+	 */
 	private void showEventsForDate(String datestr) {
 		System.out.println("Events for date: " + datestr);
 		List<Event> events = eventService.getEventsFromSpecifiedDay(datestr);
@@ -184,7 +206,10 @@ public class TerminalDisplay {
 			showEvent(i, events.get(i), false);
 		}
 	}
-	
+	/**
+	 * Wyswietla w konsoli wszystkie eventy ktore odbywaja danego przez parametr miesiaca 
+	 * @param month - integer ktory okresla numer miesiaca ktora nastepnie zostaje zmapowana do nazwy w jezyku ang.
+	 */
 	private void showEventsForMonth(Integer month) {
 		System.out.println("Events for month: " + monthMapping.get(month));
 		List<Event> events = eventService.getEventsFromSpecifiedMonth(month.toString());
@@ -192,7 +217,10 @@ public class TerminalDisplay {
 			showEvent(null, events.get(i), true);
 		}
 	}
-	
+	/**
+	 * Wyswietla w konsoli wszystkie eventy ktore odbywaja sie w danym przez parametr miejscu
+	 * @param place - miejsce dla ktorego szukamy wydarzen
+	 */
 	private void showEventsForPlace(String place) {
 		System.out.println("Events for place: " + place);
 		List<Event> events = eventService.filterWithPlace(place);
@@ -200,7 +228,12 @@ public class TerminalDisplay {
 			showEvent(null, events.get(i), true);
 		}
 	}
-	
+	/**
+	 * Wyswietla stringa ktory definiuje dane wydarzenie 
+	 * @param idc - integer ktory okresla index wydarzenia w danym dniu
+	 * @param event - event dla ktorego budowany jest string definiujacy ten event
+	 * @param printEventDate - zmienna logiczna ktora decyduje o tym czy do stringa definiujacego wydarzenie dodawac informacje o dacie
+	 */
 	private void showEvent(Integer idx, final Event event, boolean printEventDate) {
 		StringBuilder strb = new StringBuilder();
 		strb
@@ -220,7 +253,10 @@ public class TerminalDisplay {
 			.append("=====\n");
 		System.out.println(strb.toString());
 	}
-	
+	/**
+	 * Wyswietla podany przez parametr message Remindera 
+	 * @param message - message zwrocony przez remindera ktory zawiera informacje o zblizajacym sie evencie
+	 */
 	public void reminderMessage(String message){
 		System.out.println(message);
 	}

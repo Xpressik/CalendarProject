@@ -36,6 +36,7 @@ public class DayList extends JFrame {
 	 * Tworzy okno wyswietlajace wydarzenia dla danego dniapoprzez wywolanie konstruktora klasy DayList oraz odpowienie skonfigurowanie okna.
 	 * @param date - data dla ktorej maja zostac wyswietlone wydarzenia
 	 * @param formattedDate - sfromatowana data na potrzeby powiadomien
+	 * @param eventService - obiekt typu EventService
 	 */
 	public static void init(final String date, final String formattedDate, final EventService eventService){
 		EventQueue.invokeLater(new Runnable() {
@@ -59,6 +60,7 @@ public class DayList extends JFrame {
 	 * 
 	 * @param date - data dla ktorej maja zostac wyswietlone wydarzenia
 	 * @param formattedDate - odpowiednio sformatowana data na potrzeby przypomnien
+	 * @param eventService - obiekt typu EventSerivice
 	 */
 	public DayList(final String date, String formattedDate, final EventService eventService) {
 		

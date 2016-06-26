@@ -23,7 +23,7 @@ public class Main {
 	/**
 	 * Metoda main rozpoczyna dzialanie aplikacji pobierajac wydarzenia z bazydancyh oraz nastepnie wyswietlajac okno kalendarza.
 	 * @param args - argumenty uruchomienia programu
-	 * @throws IOException 
+	 * @throws IOException - moze wyrzuc wyjatek typu IOException
 	 */
 	public static void main(String[] args) throws IOException {
 		
@@ -36,7 +36,10 @@ public class Main {
 		EventService eventService = new EventService(dbDataRepository);
 
 		System.out.println("Press 1 to open Calendar in full gui version \nPress 2 to open Calendar in emergency terminal version");
-		mode  = 1;//new Scanner(System.in).nextInt();
+		
+		Scanner input = new Scanner(System.in);
+		mode = input.nextInt();
+		
 		System.out.println(mode);
 		if (mode  == 1){
 			Frame window = new Frame(eventService);
