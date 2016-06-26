@@ -272,7 +272,7 @@ public class Frame implements ActionListener {
  		timer = new javax.swing.Timer(1000, new ActionListener() {
  			@Override
  			public void actionPerformed(ActionEvent e) {
-			//	System.out.println("WORKING...");	
+				System.out.println("WORKING...");	
  				Reminder reminderObject = new Reminder(eventService);
  				String message = reminderObject.toRemind();
  				if (message != null && !"".equals(message)) {
@@ -280,7 +280,12 @@ public class Frame implements ActionListener {
  					ReminderWindow reminderW = new ReminderWindow(message);
  				}
  			}
- 		}){{setInitialDelay( 0 );}};
+ 		}){/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+		{setInitialDelay( 0 );}};
  		timer.start();
 		
 	}

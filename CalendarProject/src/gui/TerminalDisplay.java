@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,8 +13,11 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import javax.swing.Timer;
+
 import data.Event;
 import data.EventService;
+import logic.Reminder;
 
 public class TerminalDisplay {
 	
@@ -32,10 +37,26 @@ public class TerminalDisplay {
  		put(11, "November");
  		put(12, "December");
  	}};
+
+	private Timer timer;
 	
-	public TerminalDisplay(EventService eventService){
+	public TerminalDisplay(final EventService eventService){
 		this.eventService = eventService;
 		try {
+			timer = new javax.swing.Timer(1000, new ActionListener() {
+	 			private String message = null;
+				@Override
+	 			public void actionPerformed(ActionEvent e) {
+//					System.out.println("WORKING...");	
+					Reminder reminderObject = new Reminder(eventService);
+	 				message = reminderObject.toRemind();
+	 				if (message != null && !"".equals(message)){
+	 					reminderMessage(message);
+	 				}
+	 			}
+			});
+			System.out.println("test");
+			timer.start();
 			mainLoop();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -198,5 +219,9 @@ public class TerminalDisplay {
 			.append("  Reminder:").append(ldt.toString()).append("\n")
 			.append("=====\n");
 		System.out.println(strb.toString());
+	}
+	
+	public void reminderMessage(String message){
+		System.out.println(message);
 	}
 }
