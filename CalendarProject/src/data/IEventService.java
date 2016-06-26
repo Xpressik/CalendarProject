@@ -21,4 +21,13 @@ public interface IEventService {
 	
 	public Date createReminder(String eventDate, String fromHour, Integer remindIndex);
 	public List<Event> removeEventByIdx(String eventDate, Integer idx);
+	
+	public void loadEventsFromXmlFile(String filename);
+	public void saveEventsToXmlFile(String filename);
+	
+	public void loadEventsFromDatabase();
+	public void saveEventsToDatabase();
+	
+	public boolean hasXmlDataRepository();
+	public boolean hasDbDataRepository();
 }

@@ -1,5 +1,9 @@
 package data;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -102,4 +106,100 @@ public class EventService implements IEventService {
 		return getEventsFromSpecifiedDay(eventDate);
 	}
 
+	@Override
+	public void loadEventsFromXmlFile(String filename) {
+		if (filename == null || "".equals(filename)) {
+			System.out.println("No file name selected");
+			return;
+		}
+		Path path = Paths.get(filename);
+		if (!Files.exists(path) || Files.isDirectory(path)) {
+			System.out.println("File does not exist or is a directory");
+			return;
+		}
+		XmlDataRepository xmlDataRepository = new XmlDataRepository(filename);
+		try {
+			xmlDataRepository.loadFromXmlFile();	
+		} catch(Exception ex) {
+			ex.printStackTrace();
+			return;
+		}
+		this.repository = xmlDataRepository;
+	}
+
+	@Override
+	public void saveEventsToXmlFile(String filename) {
+		XmlDataRepository xmlDataRepository = null;
+		if (hasXmlDataRepository()) {
+			xmlDataRepository = (XmlDataRepository)this.repository;
+		} else {
+			if (filename == null || "".equals(filename)) {
+				System.out.println("No file name selected");
+				return;
+			}
+			Path path = Paths.get(filename);
+			if (Files.isDirectory(path)) {
+				System.out.println("File is a directory");
+				return;
+			}
+			xmlDataRepository = new XmlDataRepository(filename);
+			xmlDataRepository.addEvents(this.repository.getAllEvents());
+		}
+		try {
+			xmlDataRepository.saveToXmlFile();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+			return;
+		}
+		this.repository = xmlDataRepository;
+	}
+
+	@Override
+	public boolean hasXmlDataRepository() {
+		return this.repository instanceof XmlDataRepository;
+	}
+
+	@Override
+	public boolean hasDbDataRepository() {
+		return this.repository instanceof DbDataRepository;
+	}
+	
+	@Override
+	public void loadEventsFromDatabase() {
+		DbDataRepository dbDataRepository = null;
+		if (hasDbDataRepository()) {
+			dbDataRepository = (DbDataRepository)this.repository;
+		} else {
+			dbDataRepository = new DbDataRepository();
+		}
+		try {
+			dbDataRepository.loadFromDatabase();	
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return;
+		}
+		
+		this.repository = dbDataRepository;
+	}
+
+	@Override
+	public void saveEventsToDatabase() {
+		DbDataRepository dbDataRepository = null;
+		if (hasDbDataRepository()) {
+			dbDataRepository = (DbDataRepository)this.repository;
+		} else {
+			dbDataRepository = new DbDataRepository();
+			dbDataRepository.addEvents(this.repository.getAllEvents());
+		}
+		try {
+			dbDataRepository.saveToDatabase();	
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return;
+		}
+		
+		this.repository = dbDataRepository;
+	}
+
+	
 }

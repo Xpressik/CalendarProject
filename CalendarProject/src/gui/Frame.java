@@ -129,15 +129,15 @@ public class Frame implements ActionListener {
 	 * Wywoluje metode init z paramterem dbData
 	 * @param dbData - obiekt zawierajacy informacje niezbedne do polaczenia z baza danych (dane logowania).
 	 */
-	public Frame(DBData dbData, EventService eventService){
-		init(dbData, eventService);
+	public Frame(EventService eventService){
+		init(eventService);
 	}
 	
 	/**
 	 * Metoda odpowiedzialna za stworzenie glownego okna aplikacji i umozliwienie uzytkownikowi interakcje z programem. Poprzez wybor dni, tworzenie, przegladanie, filtrowanie wydarzen. Umozliwia dobor ustawien oraz wyswietlenie informacji.
 	 * @param dbData
 	 */
-	private void init(final DBData dbData, final EventService eventService){
+	private void init(final EventService eventService){
 				
 		calendar = new JCalendar();
 		calendar.setBounds(0,0,350,350);
@@ -257,16 +257,13 @@ public class Frame implements ActionListener {
 		        int promptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit?","Question",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
 		        if(promptResult ==JOptionPane.YES_OPTION)
 		        {
-		            DBConnection db;
-					try {
-						db = new DBConnection(dbData, eventService);
-						db.saveData();
-					} catch (IncorrectPasswordException | ClassNotFoundException e) {
-						JOptionPane.showMessageDialog(null, "There has been some problems with database.\nOr you have typed wrong data.", "Database failure", JOptionPane.WARNING_MESSAGE);
-					}
-		            
-		        	System.exit(0);
-		      }
+		        	if (eventService.hasDbDataRepository()) {
+		        		eventService.saveEventsToDatabase();
+		        	} else if (eventService.hasXmlDataRepository()) {
+		        		eventService.saveEventsToXmlFile(null);
+		        	}
+		          System.exit(0);
+		        }
 		    }
 		});
 		

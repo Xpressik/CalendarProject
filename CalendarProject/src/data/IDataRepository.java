@@ -5,8 +5,10 @@ import java.util.List;
 public interface IDataRepository {
 	
 	//	add & remove
+	public void addEvents(List<Event> events);
 	public void addEvent(Event event);
 	public void removeEvent(Event event);
+	public void removeAllEvents();
 	
 	//	get
 	public List<Event> getEventsFromSpecifiedDay(String date);

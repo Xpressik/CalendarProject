@@ -9,6 +9,11 @@ public class DataRepository implements IDataRepository {
 	private List<Event> events = new Vector<Event>();
 
 	@Override
+	public void addEvents(List<Event> events) {
+		this.events.addAll(events);
+	}
+	
+	@Override
 	public void addEvent(Event event) {
 		events.add(event);
 	}
@@ -16,6 +21,11 @@ public class DataRepository implements IDataRepository {
 	@Override
 	public void removeEvent(Event event) {
 		events.remove(event);
+	}
+	
+	@Override
+	public void removeAllEvents() {
+		events.clear();
 	}
 
 	@Override
@@ -95,6 +105,4 @@ public class DataRepository implements IDataRepository {
 		}
 		return result;
 	}
-
-	
 }

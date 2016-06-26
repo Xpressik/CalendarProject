@@ -53,7 +53,8 @@ public class TerminalDisplay {
 		do {
 			System.out.println("MENU:");
 			System.out.println("  1 - SHOW EVENTS FOR DATE, 2 -  SHOW EVENTS FOR MONTH, 3 - SHOW EVENTS BY PLACE");
-			System.out.println("  4 - CREATE EVENT, 5 - DELETE EVENT, 0 - Exit");
+			System.out.println("  4 - CREATE EVENT, 5 - DELETE EVENT");
+			System.out.println("  6 - LOAD FROM XML, 7 - SAVE TO XML, 0 - EXIT");
 			
 			action = input.nextInt();// System.in.read();
 			
@@ -130,10 +131,25 @@ public class TerminalDisplay {
 				break;
 			}
 				
-			case 50:
+			case 6: {
+				// LOAD FRO XML
+				System.out.println("Enter XML file name:");
+				String filename = input.next();
+				eventService.loadEventsFromXmlFile(filename);
+				selectedEventDate = null;
 				break;
-			case 51:
+			}
+			case 7: {
+				// SAVE TO XML
+				String filename = null;
+				if (!eventService.hasXmlDataRepository()) {
+					System.out.println("Enter XML file name:");
+					filename = input.next();
+				}
+				eventService.saveEventsToXmlFile(filename);
+				selectedEventDate = null;
 				break;
+			}
 			}
 			
 		} while(action != 0);
